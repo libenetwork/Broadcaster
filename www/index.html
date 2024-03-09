@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+ <head>
+   <meta charset="utf-8">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<title>Broadcaster Panel</title>
+ </head>
+ <body>
+ <div style="height: 70vh; background: grey;">
+     <video id="video" autoplay playsinline muted style="
+height: 70vh;
+"></video>
+ </div>
+ <div style="width:80%;margin: auto;padding-top:10px ;">
+     <button class="btn btn-secondary" onclick="window.open('./video.html');startCapture()"> Start Screen Sharing</button>
+     <button class="btn btn-secondary" id="stop"> Stop</button>
+ </div>
+
+ <div class = "test"></div>
+
+     <nav>
+     <button class="btn btn-secondary" data-action="goLive">Go Live</button>
+       <input type="text" id = "url" placeholder="Broadcast URL">
+       <input type="text" id = "key" placeholder="Broadcast Key">
+   </nav>
+ <p id = "live">offline</p>
+ <script src = "js/communicator.js"></script>
+  <script>
+
+      window.localStorage.setItem("status", "offline");
+      const videoElem = document.getElementById("video");
+      const stopElem = document.getElementById("stop");
+
+      const url = document.getElementById("url");
+      const key = document.getElementById("key");
+
+      var displayMediaOptions = {
+          video: {
+              cursor: "always",
+              height: 2000,
+              width: 2000
+          },
+          audio: false
+      };
+      stopElem.addEventListener("click", function (evt) {
+          stopCapture();
+      }, false);
+      async function startCapture() {
+          try {
+              videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+
+
+              dumpOptionsInfo();
+          } catch (err) {
+              console.error("Error: " + err);
+          }
+      }
+
+      function stopCapture(evt) {
+          let tracks = videoElem.srcObject.getTracks();
+          tracks.forEach(track => track.stop());
+          videoElem.srcObject = null;
+      }
+
+      function dumpOptionsInfo() {
+          const videoTrack = videoElem.srcObject.getVideoTracks()[0];
+          console.info("Track settings:");
+          console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
+          console.info("Track constraints:");
+          console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+          document.querySelector('[data-action="goLive"]').addEventListener('click', (e) => {
+
+
+
+
+                  let addres = "noname";
+                      if (url.value != "" || key.value != "")
+                          addres = url.value + "/" + key.value;
+                      alert("Broadcast was started at " + addres);
+
+                  const ws = new WebSocket(
+                      window.location.protocol.replace('http', 'ws') + '//' + // http: => ws:, https: -> wss:
+                      window.location.host +
+                      '/rtmp/' +
+                      addres
+                  );
+
+                  ws.addEventListener('open', (e) => {
+                        document.getElementById("live").innerText = "LIVE!";
+                        window.localStorage.setItem('status', "LIVE");
+                      console.log('WebSocket Open', e);
+                      setmedia("#video");
+                     let mediaRecorder = getmedia();
+                     mediaRecorder.start(1000);
+                      mediaRecorder.addEventListener('dataavailable', (e) => {
+                          ws.send(e.data);
+                      });
+
+
+                      mediaRecorder.addEventListener('stop', ws.close.bind(ws));
+
+
+
+                  });
+
+
+                  ws.addEventListener('close', (e) => {
+                      console.log('WebSocket Close', e);
+                  //    mediaRecorder.stop();
+                      window.localStorage.setItem("status", "offline");
+                  });
+
+
+              });
+
+          });
+
+
+  </script>
+ </body>
+</html>

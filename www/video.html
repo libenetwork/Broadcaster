@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Broadcaster</title>
+</head>
+<body style="margin: 0; overflow: hidden">
+<div id="content">
+<div style="width:100vw; height: 100vh; background: grey;margin: 0 !important; padding: 0;">
+    <video id="video" autoplay playsinline muted style="
+    object-fit: scale-down;
+    width: 100vw;
+
+"></video>
+</div>
+<div class = content>
+    <embed width = "1100px" src="https://w.diaka.ua/render/_OurpGhYbHWFyhoRNMqUkgfxmCbNq_zy"  style = "position: absolute; top: 800px; left: 400px">
+    <!-- <iframe width = "300px" height = "800px" src="https://c.diaka.ua/stream/n5aQHvEfK9W89wed2Xftu3ETVlOgOeT3"  style = "border: 2px black; position: absolute; top: 50px; left: 1200px"></iframe>-->
+</div>
+</div>
+<script src = "js/communicator.js"></script>
+<script>
+
+    const videoElem = document.getElementById("video");
+    const broadElem = document.getElementById("video1");
+    startCapture();
+ //   window.open("./broadcastinfo.html");
+  /*  window.open('broadcastinfo.html',
+    'newwindow',
+        'width=1920,height=1080');
+*/
+    var displayMediaOptions = {
+        video: {
+            cursor: "none",
+            height: 1920,
+            width: 1080
+        },
+        audio: false
+    };
+    function dumpOptionsInfo() {
+        const videoTrack = videoElem.srcObject.getVideoTracks()[0];
+        console.info("Track settings:");
+        console.info(JSON.stringify(videoTrack.getSettings(), null, 2));
+        console.info("Track constraints:");
+        console.info(JSON.stringify(videoTrack.getConstraints(), null, 2));
+    }
+    async function startCapture() {
+        try {
+            videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+           // broadElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+
+
+            dumpOptionsInfo();
+        } catch (err) {
+            console.error("Error: " + err);
+        }
+
+    }
+</script>
+</body>
+</html>
