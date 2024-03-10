@@ -19,7 +19,8 @@ const server = http.createServer(app).listen(3000, () => {
 app.use(bodyParser.json());
 
 
-const PORT =  3010;
+
+const PORT = process.env.PORT || 3010;
 
 app.listen(PORT, () => {
   console.log(`Webhook receiver listening on port ${PORT}`);
