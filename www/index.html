@@ -39,10 +39,10 @@ height: 70vh;
           token = token.toString().hashCode();
           setCookie("token", token, 1000000);
           isnewtoken = true;
-          document.getElementById("token").innerHTML = "http://" + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
+          document.getElementById("token").innerHTML = window.location.protocol + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
       }else{
             token = getCookie("token");
-          document.getElementById("token").innerHTML = "http://" + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
+          document.getElementById("token").innerHTML = window.location.protocol + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
       }
       const url = document.getElementById("url");
       const key = document.getElementById("key");

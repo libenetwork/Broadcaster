@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 
 
-const PORT = process.env.PORT || 3010;
+const PORT = 3010;
 
 app.listen(PORT, () => {
   console.log(`Webhook receiver listening on port ${PORT}`);
