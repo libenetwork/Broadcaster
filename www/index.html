@@ -39,10 +39,10 @@ height: 70vh;
           token = token.toString().hashCode();
           setCookie("token", token, 1000000);
           isnewtoken = true;
-          document.getElementById("token").innerHTML = window.location.protocol + window.location.host.split(":")[0]  + '/webhook/' + token;
+          document.getElementById("token").innerHTML = window.location.protocol + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
       }else{
             token = getCookie("token");
-          document.getElementById("token").innerHTML = window.location.protocol + window.location.host.split(":")[0] + '/webhook/' + token;
+          document.getElementById("token").innerHTML = window.location.protocol + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
       }
       const url = document.getElementById("url");
       const key = document.getElementById("key");
@@ -74,7 +74,7 @@ height: 70vh;
           tracks.forEach(track => track.stop());
           videoElem.srcObject = null;
       }
-    const webhookclient = new WebSocket(window.location.protocol.replace('http', 'ws') + window.location.host.split(":")[0] + '/webhook/' + token);
+    const webhookclient = new WebSocket(window.location.protocol.replace('http', 'ws') + window.location.host.split(":")[0] + ':8080' + '/webhook/' + token );
       webhookclient.addEventListener("open", e => {console.log("Was connected!")})
       webhookclient.addEventListener("message", e => {
           console.log("Message from server ", e.data);

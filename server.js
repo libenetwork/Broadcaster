@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 
 
-const PORT = process.env.PORT || 3010;
+const PORT = 3010;
 
 app.listen(PORT, () => {
   console.log(`Webhook receiver listening on port ${PORT}`);
@@ -30,7 +30,7 @@ const videosever = new WebSocketServer({
   server: server
 });
 
-const conPORT = process.env.PORT || 8080;
+const conPORT = 8080;
 
 console.log("Waiting connection from:" + conPORT);
 const webhookserver = new WebSocketServer({ port: conPORT });
