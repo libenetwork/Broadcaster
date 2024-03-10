@@ -39,10 +39,11 @@ height: 70vh;
           token = token.toString().hashCode();
           setCookie("token", token, 1000000);
           isnewtoken = true;
-          document.getElementById("token").innerHTML =window.location.protocol + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
+          document.getElementById("token").innerHTML =window.location.protocol + "//" + window.location.host.split(":")[0] + '/webhook/' + token;
       }else{
             token = getCookie("token");
-          document.getElementById("token").innerHTML = window.location.protocol + window.location.host.split(":")[0] + ':3010' + '/webhook/' + token;
+          document.getElementById("token").innerHTML =window.location.protocol + "//" + window.location.host.split(":")[0] + '/webhook/' + token;
+
       }
       const url = document.getElementById("url");
       const key = document.getElementById("key");
@@ -55,7 +56,7 @@ height: 70vh;
           },
           audio: false
       };
-      stopElem.addEventListener("click", function (evt) {
+      stopElem.addEventListener("click", function (e) {
           stopCapture();
       }, false);
       async function startCapture() {
@@ -69,7 +70,7 @@ height: 70vh;
           }
       }
 
-      function stopCapture(evt) {
+      function stopCapture(e) {
           let tracks = videoElem.srcObject.getTracks();
           tracks.forEach(track => track.stop());
           videoElem.srcObject = null;
@@ -83,7 +84,7 @@ height: 70vh;
       );
       webhookclient.addEventListener("open", e => {console.log("Was connected!")})
       webhookclient.addEventListener("message", e => {
-          console.log("Message from server ", e.data);
+          console.log("Message from server ", decodeURI(e.data));
 
       })
       function dumpOptionsInfo() {
