@@ -19,7 +19,7 @@ const server = http.createServer(app).listen(3000, () => {
 app.use(bodyParser.json());
 
 
-const PORT = process.env.PORT || 3010;
+const PORT =  3010;
 
 app.listen(PORT, () => {
   console.log(`Webhook receiver listening on port ${PORT}`);
@@ -28,7 +28,9 @@ app.listen(PORT, () => {
 const videosever = new WebSocketServer({
   server: server
 });
-const webhookserver = new WebSocketServer({ port: 8080 });
+const connection_PORT = 8080
+console.log("Waiting connection from:" + connection_PORT);
+const webhookserver = new WebSocketServer({ port: connection_PORT });
 
 
 
