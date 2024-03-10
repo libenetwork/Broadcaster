@@ -8,6 +8,7 @@
 
 const child_process = require('child_process');
 const express = require('express');
+const bodyParser = require('body-parser');
 const WebSocketServer = require('ws').Server;
 const http = require('http');
 
@@ -15,10 +16,22 @@ const app = express();
 const server = http.createServer(app).listen(3000, () => {
   console.log('Listening...');
 });
+app.use(bodyParser.json());
 
-const wss = new WebSocketServer({
+
+const PORT = process.env.PORT || 3010;
+
+app.listen(PORT, () => {
+  console.log(`Webhook receiver listening on port ${PORT}`);
+});
+
+const videosever = new WebSocketServer({
   server: server
 });
+const webhookserver = new WebSocketServer({ port: 8080 });
+
+
+
 
 app.use((req, res, next) => {
   console.log('HTTP Request: ' + req.method + ' ' + req.originalUrl);
@@ -27,7 +40,27 @@ app.use((req, res, next) => {
 
 app.use(express.static(__dirname + '/www'));
 
-wss.on('connection', (ws, req) => {
+webhookserver.on('connection', (ws, req) => {
+
+  let match;
+  if ( !(match = req.url.match(/^\/webhook\/(.*)$/)) ) {
+    ws.terminate(); // No match, reject the connection.
+    return;
+  }
+
+  const webhookUrl = decodeURIComponent(match[1].split("/")[0]);
+
+  console.log('Connected at ' + webhookUrl + "!");
+
+  app.post('/webhook/' + webhookUrl, (req, res) => {
+    console.log('Received Webhook from /webhook/' + webhookUrl + ':', req.body);
+    ws.send(JSON.stringify(req.body));
+    res.status(200).send('OK');
+  });
+
+});
+
+videosever.on('connection', (ws, req) => {
   
   // Ensure that the URL starts with '/rtmp/', and extract the target RTMP URL.
   let match;
@@ -35,6 +68,7 @@ wss.on('connection', (ws, req) => {
     ws.terminate(); // No match, reject the connection.
     return;
   }
+
   
   const rtmpUrl = decodeURIComponent(match[1]);
   console.log('Target RTMP URL:', rtmpUrl);

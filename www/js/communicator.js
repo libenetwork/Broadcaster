@@ -1,5 +1,5 @@
 let mediaRecorder;
-const bc = new BroadcastChannel('mediachanel');
+const bc = new BroadcastChannel('donatechanel');
 
 function setmedia(selector){
 
