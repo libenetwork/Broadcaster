@@ -74,7 +74,7 @@ height: 70vh;
           tracks.forEach(track => track.stop());
           videoElem.srcObject = null;
       }
-    const webhookclient = new WebSocket(window.location.protocol.replace('http', 'ws') + window.location.host.split(":")[0] + ':80' + '/webhook/' + token );
+    const webhookclient = new WebSocket(window.location.protocol.replace('http', 'ws') + window.location.host.split(":")[0] + '/webhook/' + token );
       webhookclient.addEventListener("open", e => {console.log("Was connected!")})
       webhookclient.addEventListener("message", e => {
           console.log("Message from server ", e.data);
