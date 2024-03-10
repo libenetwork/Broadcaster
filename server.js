@@ -10,30 +10,20 @@ const child_process = require('child_process');
 const express = require('express');
 const bodyParser = require('body-parser');
 const WebSocketServer = require('ws').Server;
+const WebSocket = require('ws');
 const http = require('http');
 
 const app = express();
-const server = http.createServer(app).listen(443, () => {
+const server = http.createServer(app).listen(3000, () => {
   console.log('Listening...');
 });
+
 app.use(bodyParser.json());
 
 
-
-const PORT = process.env.PORT || 443;
-
-app.listen(PORT, () => {
-  console.log(`Webhook receiver listening on port ${PORT}`);
+const videoserver = new WebSocketServer({
+server:server
 });
-
-const videosever = new WebSocketServer({
-  server: server
-});
-
-const conPORT = 80;
-
-console.log("Waiting connection from:" + conPORT);
-const webhookserver = new WebSocketServer({ port: conPORT });
 
 
 
@@ -45,27 +35,9 @@ app.use((req, res, next) => {
 
 app.use(express.static(__dirname + '/www'));
 
-webhookserver.on('connection', (ws, req) => {
 
-  let match;
-  if ( !(match = req.url.match(/^\/webhook\/(.*)$/)) ) {
-    ws.terminate(); // No match, reject the connection.
-    return;
-  }
 
-  const webhookUrl = decodeURIComponent(match[1].split("/")[0]);
-
-  console.log('Connected at ' + webhookUrl + "!");
-
-  app.post('/webhook/' + webhookUrl, (req, res) => {
-    console.log('Received Webhook from /webhook/' + webhookUrl + ':', req.body);
-    ws.send(JSON.stringify(req.body));
-    res.status(200).send('OK');
-  });
-
-});
-
-videosever.on('connection', (ws, req) => {
+videoserver.on('connection', (ws, req) => {
   
   // Ensure that the URL starts with '/rtmp/', and extract the target RTMP URL.
   let match;
