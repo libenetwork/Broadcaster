@@ -13,7 +13,7 @@ const WebSocketServer = require('ws').Server;
 const http = require('http');
 
 const app = express();
-const server = http.createServer(app).listen(3000, () => {
+const server = http.createServer(app).listen(443, () => {
   console.log('Listening...');
 });
 app.use(bodyParser.json());
