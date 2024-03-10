@@ -28,7 +28,7 @@ app.listen(PORT, () => {
 const videosever = new WebSocketServer({
   server: server
 });
-const connection_PORT = 8080
+const connection_PORT = 8080;
 console.log("Waiting connection from:" + connection_PORT);
 const webhookserver = new WebSocketServer({ port: connection_PORT });
 
