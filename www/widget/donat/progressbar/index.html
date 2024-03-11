@@ -4,8 +4,34 @@
     <meta charset="UTF-8">
     <title>Progressbar</title>
   <script src="../../../js/communicator.js"></script>
+    <link rel = "stylesheet" href="../../../css/progressbar.css">
 </head>
 <body>
+<div class="badge">
+    <div class="tittle">
+        <div class = "starttext">
+        <div id = "tittle">Трошки позбираєм</div>
+
+        </div>
+        <div class = "endtext">
+            <div id = "amount">Зібрано 80%
+            </div>
+        </div>
+
+    </div>
+
+<div class="progress">
+    <div class="skill" style="width: 80%">80₴</div>
+</div>
+    <div class = "indicator">
+        <div id="start">
+            0₴
+        </div>
+        <div id = "end">
+            100₴
+        </div>
+    </div>
+</div>
 <script>
   bc.onmessage = (e) => {
       console.log(e.data);
