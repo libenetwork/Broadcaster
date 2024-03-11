@@ -44,7 +44,8 @@
   bc.onmessage = (e) => {
       console.log(e.data);
       var progressbar = document.getElementsByClassName("skill")[0];
-
+        var obj = JSON.parse(e.data);
+        console.log(obj.amount);
       if (Number(progressbar.style.width.split('%')[0]) < 5){
           progressbar.style.visibility = "hidden";
       }else{
