@@ -48,7 +48,7 @@
       var progressbar = document.getElementsByClassName("skill")[0];
         var obj = JSON.parse(e.data);
         console.log(obj.amount);
-        amount = amount + obj.amount;
+        amount = amount + Number(obj.amount);
         if (amount/350 < 1) {
             var progress = amount / 350 * 100 + "%";
         }
@@ -56,6 +56,7 @@
             target: '.skill',
             width: progress
         });
+        document.getElementById("amount").innerText = "Зібрано" + Math.round(amount/350);
       if (Number(progressbar.style.width.split('%')[0]) < 5){
           progressbar.style.visibility = "hidden";
       }else{
