@@ -86,7 +86,7 @@ height: 70vh;
       webhookclient.addEventListener("message", e => {
 
           console.log("Message from server ", decodeURI(e.data));
-          bc.postMessage("test message");
+          bc.postMessage(decodeURI(e.data));
 
       })
       function dumpOptionsInfo() {
