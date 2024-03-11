@@ -84,8 +84,9 @@ height: 70vh;
       );
       webhookclient.addEventListener("open", e => {console.log("Was connected!")})
       webhookclient.addEventListener("message", e => {
-          alert(e.data);
+
           console.log("Message from server ", decodeURI(e.data));
+          bc.postMessage("test message");
 
       })
       function dumpOptionsInfo() {
