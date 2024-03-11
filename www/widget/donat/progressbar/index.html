@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Progressbar</title>
   <script src="../../../js/communicator.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
     <link rel = "stylesheet" href="../../../css/progressbar.css">
 </head>
 <body>
+
 <div class="badge">
     <div class="tittle">
         <div class = "starttext">
@@ -14,28 +16,42 @@
 
         </div>
         <div class = "endtext">
-            <div id = "amount">Зібрано 80%
+            <div id = "amount">Зібрано 0%
             </div>
         </div>
 
     </div>
 
 <div class="progress">
-    <div class="skill" style="width: 80%">80₴</div>
+    <div class="skill" style="width: 0%">0₴</div>
 </div>
     <div class = "indicator">
         <div id="start">
             0₴
         </div>
         <div id = "end">
-            100₴
+            350₴
         </div>
     </div>
 </div>
 <script>
+    var progressbar = document.getElementsByClassName("skill")[0];
+    if (Number(progressbar.style.width.split('%')[0]) < 5){
+        progressbar.style.visibility = "hidden";
+    }else{
+        progressbar.style.visibility = "visible";
+    }
   bc.onmessage = (e) => {
       console.log(e.data);
+      var progressbar = document.getElementsByClassName("skill")[0];
+
+      if (Number(progressbar.style.width.split('%')[0]) < 5){
+          progressbar.style.visibility = "hidden";
+      }else{
+          progressbar.style.visibility = "visible";
+      }
   };
+
 </script>
 </body>
 </html>

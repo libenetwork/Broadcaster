@@ -92,20 +92,20 @@ p {
     color: white;
     padding: 1%;
     text-align: right;
-    font-size: 15pt;
+    font-size: 5.5vh;
     border-radius: 3em;
     font-family: "Blogger Sans";
     font-weight: 400;
 }
 .badge{
-    padding: 1.5em;
+    padding: 7vh;
     background: white;
-    border-radius: 1.5em;
+    border-radius: 10vh;
 }
 .indicator{
     font-family: "Blogger Sans";
     margin-top: 0.5em;
-    font-size: 15pt;
+    font-size: 5.5vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -113,8 +113,8 @@ p {
 }
 .tittle{
     font-family: "Montserrat";
-    margin-bottom: 0.5em;
-    font-size: 25pt;
+    margin-bottom: 4vh;
+    font-size: 8vh;
     display: flex;
     font-weight: 800;
     background: linear-gradient(60deg, rgba(255, 135, 0, 0.8), #ee2a7b, #f9ce34);
@@ -134,7 +134,7 @@ p {
 
 }
 #amount{
-    font-size: 25pt;
+
     background-color: black;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
