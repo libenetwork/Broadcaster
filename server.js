@@ -141,5 +141,9 @@ Socketserver.on('connection', (ws, req) => {
       ws.send(JSON.stringify(req.body));
       res.status(200).send('OK');
     });
+    ws.addAbortListener("close", e =>
+    {
+        console.log(Url + " disconnected!");
+    })
   }
 });
