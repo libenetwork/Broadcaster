@@ -64,7 +64,9 @@
 
       t.play();
         document.getElementById("amount").innerText = "Зібрано " + Math.round(amount/350*100) + "%";
-      if (Number(progressbar.style.width.split('%')[0]) < 5){
+
+        document.getElementsByClassName("skill")[0].innerText = amount + "₴";
+      if (Number(progress.split("%")[0]) < 5){
           progressbar.style.visibility = "hidden";
       }else{
           progressbar.style.visibility = "visible";
