@@ -5,7 +5,7 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>Broadcaster Panel</title>
  </head>
- <body>
+ <body onunload="abort()">
  <div style="height: 70vh; background: grey;">
      <video id="video" autoplay playsinline muted style="
 height: 70vh;
@@ -144,9 +144,10 @@ height: 70vh;
               });
 
           });
-      document.addEventListener("unload", (e) => {
-          webhookclient.close();
-      });
+
+
+
+
 
 
   </script>

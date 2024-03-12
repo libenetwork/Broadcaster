@@ -29,16 +29,15 @@ server:server
 
 
 app.use((req, res, next) => {
-  console.log('HTTP Request: ' + req.method + ' ' + req.originalUrl);
+  //console.log('HTTP Request: ' + req.method + ' ' + req.originalUrl);
   return next();
 });
 
 app.use(express.static(__dirname + '/www'));
 
 
-
 Socketserver.on('connection', (ws, req) => {
-  console.log("acces!");
+  //console.log("acces!");
   // Ensure that the URL starts with '/rtmp/', and extract the target RTMP URL.
   console.log(req.url);
 /*  if (!(match = req.url.match(/^\/rtmp\/(.*)$/))) {
@@ -66,7 +65,7 @@ Socketserver.on('connection', (ws, req) => {
 
   function makevideoserver() {
     const Url = req.url.split("/rtmp/")[1];
-    console.log(Url);
+   // console.log(Url);
     console.log('Target RTMP URL:', Url);
 
     // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP
@@ -128,22 +127,31 @@ Socketserver.on('connection', (ws, req) => {
     });
 
     // If the client disconnects, stop FFmpeg.
-    ws.on('close', (e) => {
-      ffmpeg.kill('SIGINT');
-    });
+
   }
   function makewebhookserver(){
     const Url = req.url.split("/")[2];
-    console.log(Url);
+    //console.log(Url);
     console.log('Connected at ' + Url + "!");
-    app.post('/webhook/' + Url, (req, res) => {
+    ws.id = Url;
+      Socketserver.clients.forEach(function each(client) {
+          console.log('Client.ID: ' + client.id);
+      });
+
+      app.post('/webhook/' + Url, (req, res) => {
       console.log('Received Webhook from /webhook/' + Url + ':', req.body);
-      ws.send(JSON.stringify(req.body));
+        Socketserver.clients.forEach((client =>
+        {
+            if ((client.readyState === ws.OPEN) && (client.id === Url)){
+                client.send(JSON.stringify(req.body));
+                console.log("Sended!");
+            }
+        }));
       res.status(200).send('OK');
+
     });
-    ws.addEventListener("close", e =>
-    {
-        console.log(Url + " disconnected!");
-    });
+
   }
+
 });
+
