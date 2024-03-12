@@ -53,10 +53,16 @@
         if (amount/350 < 1) {
             var progress = amount / 350 * 100 + "%";
         }
-        anime({
-            target: '.skill',
-            width: progress
-        });
+      var t = anime({
+          duration: 400,
+          loop: false,
+          autoplay: false,
+          targets: '.skill',
+          width: progress,
+          easing: 'easeInOutExpo'
+      });
+
+      t.play();
         document.getElementById("amount").innerText = "Зібрано " + Math.round(amount/350*100) + "%";
       if (Number(progressbar.style.width.split('%')[0]) < 5){
           progressbar.style.visibility = "hidden";
