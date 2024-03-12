@@ -36,6 +36,7 @@
     </div>
 </div>
 <script>
+    var amount = 0;
     var progressbar = document.getElementsByClassName("skill")[0];
     if (Number(progressbar.style.width.split('%')[0]) < 5){
         progressbar.style.visibility = "hidden";
@@ -43,7 +44,7 @@
         progressbar.style.visibility = "visible";
     }
   bc.onmessage = (e) => {
-        var amount = 0;
+
       console.log(e.data);
       var progressbar = document.getElementsByClassName("skill")[0];
         var obj = JSON.parse(e.data);
