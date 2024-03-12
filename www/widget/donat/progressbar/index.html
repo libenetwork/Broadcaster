@@ -56,7 +56,7 @@
             target: '.skill',
             width: progress
         });
-        document.getElementById("amount").innerText = "Зібрано " + Math.round(amount/350) + "%";
+        document.getElementById("amount").innerText = "Зібрано " + Math.round(amount/350*100) + "%";
       if (Number(progressbar.style.width.split('%')[0]) < 5){
           progressbar.style.visibility = "hidden";
       }else{
