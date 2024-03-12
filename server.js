@@ -144,6 +144,6 @@ Socketserver.on('connection', (ws, req) => {
     ws.addEventListener("close", e =>
     {
         console.log(Url + " disconnected!");
-    })
+    });
   }
 });
