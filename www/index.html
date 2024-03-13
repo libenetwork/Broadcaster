@@ -27,6 +27,7 @@ height: 70vh;
  <p id = "live">offline</p>
  <script src = "js/communicator.js"></script>
  <script src = "js/coockie.js"></script>
+ <script src="js/generate.js" type="module"></script>
   <script>
 
       window.localStorage.setItem("status", "offline");
@@ -83,12 +84,7 @@ height: 70vh;
           token
       );
       webhookclient.addEventListener("open", e => {console.log("Was connected!")})
-      webhookclient.addEventListener("message", e => {
 
-          console.log("Message from server ", decodeURI(e.data));
-          bc.postMessage(decodeURI(e.data));
-
-      })
       function dumpOptionsInfo() {
           const videoTrack = videoElem.srcObject.getVideoTracks()[0];
           console.info("Track settings:");

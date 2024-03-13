@@ -10,7 +10,8 @@ const child_process = require('child_process');
 const express = require('express');
 const bodyParser = require('body-parser');
 const WebSocketServer = require('ws').Server;
-const WebSocket = require('ws');
+//import { HfInference } from "npm:@huggingface/inference"
+
 const http = require('http');
 
 const app = express();
@@ -60,19 +61,7 @@ Socketserver.on('connection', (ws, req) => {
     ws.terminate(); // No match, reject the connection.
     return;
   }
-console.log("Starting Python...");
-  var datatosend;
-  const python = child_process.spawn("python", ['python/script.py']);
-    python.stdout.on('data', function (data) {
-        console.log('Pipe data from python script ...');
-        dataToSend = data.toString();
-        console.log(datatosend);
-    });
-    python.on('close', (code) => {
-        console.log(`child process close all stdio with code ${code}`);
-        // send data to browser
 
-    });
 
 
   function makevideoserver() {
