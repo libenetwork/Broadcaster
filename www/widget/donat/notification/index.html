@@ -4,16 +4,64 @@
     <meta charset="UTF-8">
     <title>Notification</title>
   <script src="../../../js/communicator.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script type="application/javascript" src="../../../js/anime.min.js"></script>
+    <link rel = "stylesheet" href="../../../css/notification.css">
 </head>
 <body>
+
+<div class = "container">
+    <video class="video" loop muted>
+        <source src = "default.mp4">
+    </video>
+    <div class = "notification">
+        <div id = "amount">
+            100₴ закинув
+        </div>
+        <div id = "author">
+            Мурзик Васильович
+        </div>
+
+
+
+        <div id = message>
+            Кожному своє - так було написано на воротах Бухенвальда
+        </div>
+    </div>
+
+</div>
 <script>
+    alert("Донати озвучуються");
   bc.onmessage = (e) => {
       console.log(e.data);
       var start_audio = new Audio("default_start.mp3");
-      var audio = new Audio(JSON.parse(e.data).link);
+      var voice = new Audio(JSON.parse(e.data).link);
+      document.getElementById('amount').innerText = JSON.parse(e.data).amount + "₴ закинув";
+      document.getElementById('author').innerText = JSON.parse(decodeURI(e.data)).name.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":");
+      document.getElementById('message').innerText = JSON.parse(decodeURI(e.data)).message.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":");
+      var ina = anime({
+          targets: '.container',
+          duration: 1000,
+          translateY: 1500,
+          autoplay: false
+        });
+      var outa = anime({
+          targets: '.container',
+          duration: 1000,
+          translateY: -1500,
+          delay: 4000,
+          autoplay: false,
+          easing: 'easeInOutElastic(1, .6)'
+
+      });
+       ina.play();
+      document.getElementsByClassName("video")[0].play();
       start_audio.play();
       start_audio.onended = function () {
-          audio.play();
+          voice.play();
+          voice.onended = function (){
+              outa.play();
+          }
 
       };
       };

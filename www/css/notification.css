@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+    font-family: Blogger Sans;
+    src: url("../fonts/Blogger_Sans.otf");
+}
+@font-face {
+    font-family: Blogger Sans Bold;
+    src: url("../fonts/Blogger_Sans-Bold.otf");
+}
+
+.container{
+ position: relative;
+    top: -1500px;
+    background-color: white;
+    border-radius: 1em;
+    margin: 0;
+    width: min-content;
+    -webkit-box-shadow: 3px 6px 50px -7px rgba(153,153,153,0.8);
+    -moz-box-shadow: 3px 6px 50px -7px rgba(153,153,153,0.8);
+    box-shadow: 3px 6px 50px -7px rgba(153,153,153,0.8);
+}
+.video{
+    border-radius: 1em 1em 0em 0em;
+    width: 100vw;
+}
+body{
+    margin: 0;
+}
+.notification{
+
+
+}
+#amount{
+    padding-top: 5vw;
+    font-family: "Blogger Sans";
+    font-size: 10vw;
+    color: #282828;
+    text-align: center;
+}
+hr{
+    background-color: #b0b0b0;
+}
+#author{
+    font-family: "Montserrat";
+    font-weight: 800;
+    font-size: 13.5vw;
+
+    background: linear-gradient(-130deg, #6228d7, #ee2a7b, #de9000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+   /*padding-bottom: 0.25em;*/
+}
+#message{
+    font-family: "Blogger Sans";
+    margin: 0.5em;
+    font-size: 8vw;
+    color: #282828;
+    text-align: center;
+    padding-top: 0.1em;
+    padding-bottom: 1em;
+}
