@@ -13,5 +13,8 @@
     "@huggingface/inference": "^2.6.4",
     "express": "^4.18.3",
     "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@gradio/client": "^0.13.0"
   }
 }

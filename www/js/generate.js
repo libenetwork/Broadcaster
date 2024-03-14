@@ -1,9 +1,21 @@
-import { HfInference } from "https://esm.sh/@huggingface/inference"
-const hf = new HfInference('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');
+import { client } from "https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js";
+
 webhookclient.addEventListener("message", e => {
-    console.log(JSON.parse(decodeURI(e.data)).message);
-    console.log("Message from server ", decodeURI(e.data));
-
-    bc.postMessage(decodeURI(e.data));
-
+    let data = JSON.parse(decodeURI(e.data)).name.replaceAll("+", " ") + " задон+атив " + JSON.parse(decodeURI(e.data)).amount + " гривень і сказав «" + JSON.parse(decodeURI(e.data)).message.replaceAll("+", " ") + "»";
+    generate(data, e)
 })
+async function generate(text, e){
+    const app = await client("https://robinhad-ukrainian-tts.hf.space/");
+    const result = await app.predict("/predict", [
+        text, // string  in 'Input' Textbox component
+        "Дмитро (чоловічий) 👨", // string  in 'Voice' Radio component
+        // string  in 'Accentor' Radio component
+    ]);
+    const link = result.data[0].data;
+
+    let json = JSON.parse(decodeURI(e.data));
+    json.link = link;
+    //return JSON.stringify(json);
+    bc.postMessage(JSON.stringify(json));
+   // console.log(url);
+}
