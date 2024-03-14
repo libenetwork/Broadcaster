@@ -2,14 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Progressbar</title>
+    <title>Notification</title>
   <script src="../../../js/communicator.js"></script>
 </head>
 <body>
 <script>
   bc.onmessage = (e) => {
       console.log(e.data);
-  };
+      var start_audio = new Audio("default_start.mp3");
+      var audio = new Audio(JSON.parse(e.data).link);
+      start_audio.play();
+      start_audio.onended = function () {
+          audio.play();
+
+      };
+      };
+
 </script>
 </body>
 </html>
