@@ -88,6 +88,7 @@ p {
     border-radius: 3em;
     font-family: "Blogger Sans";
     font-weight: 400;
+    display: flex; justify-content: flex-end;
 }
 .badge{
     padding: 7vh;
@@ -110,7 +111,7 @@ p {
     display: flex;
     font-weight: 800;
     background: linear-gradient(60deg, rgba(255, 135, 0, 0.8), #ee2a7b, #f9ce34);
-    -webkit-background-clip: text;
+    -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent;
     justify-content: space-between;
 }
