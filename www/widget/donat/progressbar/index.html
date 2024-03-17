@@ -36,14 +36,8 @@
     </div>
 </div>
 <script>
-    var amount = 0;
-    var indication = {
-        amount: 0
-    }
-  /*  Object.observe(indication, function (changes) {
-        document.getElementsByClassName("skill")[0].innerText = newvalue + "₴";
-    });*/
-    var progressbar = document.getElementsByClassName("skill")[0];
+    let amount = 0;
+    let progressbar = document.getElementsByClassName("skill")[0];
     if (Number(progressbar.style.width.split('%')[0]) < 5){
         progressbar.style.visibility = "hidden";
     }else{
@@ -66,7 +60,7 @@
             document.getElementById("amount").innerText = "Зібрано " + amount + "₴";
 
         }
-      var text = anime({
+      let text = anime({
           duration: 450,
           loop: false,
           autoplay: false,
@@ -75,7 +69,7 @@
           round: 1,
           easing: 'easeInOutExpo'
       }  );
-      var t = anime({
+      let t = anime({
           duration: 500,
           loop: false,
           autoplay: false,
@@ -83,7 +77,7 @@
           width: progress,
           easing: 'easeInOutExpo'
       });
-      var gradient = anime({
+      let gradient = anime({
           duration: 400,
           loop: false,
           autoplay: false,
