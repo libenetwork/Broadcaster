@@ -10,7 +10,7 @@ let micro = [];
         }
     });
     //console.log(micro);
-    let append = " <a class=\"dropdown-item\" onClick=\"choose(0)\">Захоплення пристрою</a>\n"; let i = 1;
+    let append = " <a class=\"dropdown-item\" onClick=\"choose(0)\">Захоплення звуків пристрою</a>\n"; let i = 1;
   let microphone = document.getElementsByClassName("microphone")[1];
 
     micro.forEach((device) => {

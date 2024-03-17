@@ -41,13 +41,16 @@ function create_stream(id){
     // sources[id].device.getUserMedia({});
 
     if (sources[id].device === undefined){
-        const audio = true;
+
         navigator.mediaDevices.getDisplayMedia({
             video:  true ,
-            audio: audio
+            audio: true,
+            systemAudio: "include"
         })
-    .then((videostream, audiostream) => {
+    .then((stream) => {
             const context = new AudioContext();
+            const audiostream = new MediaStream;
+             audiostream.addTrack(stream.getAudioTracks()[0]);
             const source = context.createMediaStreamSource(audiostream);
             const analyzer = context.createAnalyser();
             const destination = context.createMediaStreamDestination();
@@ -78,6 +81,7 @@ function create_stream(id){
             }
 
             tick();
+
             audiostreams[audiostreams.length] = destination.stream;
         });
     }else {
