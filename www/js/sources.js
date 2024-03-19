@@ -59,6 +59,7 @@ function create_stream(id){
             gain.connect(destination);
             // destination.connect(analyzer);
             document.getElementById('volume' + id).onchange = function () {
+
                 gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
             };
             gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
@@ -98,9 +99,14 @@ function create_stream(id){
             gain.connect(destination);
             // destination.connect(analyzer);
             document.getElementById('volume' + id).onchange = function () {
-                gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
+
+                    gain.gain.value = Number(this.value)/100;
+
+
             };
-            gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
+
+                    gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
+            
             gain.connect(analyzer);
 
             //source.connect(analyzer);
