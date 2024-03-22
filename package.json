@@ -11,7 +11,9 @@
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "@huggingface/inference": "^2.6.4",
+    "bluebird": "^3.7.2",
     "express": "^4.18.3",
+    "googleapis": "^134.0.0",
     "multistreamsmixer": "^1.2.2",
     "ws": "^8.16.0"
   },

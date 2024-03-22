@@ -9,7 +9,9 @@
 const child_process = require('child_process');
 const express = require('express');
 const bodyParser = require('body-parser');
+const youtube = require('./youtube.js');
 const WebSocketServer = require('ws').Server;
+const url = require('url');
 //import { HfInference } from "npm:@huggingface/inference"
 
 const http = require('http');
@@ -21,6 +23,8 @@ const server = http.createServer(app).listen(3000, () => {
 
 app.use(bodyParser.json());
 
+youtube.makeauth();
+console.log("OATH2client generated");
 
 const Socketserver = new WebSocketServer({
 server:server
@@ -38,30 +42,31 @@ app.use(express.static(__dirname + '/www'));
 
 
 Socketserver.on('connection', (ws, req) => {
-  //console.log("acces!");
-  // Ensure that the URL starts with '/rtmp/', and extract the target RTMP URL.
-  console.log(req.url);
-/*  if (!(match = req.url.match(/^\/rtmp\/(.*)$/))) {
-    console.log("terminate!");
-    ws.terminate(); // No match, reject the connection.
-    return;
-  }
-  if (match === req.url.match(/^\/rtmp\/(.*)$/)) {
-    console.log ("Broadcast was started!");
-    makevideoserver();
-  } else {
-    console.log ("Webhook!");
-    makewebhookserver();
-  }*/
+  //console.log(req.url);
   if (req.url.includes("webhook")){
     makewebhookserver();
   }else if (req.url.includes("rtmp")){
     makevideoserver();
-  }else{
+  }
+
+  else if(req.url.includes("youtube")){
+      if (req.url.split("/youtube/")[1] === "auth"){
+          //console.log(youtube.get_autorizationURL());
+        makeyoutubeserver();
+      }
+  }
+  else{
     ws.terminate(); // No match, reject the connection.
     return;
   }
+function  makeyoutubeserver(){
 
+    ws.send(youtube.get_autorizationURL());
+    ws.on("message", (msg) =>{
+        console.log(msg.toString());
+        youtube.get_token(msg.toString());
+    });
+}
 
 
   function makevideoserver() {

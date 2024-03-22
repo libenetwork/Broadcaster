@@ -1,0 +1,29 @@
+{
+  "name": "broadcaster-linux",
+  "version": "0.1.0",
+  "description": "Broadcaster app linux client",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron . --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto",
+    "start": "electron . --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto"
+  },
+  "repository": {
+    "type": "git",
+    "url": "broadcaster-linux"
+  },
+  "keywords": [
+    "rtmp",
+    "client",
+    "streaming"
+  ],
+  "author": "Naumenko",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "electron": "^29.1.4"
+  },
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "google-auth-library": "^9.7.0",
+    "googleapis": "^134.0.0"
+  }
+}

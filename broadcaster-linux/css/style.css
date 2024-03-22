@@ -1,0 +1,60 @@
+.welcome{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.welcome_label{
+    margin-top: 0.5em;
+    font-weight: 200;
+    font-size: 3em;
+}
+.gtk-window{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+    color: #6b6b6b;
+}
+#connect{
+    position: absolute;
+    top: 7%;
+    left: 115%;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+#register_text{
+    text-align: center;
+    font-size: 2em;
+    font-weight: 300;
+}
+.block {
+    width: 100px;
+    padding: 25px;
+    background-color: #393939ff;
+    transition: background-color 0.1s ease-out 100ms;
+    border-radius: 1em;
+
+}
+.block:hover{
+    background-color: #656565ff;
+}
+#register_button{
+    margin-top: 1.5em;
+}
+.register_label{
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: 500;
+}
