@@ -31,15 +31,15 @@ body{
 }
 .close_icon{
 
-    height: 8pt;
+    height: 14pt;
 
      filter: invert(91%) sepia(100%) saturate(25%) hue-rotate(74deg) brightness(106%) contrast(107%);
 
 }
 .close{
-    padding: 11px;
-    padding-top: 7px !important;
-    padding-bottom: 7px !important;
+    padding: 5px;
+
+    padding-bottom: 1px !important;
     border-radius: 2em;
     background-color: #393939ff;
 }

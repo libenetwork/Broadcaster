@@ -40,15 +40,16 @@ function get_autorizationURL(){
     });
 
 }
- async function get_token(authorise){
+ async function get_token(authorise, ws){
     //console.log(oauth2Client);
      //console.log(authorise);
      let q = await url.parse(authorise, true).query;
-     console.log(q.code);
+     //console.log(q.code);
      let token_generator = new Promise((resolve) => {
              resolve(oauth2Client.getToken(q.code))});
+     //console.log(ws);
      await token_generator.then((value) => {
-       console.log(value)});
+       ws.send(JSON.stringify(value))});
 
 
      //oauth2Client.setCredentials(token);

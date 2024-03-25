@@ -1,38 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   height="24"
-   viewBox="0 -960 960 960"
-   width="24"
-   version="1.1"
-   id="svg1"
-   sodipodi:docname="close.svg"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1" />
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#999999"
-     borderopacity="1"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:zoom="24.166667"
-     inkscape:cx="12"
-     inkscape:cy="12"
-     inkscape:window-width="1536"
-     inkscape:window-height="792"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg1" />
-  <path
-     d="M 482.6347,-380.84896 128.24157,-27.599695 q -19.88941,19.8252202 -50.627585,19.8252202 -30.738178,0 -50.627596,-19.8252202 -19.8894062,-19.825207 -19.8894062,-50.46418 0,-30.638965 19.8894062,-50.464185 L 381.37952,-481.77733 26.986389,-835.02659 q -19.8894062,-19.82522 -19.8894062,-50.46419 0,-30.63896 19.8894062,-50.46418 19.889418,-19.82521 50.627596,-19.82521 30.738175,0 50.627585,19.82521 l 354.39313,353.24927 354.39312,-353.24927 q 19.88941,-19.82521 50.6276,-19.82521 30.73818,0 50.62758,19.82521 19.88941,19.82522 19.88941,50.46418 0,30.63897 -19.88941,50.46419 L 583.88988,-481.77733 938.283,-128.52806 q 19.88941,19.82522 19.88941,50.464185 0,30.638973 -19.88941,50.46418 -19.8894,19.8252202 -50.62758,19.8252202 -30.73819,0 -50.6276,-19.8252202 z"
-     id="path1"
-     style="stroke-width:1.80521" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="16px" viewBox="0 0 16 16" width="16px" xmlns="http://www.w3.org/2000/svg">
+    <path d="m 4 4 h 1 h 0.03125 c 0.253906 0.011719 0.511719 0.128906 0.6875 0.3125 l 2.28125 2.28125 l 2.3125 -2.28125 c 0.265625 -0.230469 0.445312 -0.304688 0.6875 -0.3125 h 1 v 1 c 0 0.285156 -0.035156 0.550781 -0.25 0.75 l -2.28125 2.28125 l 2.25 2.25 c 0.1875 0.1875 0.28125 0.453125 0.28125 0.71875 v 1 h -1 c -0.265625 0 -0.53125 -0.09375 -0.71875 -0.28125 l -2.28125 -2.28125 l -2.28125 2.28125 c -0.1875 0.1875 -0.453125 0.28125 -0.71875 0.28125 h -1 v -1 c 0 -0.265625 0.09375 -0.53125 0.28125 -0.71875 l 2.28125 -2.25 l -2.28125 -2.28125 c -0.210938 -0.195312 -0.304688 -0.46875 -0.28125 -0.75 z m 0 0" fill="#2e3436"/>
 </svg>

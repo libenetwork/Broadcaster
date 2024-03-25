@@ -63,8 +63,8 @@ function  makeyoutubeserver(){
 
     ws.send(youtube.get_autorizationURL());
     ws.on("message", (msg) =>{
-        console.log(msg.toString());
-        youtube.get_token(msg.toString());
+        //console.log(msg.toString());
+        youtube.get_token(msg.toString(), ws);
     });
 }
 
