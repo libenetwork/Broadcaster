@@ -1,0 +1,21 @@
+@media only screen and (min-width: 601px){ .frame{
+    height: 40vw !important;
+}}
+@media only screen and (min-width: 993px){ .frame{
+    height: 30vw !important;
+}}
+.frame{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.video-container{
+    height: 50vw; background: #303030;
+    border-radius: 1em;
+}
+.gtk-window{
+    justify-content: flex-start !important; background-color: #242424 !important;
+}
+.live-button{
+
+}

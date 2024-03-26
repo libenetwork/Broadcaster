@@ -11,22 +11,37 @@
     <link rel = "stylesheet" href="css/style.css">
     <script src = "js/anime.min.js"></script>
     <link rel = "icon" href="img/icon1024.png">
+    <link rel = "stylesheet" href = "css/materialize.min.css">
+    <link rel = "stylesheet" href = "css/broadcaster_style.css">
 
 
 </head>
 <body>
 
-<div class = "gtk-window">
-    <div class = "header">
-        <div class="menu"></div>
+<div class = "gtk-window" style="">
+    <div class = "gtkheader">
 
+        <img class = "add_icon" src="symbols/plus-large-square-outline-symbolic.svg">
+        <div>
+            <div class="tab active"><img class="tab_icon" src="symbols/skull-symbolic.svg">Сцена 1</div>
+        </div>
         <div class="close">
             <img class = "close_icon" src="symbols/close.svg">
         </div>
     </div>
-    <div class = "content">
-
+    <div class = "content row" style="margin: 0;">
+        <div class="frame col s12 m12 l7" style=" margin-top: 0.5em;  padding: 0">
+           <div class="video-container">
+            <video id="video" autoplay playsinline muted style="
+"></video></div>
+            <div class="button_row">
+                <div class = "gtkbutton"><img class="button_icon" src="symbols/explore2-large-symbolic.svg">Відкрити сцену</div>
+                <div class = "gtkbutton"><img class="button_icon" src="symbols/podcast-symbolic.svg">Почати трансляції</div>
+                <div class = "gtkbutton"><img src="symbols/donut.svg">Пожертви</div>
+                <div class = "gtkbutton"><img class="button_icon" src="symbols/media-record-symbolic.svg">Вийти в етер!</div>
+            </div>
     </div>
+
 
 
 </div>

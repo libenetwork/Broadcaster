@@ -8,12 +8,22 @@ function createmainwindow(){
             allowRunningInsecureContent: true,
             nodeIntegration: true,
             contextIsolation: false},
-        height: 800,
+        height: 720,
         icon: 'img/icon1024',
         frame: false,
         transparent: true
     })
+    window.on("maximize", (e) =>{
+        window.webContents.send('maximize');
+
+    });
     window.loadFile("broadcaster.html");
+
+    window.on("unmaximize", (e) =>{
+
+        window.webContents.send('return');
+
+    });
 }
 //const nativeTheme = electron.remote.nativeTheme
 function createaddwindow(path){
@@ -48,7 +58,7 @@ const createWindow = (path) => {
             allowRunningInsecureContent: true,
             nodeIntegration: true,
         contextIsolation: false},
-        height: 800,
+        height: 720,
         icon: 'img/icon1024',
         frame: false,
         transparent: true

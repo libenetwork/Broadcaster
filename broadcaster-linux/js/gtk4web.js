@@ -6,12 +6,17 @@ function closeApp(e) {
     e.preventDefault()
     ipc.send('close')
 }
+console.log(document.getElementsByClassName("close").length)
 document.getElementsByClassName("close")[0].addEventListener("click", closeApp);
 ipc.on('maximize', function (e) {
+console.log("max");
 document.getElementsByClassName("gtk-window")[0].style = "border-radius:0";
+    document.getElementsByClassName("gtkheader")[0].style = "border-radius:0";
+
 });
 ipc.on('return', function (e) {
     document.getElementsByClassName("gtk-window")[0].style = "border-radius:1em";
+    document.getElementsByClassName("gtkheader")[0].style = "border-radius:1em";
 });
 
 const welcome = document.getElementsByClassName("welcome")[0];

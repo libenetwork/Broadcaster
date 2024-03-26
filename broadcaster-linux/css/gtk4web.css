@@ -1,10 +1,11 @@
 .gtk-window{
 background-color: #303030ff;
-padding: 10px;
-    box-shadow: 0px 0px 34px -18px rgba(0,0,0,0.75);
-    border-radius: 1em;
-    height: 97vh;
 
+    box-shadow: 0px 0px 34px -18px rgba(0,0,0,0.75);
+
+    padding: 0px;
+    height: 100vh;
+    border-radius: 1em;
 }
 
 body{
@@ -16,18 +17,21 @@ body{
     overflow: hidden;
 
 }
-.header{
-    width: 100%;
+.gtkheader{
+    border-radius: 1em 1em  0 0 ;
+    background-color: #303030ff;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-
+    -webkit-app-region: drag;
+    padding: 10px;
 
 }
 .tittle{
     font-size: 11pt;
     padding: 7px;
     -webkit-app-region: drag;
+    font-weight: 400;
 }
 .close_icon{
 
@@ -38,7 +42,7 @@ body{
 }
 .close{
     padding: 5px;
-
+    -webkit-app-region: no-drag;
     padding-bottom: 1px !important;
     border-radius: 2em;
     background-color: #393939ff;
@@ -62,4 +66,37 @@ body{
 }
 .button:hover{
     background-color: #4991e8;
+}
+.tab{
+    -webkit-app-region: no-drag;
+    display: flex;
+    align-items: center;
+    padding: 5pt;
+    padding-left: 10pt !important;
+    padding-right: 10pt !important;
+    border-radius: 0.5em;
+    font-weight: 400;
+}
+.tab, .active{
+    background-color: rgba(255,255,255,10%);
+}
+.tab_icon{
+    height: 10pt;
+
+    padding-right: 6pt;
+    filter: invert(91%) sepia(100%) saturate(25%) hue-rotate(74deg) brightness(106%) contrast(107%);
+
+}
+.content{
+    padding: 1em;
+}
+.gtkbutton{
+    padding: 0.5em 1em;
+    border-radius: 0.6em;
+    background-color: rgba(255,255,255,0.1);
+    display: flex;
+    gap: 0.7em;
+}
+.button_icon{
+    filter: invert(91%) sepia(100%) saturate(25%) hue-rotate(74deg) brightness(106%) contrast(107%);
 }
