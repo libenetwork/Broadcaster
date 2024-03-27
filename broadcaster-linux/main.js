@@ -8,7 +8,9 @@ function createmainwindow(){
             allowRunningInsecureContent: true,
             nodeIntegration: true,
             contextIsolation: false},
-        height: 720,
+        height: 780,
+        minWidth: 765,
+        minHeight: 780,
         icon: 'img/icon1024',
         frame: false,
         transparent: true

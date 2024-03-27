@@ -13,12 +13,12 @@
     <link rel = "icon" href="img/icon1024.png">
     <link rel = "stylesheet" href = "css/materialize.min.css">
     <link rel = "stylesheet" href = "css/broadcaster_style.css">
-
+    <script src = "js/broadcaster.js"></script>
 
 </head>
 <body>
 
-<div class = "gtk-window" style="">
+<div class = "gtk-window main-window" style="">
     <div class = "gtkheader">
 
         <img class = "add_icon" src="symbols/plus-large-square-outline-symbolic.svg">
@@ -30,21 +30,42 @@
         </div>
     </div>
     <div class = "content row" style="margin: 0;">
-        <div class="frame col s12 m12 l7" style=" margin-top: 0.5em;  padding: 0">
+        <div class="frame col s12 m12 l9 xl7" style=" margin-top: 0.5em;  padding: 0">
            <div class="video-container">
-            <video id="video" autoplay playsinline muted style="
+               <div class = "no-video"><img src="symbols/eye-not-looking-symbolic.svg" class = "disactive_icon" style ="height: 7vh">
+               </div> <div class="no-video"> <p class="no-sources-text">Відкрийте сцену, аби почати трансляцію</p></div>
+
+            <video id="video" class="not-show" autoplay playsinline muted style="
 "></video></div>
             <div class="button_row">
                 <div class = "gtkbutton"><img class="button_icon" src="symbols/explore2-large-symbolic.svg">Відкрити сцену</div>
                 <div class = "gtkbutton"><img class="button_icon" src="symbols/podcast-symbolic.svg">Почати трансляції</div>
                 <div class = "gtkbutton"><img src="symbols/donut.svg">Пожертви</div>
-                <div class = "gtkbutton"><img class="button_icon" src="symbols/media-record-symbolic.svg">Вийти в етер!</div>
+                <div class = "gtkbutton live-button"><img class="button_icon" src="symbols/media-record-symbolic.svg">Вийти в етер!</div>
+            </div>
+
+            <div class="button_row" id = "comments">
+                <div class = "gtkbutton" ><img style="width: 15pt" src="symbols/chat-bubbles-empty-inverted-symbolic.png">Подивитися коментарі</div>
+
+            </div>
+            <div class="audio_sources">
+                <div class = "preferences-group">
+                    <div class = 'preferences_header'><div class = "caption"><div class = "preferences_caption">Авдіо джерела</div><div class="preferences_subcaption">Додайте джерело авдіо, що мусить бути в трансляції</div> </div>
+                        <div class = "preferences_sufix"><img class = "sufix_icon button_icon" src="symbols/plus-large-symbolic.svg">Додайте джерела</div></div>
+                    <div class = "no-sources">
+                        <img class = 'disactive_icon no-source-icon' src = "symbols/sound-wave-alt-symbolic.svg">
+                        <div class = "no-sources-text">Нема звуку. Без звуку неможливо почати трансляцію</div>
+                    </div>
+                </div>
             </div>
     </div>
 
 
 
 </div>
+
+</div>
+
 <script src = "js/youtube_auth.js"></script>
 <script src="js/gtk4web.js"></script>
 <script type="module" src = "gtk.js"></script>

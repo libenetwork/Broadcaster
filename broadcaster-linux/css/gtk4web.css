@@ -96,7 +96,55 @@ body{
     background-color: rgba(255,255,255,0.1);
     display: flex;
     gap: 0.7em;
+    transition: all 0.1s ease-out
+
+}
+.gtkbutton:hover{
+    background-color: rgba(255,255,255,0.2);
+
 }
 .button_icon{
     filter: invert(91%) sepia(100%) saturate(25%) hue-rotate(74deg) brightness(106%) contrast(107%);
+}
+.disactive_icon {
+    filter: brightness(0) saturate(100%) invert(68%) sepia(0%) saturate(14%) hue-rotate(24deg) brightness(97%) contrast(91%);
+}
+.preferences-group{
+    gap: 2em;
+    display: flex;
+    flex-direction: column;
+}
+.preferences_caption{
+    font-size: 15pt;
+    font-weight: 500;
+}
+.preferences_subcaption{
+    font-size: 13pt;
+    font-weight: 300;
+    color: #a7a7a7;
+}
+.preferences_header{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+.preferences_sufix{
+    font-size: 13pt;
+    font-weight: 500;
+    padding: 7pt;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 8pt;
+    transition: all 0.1s ease-out;
+
+    border-radius: 0.4em;
+}
+.preferences_sufix:hover{
+    background-color: rgba(255,255,255, 0.1);
+}
+.not-show{
+    display: none;
 }

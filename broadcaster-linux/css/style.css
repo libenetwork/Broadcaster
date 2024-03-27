@@ -9,7 +9,7 @@
 
 .welcome_label{
     margin-top: 0.5em;
-    font-weight: 200;
+    font-weight: 500;
     font-size: 3em;
 }
 .gtk-window{
@@ -82,4 +82,7 @@
 .button_row .gtkbutton{
     width: 100%;
     justify-content: center;
+}
+.sources{
+    display: flex;
 }
