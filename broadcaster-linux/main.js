@@ -1,13 +1,41 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, desktopCapturer } = require('electron')
 const electron = require("electron")
 const path = require("path");
 
+
+function open_scene(){
+    const scene = new BrowserWindow({
+        webPreferences: {
+            allowRunningInsecureContent: true,
+            nodeIntegration: true,
+            contextIsolation: false, devTools: true},
+        fullscreen:true,
+        frame: false,
+        transparent: true
+    })
+    ipcMain.on('get-sources', () => {
+
+        return desktopCapturer.getSources({ types: ['window', 'screen'] }).then(async sources => {
+            console.log(sources);
+
+            for (const source of sources) {
+                console.log(source.id);
+
+                scene.webContents.send("source_id", source.id);
+            }
+        })
+    });
+
+    scene.loadFile("video.html");
+
+}
 function createmainwindow(){
     const window = new BrowserWindow({
         webPreferences: {
             allowRunningInsecureContent: true,
             nodeIntegration: true,
             contextIsolation: false},
+        preload: path.join(__dirname, 'preload.js'),
         height: 780,
         minWidth: 765,
         minHeight: 780,
@@ -15,6 +43,24 @@ function createmainwindow(){
         frame: false,
         transparent: true
     })
+    ipcMain.on('get-frame', () => {
+
+        return desktopCapturer.getSources({ types: ['window', 'screen'] }).then(async sources => {
+            console.log(sources);
+
+            for (const source of sources) {
+                console.log(source.id);
+
+                window.webContents.send("frame_id", source.id);
+            }
+        })
+    });
+
+
+    ipcMain.on("open_scene", (e) => {
+        console.log("open_scene");
+        open_scene();
+    });
     window.on("maximize", (e) =>{
         window.webContents.send('maximize');
 

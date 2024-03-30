@@ -16,7 +16,7 @@ document.getElementsByClassName("gtk-window")[0].style = "border-radius:0";
 });
 ipc.on('return', function (e) {
     document.getElementsByClassName("gtk-window")[0].style = "border-radius:1em";
-    document.getElementsByClassName("gtkheader")[0].style = "border-radius:1em";
+    document.getElementsByClassName("gtkheader")[0].style = "border-radius:1em 1em 0 0 ";
 });
 
 const welcome = document.getElementsByClassName("welcome")[0];

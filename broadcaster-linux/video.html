@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Broadcaster</title>
+    <title>Broadcaster Scene</title>
 </head>
 <body style="margin: 0; overflow: hidden">
 <div id="content">
@@ -14,29 +14,23 @@
 "></video>
 </div>
 <div class = content>
-    <embed width = "600px" height = "240px" src="widget/donat/progressbar"  style = "position: absolute; top: 720px; left: 475px">
-    <embed width = "220px" height = "420px" src = "widget/donat/notification" style = "position: absolute; top:30px; left: 1290px">
+    <embed width = "600px" height = "240px" src="widget/donat/progressbar/index.html" style = "position: absolute; top: 720px; left: 475px">
+    <embed width = "220px" height = "420px" src = "widget/donat/notification/index.html" style = "position: absolute; top:30px; left: 1290px">
 </div>
 </div>
 <script src = "js/communicator.js"></script>
+<script src = "js/gtk4web.js"></script>
 <script>
 
     const videoElem = document.getElementById("video");
     const broadElem = document.getElementById("video1");
-    startCapture();700
+    startCapture();
  //   window.open("./broadcastinfo.html");
   /*  window.open('broadcastinfo.html',
     'newwindow',
         'width=1920,height=1080');
 */
-    var displayMediaOptions = {
-        video: {
-            cursor: "none",
-            height: 1920,
-            width: 1080
-        },
-        audio: false
-    };
+
     function dumpOptionsInfo() {
         const videoTrack = videoElem.srcObject.getVideoTracks()[0];
         console.info("Track settings:");
@@ -46,9 +40,57 @@
     }
     async function startCapture() {
         try {
-            videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-           // broadElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+         ipc.send("get-sources");
+         ipc.on("source_id", async (e, source) => {
+             try {
 
+                 videoElem.srcObject = await navigator.mediaDevices.getUserMedia({
+                audio: false,
+
+                     video: {
+                         mandatory: {
+                             chromeMediaSource: 'desktop',
+                             chromeMediaSourceId: source,
+
+
+                         }
+                     }
+                 });
+                 wc.postMessage("connected")
+             }catch (e){
+                 console.log(e);
+             }
+         })
+            //videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+           // broadElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+         /*   if (!navigator.mediaDevices?.enumerateDevices) {
+                console.log("enumerateDevices() not supported.");
+            } else {
+                // List cameras and microphones.
+                navigator.mediaDevices
+                    .enumerateDevices()
+                    .then((devices) => {
+                        devices.forEach((device) => {
+                            console.log(`${device.kind}: ${device.label} id = ${device.deviceId}`);
+                        });
+                    })
+                    .catch((err) => {
+                        console.error(`${err.name}: ${err.message}`);
+                    });
+            }
+*/
+          /*  videoElem.srcObject = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: {
+                    mandatory:{
+                        chromeMediaSource: 'desktop',
+                        chromeMediaSourceId: 'window:1:0',
+                        width: 1920,
+                        height: 1080
+
+                    }
+                }
+            });*/
 
             dumpOptionsInfo();
         } catch (err) {

@@ -5,7 +5,10 @@ document.getElementById("youtube").addEventListener("click", (e) =>
    youtube_authorise();
 });
 let youtubesocket;
+let authostarted = false;
 function youtube_authorise() {
+    if (authostarted === false){
+        authostarted = true;
     let login;
     youtubesocket = new WebSocket(
 
@@ -29,6 +32,6 @@ function youtube_authorise() {
             ipc.send("mainwindow");
             ipc.send("closewindow");
         }
-    });
+    });}
 
 }

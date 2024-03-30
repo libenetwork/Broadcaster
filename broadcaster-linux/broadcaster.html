@@ -13,7 +13,7 @@
     <link rel = "icon" href="img/icon1024.png">
     <link rel = "stylesheet" href = "css/materialize.min.css">
     <link rel = "stylesheet" href = "css/broadcaster_style.css">
-    <script src = "js/broadcaster.js"></script>
+    <script src="js/communicator.js"></script>
 
 </head>
 <body>
@@ -35,10 +35,10 @@
                <div class = "no-video"><img src="symbols/eye-not-looking-symbolic.svg" class = "disactive_icon" style ="height: 7vh">
                </div> <div class="no-video"> <p class="no-sources-text">Відкрийте сцену, аби почати трансляцію</p></div>
 
-            <video id="video" class="not-show" autoplay playsinline muted style="
+            <video id="video" style = "width: 100%; height: 100%; object-fit: fill" class="not-show" autoplay playsinline muted style="
 "></video></div>
             <div class="button_row">
-                <div class = "gtkbutton"><img class="button_icon" src="symbols/explore2-large-symbolic.svg">Відкрити сцену</div>
+                <div class = "gtkbutton" id = "open_scene"><img class="button_icon"  src="symbols/explore2-large-symbolic.svg">Відкрити сцену</div>
                 <div class = "gtkbutton"><img class="button_icon" src="symbols/podcast-symbolic.svg">Почати трансляції</div>
                 <div class = "gtkbutton"><img src="symbols/donut.svg">Пожертви</div>
                 <div class = "gtkbutton live-button"><img class="button_icon" src="symbols/media-record-symbolic.svg">Вийти в етер!</div>
@@ -65,11 +65,65 @@
 </div>
 
 </div>
-
+<script src = "js/broadcaster.js"></script>
 <script src = "js/youtube_auth.js"></script>
 <script src="js/gtk4web.js"></script>
 <script type="module" src = "gtk.js"></script>
 <script type = "module" src = "theme.js"></script>
+<script>
+    wc.addEventListener("message", (e) =>
+    {
+
+        switch (e.data){
+            case "connected":
+                alert("Поширте вікно створенної сцени");
+
+                    ipc.send("get-frame");
+                    ipc.on("frame_id", async (e, source) => {
+                        try {
+
+                            let stream = await navigator.mediaDevices.getUserMedia({
+                                audio: {
+                                    mandatory: {
+                                        chromeMediaSource: 'desktop'
+                                    }
+                                },
+                                video: {
+                                    mandatory: {
+                                        chromeMediaSource: 'desktop',
+                                        chromeMediaSourceId: source,
+
+
+                                    }
+                                }
+                            });
+                            let delete_elem = document.getElementsByClassName("no-video");
+                            for (let i = 0; i < delete_elem.length; i++){
+                                delete_elem[i].style.display = "none";
+                            }
+                            document.getElementById("video").classList.remove("not-show");
+                            document.getElementById("video").srcObject = stream;
+                            document.getElementsByClassName("no-sources")[0].classList.add("not-show");
+                           // wc.postMessage("connected")
+                        }catch (e){
+                            console.log(e);
+                        }
+
+
+
+    });
+    break;
+        }
+    });
+</script>
+<script src = "js/communicator.js"></script>
+<script src = "js/coockie.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js"></script>
+<script src = "js/audio.js"></script>
+<script src="js/donate.js"></script>
+<script src="js/generate.js" type="module"></script>
+<script src = "js/sources.js"></script>
+<script src = "js/grab.js"></script>
 </body>
 </html>
 
