@@ -90,18 +90,12 @@ wc.addEventListener("message", (e) =>
                     let system_progress = document.createElement("div");
                     system_progress.classList.add("indicator");
                     system_indicator.appendChild(system_progress);
-
                     const tempSliderValue = system_range.value;
-
                     const progress = (tempSliderValue / system_range.max) * 100;
-
                     system_range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
-
                     system_range.addEventListener("input", (event) => {
                         const tempSliderValue = event.target.value;
-
                         const progress = (tempSliderValue / system_range.max) * 100;
-
                         system_range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
                     })
                     container.appendChild(system_range);

@@ -16,7 +16,7 @@ let micro = [];
         let menu = document.getElementsByClassName("popr-box")[0];
         dev_source.classList.add("popr-item");
         let icon = document.createElement("img");
-        icon.src = "symbols/audio-volume-high-symbolic.svg";
+        icon.src = "symbols/microphone2-symbolic.svg";
         icon.classList.add("button_icon");
         icon.classList.add("min-size");
         dev_source.append(icon);
@@ -26,8 +26,8 @@ let micro = [];
         dev_source.classList.add("popr-caption");
         dev_source.append(caption);
         dev_source.classList.add("popr-elem");
-       dev_source.addEventListener("click", () => choose(id));
         menu.append(dev_source);
+
 
     });
 

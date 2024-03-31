@@ -46,7 +46,7 @@ http://www.tipue.com/popr
                     }
                     
                     var out = '<div class="popr_container_' + d_m + '"><div class="popr_point_' + d_m + '"><div class="popr_content">' + $('div[data-box-id="' + $(this).attr('data-id') + '"]').html() + '</div></div></div>';
-                    
+
                     $(this).append(out);
                     $(popr_cont).css("width", ($(this).width() + 25) + "px");
 
@@ -63,7 +63,7 @@ http://www.tipue.com/popr
                          var w = window.innerHeight - w_h - 10;
                          document.getElementsByClassName("popr_content")[0].style.maxHeight =  w + 'px';
                     document.getElementsByClassName("popr_content")[0].classList.add("no-scrollbar");
-                    let elem =               document.getElementsByClassName("popr_content")[0];
+                    let elem = document.getElementsByClassName("popr_content")[0];
                     (function(timer) {
 
 
@@ -83,6 +83,12 @@ http://www.tipue.com/popr
                     })();
 
 
+               let click = document.getElementsByClassName("popr_content")[0].children;
+               console.log(click);
+               for (let i = 0; i < click.length; i++){
+                    console.log(i);
+                    click[i].addEventListener("click", (e) => {add_source(i)});
+               }
 
 
                     $(popr_cont).fadeIn(set.speed);   
