@@ -6,6 +6,8 @@ background-color: #303030ff;
     padding: 0px;
     height: 100vh;
     border-radius: 1em;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
 }
 
 body{
@@ -61,8 +63,9 @@ body{
     text-decoration: none;
     display: inline-block;
     font-size: 1.3em;
-    font-weight: 800;
-    transition: background-color 0.1s ease-out 100ms
+    font-weight: 500;
+    transition: background-color 0.1s ease-out 100ms;
+    font-family: "Cantarell";
 }
 .button:hover{
     background-color: #4991e8;
@@ -239,6 +242,8 @@ Not supports in Firefox and IE */
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
 
 }
-
+.min-size{
+    height: min-content;
+}
 
 

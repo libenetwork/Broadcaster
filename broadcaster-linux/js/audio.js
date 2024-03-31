@@ -9,13 +9,26 @@ let micro = [];
             micro.push(device);
         }
     });
-    //console.log(micro);
-    let append = " <a class=\"dropdown-item\" onClick=\"choose(0)\">Захоплення звуків пристрою</a>\n"; let i = 1;
-  let microphone = document.getElementsByClassName("microphone")[1];
+    console.log(micro);
 
     micro.forEach((device) => {
-        append += " <a class=\"dropdown-item\" onClick=\"choose(" + i + ")\">" + device.label + " </a>\n";
-        i++;
+        let dev_source = document.createElement("div");
+        let menu = document.getElementsByClassName("popr-box")[0];
+        dev_source.classList.add("popr-item");
+        let icon = document.createElement("img");
+        icon.src = "symbols/audio-volume-high-symbolic.svg";
+        icon.classList.add("button_icon");
+        icon.classList.add("min-size");
+        dev_source.append(icon);
+        let caption = document.createElement("p");
+        caption.innerText = device.label;
+        caption.classList.add("popr-text")
+        dev_source.classList.add("popr-caption");
+        dev_source.append(caption);
+        dev_source.classList.add("popr-elem");
+       dev_source.addEventListener("click", () => choose(id));
+        menu.append(dev_source);
+
     });
 
     // microphone.innerHTML = append;

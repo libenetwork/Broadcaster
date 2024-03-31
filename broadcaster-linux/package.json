@@ -25,6 +25,7 @@
     "bluebird": "^3.7.2",
     "google-auth-library": "^9.7.0",
     "googleapis": "^134.0.0",
+    "jquery": "^3.7.1",
     "js-sha256": "^0.11.0"
   }
 }

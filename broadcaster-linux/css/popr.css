@@ -13,7 +13,7 @@ http://www.tipue.com/popr
 }
 .popr a
 {
-     color: #333;
+     color: #fff !important;
      text-decoration: none;
      border: 0;    
 }
@@ -23,30 +23,38 @@ http://www.tipue.com/popr
 }
 .popr_content
 {
-     background-color: #fff;
+
      padding: 7px ;
      margin: 0;
 	border-radius: 1em;
+	background-color: rgba(56, 56, 56, 1);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	overflow-y: scroll;
+
 }
 .popr-item
 {
-     font: 300 14px/1.7 'Helvetica Neue', Helvetica, Arial, sans-serif;
-     color: #333;
-     padding: 4px 29px 5px 29px;
+     padding: 10px 29px 10px 9px;
 	border-radius: 0.7em;
+	font-weight: 300;
+}
+.popr-elem{
+	display: flex;
+	align-items: center;
+	gap: 1em;
 }
 .popr-item:hover
 {
-     color: #333;
-     background-color: #dcdcdc;
+     color: #ffffff !important;
+	background-color: rgba(255, 255, 255, 0.1);
 }
 
 .popr_container_bottom
 {
      display: none;
      position: absolute;
-     margin-top: 10px;
-     box-shadow: 2px 2px 5px #f9f9f9;
+	border-radius: 1em;
+	box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.13);
      z-index: 1000;
 }
 .popr_container_top
@@ -59,9 +67,14 @@ http://www.tipue.com/popr
 .popr_point_top, .popr_point_bottom 
 {
      position: relative;
-	background: #fff;
-	border: 1px solid #dcdcdc;
+	background-color: rgba(56, 56, 56, 1);
 	border-radius: 1em;
+}
+.popr-caption{
+	white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+
 }
 .popr_point_top:after, .popr_point_top:before
 {
@@ -75,14 +88,15 @@ http://www.tipue.com/popr
 }
 .popr_point_top:after
 {
-	border-top-color: #fff;
+	border-bottom-color: rgba(56, 56, 56, 1);
+
+	border-top-color: rgba(56, 56, 56, 1);
 	border-width: 8px;
 	left: 50%;
 	margin-left: -8px;
 }
 .popr_point_top:before 
 {
-	border-top-color: #dcdcdc;
 	border-width: 9px;
 	left: 50%;
 	margin-left: -9px;
@@ -99,16 +113,20 @@ http://www.tipue.com/popr
 }
 .popr_point_bottom:after
 {
-	border-bottom-color: #fff;
+	border-bottom-color: rgba(56, 56, 56, 1);
 	border-width: 8px;
 	left: 50%;
 	margin-left: -8px;
 }
 .popr_point_bottom:before 
 {
-	border-bottom-color: #dcdcdc;
 	border-width: 9px;
 	left: 50%;
 	margin-left: -9px;
 }
-
+.popr-text{
+	margin: 0;
+	width: -webkit-fill-available;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
