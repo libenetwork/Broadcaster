@@ -40,52 +40,7 @@ function remove_source(){
 function create_stream(id){
     // sources[id].device.getUserMedia({});
 
-    if (sources[id].device === undefined){
 
-        navigator.mediaDevices.getDisplayMedia({
-            video:  true ,
-            audio: true,
-            systemAudio: "include"
-        })
-    .then((stream) => {
-            const context = new AudioContext();
-            const audiostream = new MediaStream;
-             audiostream.addTrack(stream.getAudioTracks()[0]);
-            const source = context.createMediaStreamSource(audiostream);
-            const analyzer = context.createAnalyser();
-            const destination = context.createMediaStreamDestination();
-            const gain = context.createGain();
-            source.connect(gain);
-            gain.connect(destination);
-            // destination.connect(analyzer);
-            document.getElementById('volume' + id).onchange = function () {
-
-                gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
-            };
-            gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
-            gain.connect(analyzer);
-
-            //source.connect(analyzer);
-
-            // The array we will put sound wave data in
-            const array = new Uint8Array(analyzer.fftSize);
-
-            function getPeakLevel() {
-                analyzer.getByteTimeDomainData(array);
-                return array.reduce((max, current) => Math.max(max, Math.abs(current - 127)), 0) / 128;
-            }
-
-            function tick() {
-                const peak = getPeakLevel();
-                document.getElementById('indicator' + id).style.width = `${peak * 100}%`;
-                requestAnimationFrame(tick);
-            }
-
-            tick();
-
-            audiostreams[audiostreams.length] = destination.stream;
-        });
-    }else {
         const constraints = {deviceId: {exact: sources[id].device.deviceId}};
         navigator.mediaDevices.getUserMedia({
             audio: constraints
@@ -128,7 +83,51 @@ function create_stream(id){
             tick();
             audiostreams[audiostreams.length] = destination.stream;
         });
+
+}
+function create_streame_from_track(track, id){
+    const context = new AudioContext();
+    const stream = new MediaStream;
+    stream.addTrack(track);
+    const source = context.createMediaStreamSource(stream);
+    const analyzer = context.createAnalyser();
+    const destination = context.createMediaStreamDestination();
+    const gain = context.createGain();
+    source.connect(gain);
+    gain.connect(destination);
+    // destination.connect(analyzer);
+    document.getElementById('volume' + id).onchange = function () {
+
+        gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
+    };
+    gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
+    gain.connect(analyzer);
+
+    //source.connect(analyzer);
+
+    // The array we will put sound wave data in
+    const array = new Uint8Array(analyzer.fftSize);
+
+    function getPeakLevel() {
+        analyzer.getByteTimeDomainData(array);
+        return array.reduce((max, current) => Math.max(max, Math.abs(current - 127)), 0) / 128;
     }
+
+    function tick() {
+        const peak = getPeakLevel();
+        document.getElementById('indicator' + id).style.width = `${peak * 100}%`;
+        if (peak * 100 > 60){
+            document.getElementById('indicator' + id).style.backgroundColor = "#1a5fb4";
+        }else if (peak * 100 > 85){
+            document.getElementById('indicator' + id).style.backgroundColor = "#8f1d25";
+        }
+        requestAnimationFrame(tick);
+    }
+
+    tick();
+
+    audiostreams[audiostreams.length] = destination.stream;
+
 }
 function remove_stream(id){
     try {

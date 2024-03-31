@@ -46,7 +46,12 @@ function get_autorizationURL(){
      let q = await url.parse(authorise, true).query;
      //console.log(q.code);
      let token_generator = new Promise((resolve) => {
-             resolve(oauth2Client.getToken(q.code))});
+
+         try{
+                      resolve(oauth2Client.getToken(q.code))}catch (e){
+             console.log(e);
+         }
+     });
      //console.log(ws);
      await token_generator.then((value) => {
        ws.send(JSON.stringify(value))});

@@ -45,7 +45,7 @@ function createmainwindow(){
     })
     ipcMain.on('get-frame', () => {
 
-        return desktopCapturer.getSources({ types: ['window', 'screen'] }).then(async sources => {
+        return desktopCapturer.getSources({ types: ['window'] }).then(async sources => {
             console.log(sources);
 
             for (const source of sources) {

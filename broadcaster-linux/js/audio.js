@@ -18,5 +18,5 @@ let micro = [];
         i++;
     });
 
-     microphone.innerHTML = append;
+    // microphone.innerHTML = append;
 })();
