@@ -26,7 +26,7 @@ ipc.on('cookie_token', (e,data) => {
     console.log(token);
 
     webhookclient = new WebSocket(
-        'ws://localhost:3000/webhook/' +
+        'wss://broadcaster-uozh.onrender.com/webhook/' +
         token
     );
     webhookclient.addEventListener("open", e => {console.log("Was connected!")})

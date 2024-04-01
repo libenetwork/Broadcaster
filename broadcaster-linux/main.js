@@ -93,7 +93,7 @@ function createmainwindow(){
         token = Math.random() * 10000;
         hash(token.toString()).then((hex) => { console.log(hex);
             token = hex;
-            const cookie = {url: "http://localhost:3000", name: "token", value: token, expirationDate: 1000000000000000};
+            const cookie = {url: "https://broadcaster-uozh.onrender.com", name: "token", value: token, expirationDate: 1000000000000000};
                 session.defaultSession.cookies.set(cookie)
             .then(() => {
                 console.log(cookie);
@@ -130,7 +130,7 @@ function createaddwindow(path){
     window.loadURL(path);
     window.on("page-title-updated", () => {
 
-        if (window.webContents.getURL().split("?")[0] === "http://localhost:3000/"){
+        if (window.webContents.getURL().split("?")[0] === "https://broadcaster-uozh.onrender.com/"){
 
           BrowserWindow.getAllWindows()[1].webContents.send("response", window.webContents.getURL());
             window.destroy();

@@ -12,8 +12,8 @@ function youtube_authorise() {
     let login;
     youtubesocket = new WebSocket(
 
-        'ws://' + // http: => ws:, https: -> wss:
-        "localhost:3000" +
+        'wss://' + // http: => ws:, https: -> wss:
+        "broadcaster-uozh.onrender.com" +
         '/youtube/auth'
     );
     youtubesocket.addEventListener("message", e => {
