@@ -1,7 +1,7 @@
 const ipc = require('electron').ipcRenderer
 let token;
 let webhookclient;
-
+let webhook_uri;
 // close app
 function closeApp(e) {
     console.log("close");
@@ -23,12 +23,12 @@ ipc.on('return', function (e) {
 
 ipc.on('cookie_token', (e,data) => {
     token = data;
-    console.log(token);
-
+    webhook_uri = 'wss://broadcaster-uozh.onrender.com/webhook/' +
+        token;
     webhookclient = new WebSocket(
-        'wss://broadcaster-uozh.onrender.com/webhook/' +
-        token
+        webhook_uri
     );
+    console.log(webhook_uri);
     webhookclient.addEventListener("open", e => {console.log("Was connected!")})
 
 });
