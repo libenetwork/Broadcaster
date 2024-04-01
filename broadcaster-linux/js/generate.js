@@ -3,7 +3,7 @@ import { client } from "https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/i
 webhookclient.addEventListener("message", e => {
     let data = JSON.parse(decodeURI(e.data)).name.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":") + " задон+атив " + JSON.parse(decodeURI(e.data)).amount + " гривень і сказав «" + JSON.parse(decodeURI(e.data)).message.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":") + "»";
 
-    generate(data, e)
+    generate(data, e);
 })
 async function generate(text, e){
     console.log("generation started!");

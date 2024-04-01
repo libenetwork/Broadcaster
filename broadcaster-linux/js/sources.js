@@ -127,7 +127,6 @@ function create_stream(id){
                 }if (peak * 100 < 60)
                 {
                     document.getElementById('indicator' + id).style.backgroundColor = "#3584e4";
-
                 }
                 requestAnimationFrame(tick);
             }
@@ -167,7 +166,6 @@ function create_streame_from_track(track, id){
 
     function tick() {
         const peak = getPeakLevel();
-        document.getElementById('indicator' + id).style.width = `${peak * 100}%`;
         document.getElementById('indicator' + id).style.width = `${peak * 100}%`;
         if (peak * 100 > 60){
             document.getElementById('indicator' + id).style.backgroundColor = "#1a5fb4";

@@ -1,4 +1,6 @@
 const ipc = require('electron').ipcRenderer
+let token;
+let webhookclient;
 
 // close app
 function closeApp(e) {
@@ -19,10 +21,23 @@ ipc.on('return', function (e) {
     document.getElementsByClassName("gtkheader")[0].style = "border-radius:1em 1em 0 0 ";
 });
 
+ipc.on('cookie_token', (e,data) => {
+    token = data;
+    console.log(token);
+
+    webhookclient = new WebSocket(
+        'ws://localhost:3000/webhook/' +
+        token
+    );
+    webhookclient.addEventListener("open", e => {console.log("Was connected!")})
+
+});
+
 const welcome = document.getElementsByClassName("welcome")[0];
 const start = document.getElementById("start");
 const connect = document.getElementById("connect");
 start.addEventListener("click", openintegrate);
+
 function openintegrate(e){
     console.log("next");
     const first = anime({

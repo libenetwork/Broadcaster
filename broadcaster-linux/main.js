@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, desktopCapturer } = require('electron')
+const { app, BrowserWindow, ipcMain, desktopCapturer, session } = require('electron')
 const electron = require("electron")
 const path = require("path");
 
@@ -43,6 +43,7 @@ function createmainwindow(){
         frame: false,
         transparent: true
     })
+
     ipcMain.on('get-frame', () => {
 
         return desktopCapturer.getSources({ types: ['window'] }).then(async sources => {
@@ -72,6 +73,45 @@ function createmainwindow(){
         window.webContents.send('return');
 
     });
+    async function hash(string) {
+        const utf8 = new TextEncoder().encode(string);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray
+            .map((bytes) => bytes.toString(16).padStart(2, '0'))
+            .join('');
+        return hashHex;
+    }
+     session.defaultSession.cookies.get({name: "token"})
+        .then((cookies) => {
+            console.log(cookies);
+
+   let token_cookie = cookies[0].value;
+
+    if (token_cookie === ""){
+        console.log("no token!");
+        token = Math.random() * 10000;
+        hash(token.toString()).then((hex) => { console.log(hex);
+            token = hex;
+            const cookie = {url: "http://localhost:3000", name: "token", value: token, expirationDate: 1000000000000000};
+                session.defaultSession.cookies.set(cookie)
+            .then(() => {
+                console.log(cookie);
+                window.webContents.send("cookie_token", cookie);
+                    // success
+                }, (error) => {
+                    console.error(error)
+                });
+
+            }
+        );
+    }else {
+        window.webContents.send("cookie_token", token_cookie);
+    } }).catch((error) => {
+    console.log(error)
+
+
+});
 }
 //const nativeTheme = electron.remote.nativeTheme
 function createaddwindow(path){
