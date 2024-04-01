@@ -14,7 +14,7 @@ function return_data(){
 
         let YOUR_CLIENT_ID = obj.web.client_id;
         let YOUR_CLIENT_SECRET = obj.web.client_secret;
-        let YOUR_REDIRECT_URL = "http://localhost:3000";
+        let YOUR_REDIRECT_URL = 'http://localhost:3000';
             resolve([YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REDIRECT_URL]);
     })});
 
