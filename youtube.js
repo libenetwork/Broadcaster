@@ -10,7 +10,7 @@ function return_data(){
         if (err) throw err;
 
         var obj = JSON.parse(data);
-        console.log(obj.web.redirect_uris);
+        console.log(obj.web.redirect_uris[0]);
 
         let YOUR_CLIENT_ID = obj.web.client_id;
         let YOUR_CLIENT_SECRET = obj.web.client_secret;
