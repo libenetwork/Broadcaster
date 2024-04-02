@@ -20,13 +20,17 @@ ipc.on('return', function (e) {
     document.getElementsByClassName("gtk-window")[0].style = "border-radius:1em";
     document.getElementsByClassName("gtkheader")[0].style = "border-radius:1em 1em 0 0 ";
 });
+function open_donate_window(){
+    ipc.send("open_donate");
+}
 
 ipc.on('cookie_token', (e,data) => {
     token = data;
-    webhook_uri = 'wss://broadcaster-uozh.onrender.com/webhook/' +
+    webhook_uri = 'https://broadcaster-uozh.onrender.com/webhook/' +
         token;
     webhookclient = new WebSocket(
-        webhook_uri
+        'wss://broadcaster-uozh.onrender.com/webhook/' +
+        token
     );
     console.log(webhook_uri);
     webhookclient.addEventListener("open", e => {console.log("Was connected!")})

@@ -70,3 +70,10 @@
     background-color: rgba(53, 132, 228, 1);
 
 }
+.back_cont{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.mute{
+    filter: brightness(0) saturate(100%) invert(23%) sepia(98%) saturate(2053%) hue-rotate(339deg) brightness(85%) contrast(99%);}

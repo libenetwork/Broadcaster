@@ -245,5 +245,10 @@ Not supports in Firefox and IE */
 .min-size{
     height: min-content;
 }
-
+.highlight_icon{
+    filter: brightness(0) saturate(100%) invert(78%) sepia(5%) saturate(1%) hue-rotate(356deg) brightness(81%) contrast(83%);
+}
+.highlight_icon:hover{
+    filter: brightness(0) saturate(100%) invert(100%) sepia(65%) saturate(0%) hue-rotate(170deg) brightness(102%) contrast(101%);
+}
 

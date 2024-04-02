@@ -1,8 +1,10 @@
 class source {
-    constructor(name, device, volume) {
+    constructor(name, device, volume, position) {
         this.name = name;
         this.device = device;
         this.volume = volume;
+        this.position = position;
+
     }
 }
 let sources = [];
@@ -27,7 +29,7 @@ function add_source(id){
     }
     let container = document.createElement("div");
           //  create_stream(sources.length-1);
-            let sound = document.createElement("div");
+    let sound = document.createElement("div");
     let icon = document.createElement("img");
     icon.src = "symbols/microphone2-symbolic.svg";
     icon.classList.add("button_icon");
@@ -35,6 +37,8 @@ function add_source(id){
     let text = document.createElement("div");
     text.innerText = document.getElementsByClassName("popr-item")[id].children[1].innerText;
     text.style.fontWeight = "300";
+    text.style.overflowX = "hidden";
+    text.style.textOverflow = "ellipsis";
     sound.appendChild(text);
     container.classList.add('preferences-group-element');
     sound.classList.add('audio-source-tittle');
@@ -56,29 +60,59 @@ function add_source(id){
     const progress = (tempSliderValue / range.max) * 100;
     range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
     range.addEventListener("input", (event) => {
-        const tempSliderValue = event.target.value;
+        if (document.getElementsByClassName("back_cont")[Array.from(document.getElementsByClassName("back_cont")).findIndex((t) => Number(t.parentNode.children[1].children[0].id.split("volume")[1]) === Number(event.target.id.split("volume")[1]))].children[1].classList.contains("mute")){}else {
+
+            const tempSliderValue = event.target.value;
         const progress = (tempSliderValue / range.max) * 100;
         range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
-    })
-    container.appendChild(range);
+    }})
+    let back_cont = document.createElement("div");
+    back_cont.appendChild(range);
+    let mute = document.createElement('img');
+    mute.src = "symbols/microphone-sensitivity-muted-symbolic.svg";
+    mute.classList.add("highlight_icon");
+    back_cont.classList.add("back_cont");
+    mute.addEventListener("click", (e) => {
+        if (mute.classList.contains("mute")){
+            mute.classList.remove("mute");
+            mute.classList.add("highlight_icon");
+
+        }else{
+            mute.classList.add("mute");
+            mute.classList.remove("highlight_icon");
+        }
+    });
+    back_cont.appendChild(mute);
+    let delete_source = document.createElement("img");
+    delete_source.src = "symbols/user-trash-symbolic.svg";
+    delete_source.classList.add("highlight_icon");
+    delete_source.onclick = function (e) {
+        remove_source(Number(e.target.parentElement.parentElement.children[1].children[0].id.split("volume")[1]));
+    };
+    back_cont.appendChild(delete_source);
+    container.appendChild(back_cont);
+
     place_source.appendChild(container);
     progressbar.id = "indicator" + i;
     place_source.appendChild(indicator);
-    sources[sources.length] = new source(text.innerText, micro[id], document.getElementById("volume" + sources.length).value);
+    sources[sources.length] = new source(text.innerText, micro[id], document.getElementById("volume" + i).value, i);
     create_stream(sources.length-1)
 }
-function remove_source(){
-    if (document.getElementsByClassName("microphone")[0].innerText != "Додати пристрій"){
-        try {
-            remove_stream(sources.findIndex((e) => e.name === document.getElementsByClassName("microphone")[0].innerText));
-            sources.splice(sources.findIndex((e) => e.name === document.getElementsByClassName("microphone")[0].innerText),1);
-            Array.prototype.slice.call(document.getElementsByClassName("sources")[0].children).find((e) =>
-                e.getElementsByTagName("td")[0].innerText === document.getElementsByClassName("microphone")[0].innerText).remove();
-
-        }catch (e){
-
-        }
+function remove_source(id){
+    remove_stream(id);
+    document.getElementById("volume" + id).parentElement.parentElement.remove();
+    document.getElementById("indicator" + id).parentElement.remove();
+    try {
+        sources.slice.call(sources.findIndex((e) => e.position === id));
+    }catch (e){
+        console.log(e);
     }
+    if (document.getElementById("source").childElementCount === 0){
+        document.getElementById("source").classList.add("not-show");
+        document.getElementsByClassName("no-sources")[0].classList.remove("not-show");
+    }
+
+
 }
 function create_stream(id){
     // sources[id].device.getUserMedia({});
@@ -96,15 +130,31 @@ function create_stream(id){
             source.connect(gain);
             gain.connect(destination);
             // destination.connect(analyzer);
-            document.getElementById('volume' + id).onchange = function () {
+            let muted = false; let save ;
+            document.getElementsByClassName("back_cont")[sources[id].position].children[1].onclick = function (){
+                if (document.getElementsByClassName("back_cont")[sources[id].position].children[1].classList.contains("mute")) {
+                    muted = true;
+                    gain.gain.value = 0;
+                    document.getElementById('indicator' + sources[id].position).style.width = 0;
+                    save = document.getElementById('volume' + sources[id].position).value;
+                    document.getElementById('volume' + sources[id].position).value = 0;
+                    document.getElementById('volume' + sources[id].position).style.background ="#6d6d6dff";
 
-                    gain.gain.value = Number(this.value)/100;
-
-
+                }else {muted = false;
+                    document.getElementById('volume' + sources[id].position).value = save;
+                    gain.gain.value = Number(save) / 100; // Any number between 0 and 1.
+                    document.getElementById('volume' + sources[id].position).style.background = `linear-gradient(to right, #3584e4 ${save}%,  #6d6d6dff ${save}%)`;
+                }
+            }
+            document.getElementById('volume' + sources[id].position).onchange = function () {
+                if (muted){
+                    gain.gain.value = 0;
+                    document.getElementById('volume' + sources[id].position).value = 0;
+                    document.getElementById('volume' + sources[id].position).style.backgroundColor ="#6d6d6dff";
+                }else {
+                    gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
+                }
             };
-
-                    gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
-            
             gain.connect(analyzer);
 
             //source.connect(analyzer);
@@ -116,17 +166,30 @@ function create_stream(id){
                 analyzer.getByteTimeDomainData(array);
                 return array.reduce((max, current) => Math.max(max, Math.abs(current - 127)), 0) / 128;
             }
-
+                let r = 0;
+            let peakp;
+            let skip = 3;
             function tick() {
+                if (r === skip){
                 const peak = getPeakLevel();
-                document.getElementById('indicator' + id).style.width = `${peak * 100}%`;
+                let indicator =  document.getElementById('indicator' + sources[id].position)
+                anime({
+                    targets: indicator,
+                    width: [`${peakp * 100}%`,`${peak * 100}%`],
+
+                });
                 if (peak * 100 > 60){
-                    document.getElementById('indicator' + id).style.backgroundColor = "#1a5fb4";
+                    indicator.style.backgroundColor = "#1a5fb4";
                 } if (peak * 100 > 85){
-                    document.getElementById('indicator' + id).style.backgroundColor = "#8f1d25";
+                    indicator.style.backgroundColor = "#8f1d25";
                 }if (peak * 100 < 60)
                 {
-                    document.getElementById('indicator' + id).style.backgroundColor = "#3584e4";
+                   indicator.style.backgroundColor = "#3584e4";
+                }
+                r = 0;
+                peakp = peak;}
+                else{
+                    r++;
                 }
                 requestAnimationFrame(tick);
             }
@@ -147,9 +210,30 @@ function create_streame_from_track(track, id){
     source.connect(gain);
     gain.connect(destination);
     // destination.connect(analyzer);
-    document.getElementById('volume' + id).onchange = function () {
+    let muted = false; let save ;
+    document.getElementsByClassName("back_cont")[id].children[1].onclick = function (){
+        if (document.getElementsByClassName("back_cont")[id].children[1].classList.contains("mute")) {
+            muted = true;
+            gain.gain.value = 0;
+            document.getElementById("indicator" + id).style.width = 0;
+            save = document.getElementById('volume' + id).value;
+            document.getElementById('volume' + id).value = 0;
+            document.getElementById('volume' + id).style.background ="#6d6d6dff";
 
-        gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
+        }else {muted = false;
+        document.getElementById('volume' + id).value = save;
+            gain.gain.value = Number(save) / 100; // Any number between 0 and 1.
+            document.getElementById('volume' + id).style.background = `linear-gradient(to right, #3584e4 ${save}%,  #6d6d6dff ${save}%)`;
+        }
+        }
+     document.getElementById('volume' + id).onchange = function () {
+        if (muted){
+            gain.gain.value = 0;
+            document.getElementById('volume' + id).value = 0;
+            document.getElementById('volume' + id).style.backgroundColor ="#6d6d6dff";
+        }else {
+            gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
+        }
     };
     gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
     gain.connect(analyzer);
@@ -163,19 +247,32 @@ function create_streame_from_track(track, id){
         analyzer.getByteTimeDomainData(array);
         return array.reduce((max, current) => Math.max(max, Math.abs(current - 127)), 0) / 128;
     }
-
+    let r = 0;
+    let peakp; const skip = 3;
     function tick() {
-        const peak = getPeakLevel();
-        document.getElementById('indicator' + id).style.width = `${peak * 100}%`;
-        if (peak * 100 > 60){
-            document.getElementById('indicator' + id).style.backgroundColor = "#1a5fb4";
-        } if (peak * 100 > 85){
-            document.getElementById('indicator' + id).style.backgroundColor = "#8f1d25";
-        }if (peak * 100 < 60)
-        {
-            document.getElementById('indicator' + id).style.backgroundColor = "#3584e4";
+        if (r === skip){
+            const peak = getPeakLevel();
+            console.log('indicator' + id);
+            let indicator =  document.getElementById('indicator' + id);
+            anime({
+                targets: indicator,
+                width: [`${peakp * 100}%`,`${peak * 100}%`],
 
+            });
+            if (peak * 100 > 60){
+                indicator.style.backgroundColor = "#1a5fb4";
+            } if (peak * 100 > 85){
+                indicator.style.backgroundColor = "#8f1d25";
+            }if (peak * 100 < 60)
+            {
+                indicator.style.backgroundColor = "#3584e4";
+            }
+            r = 0;
+            peakp = peak;}
+        else{
+            r++;
         }
+
         requestAnimationFrame(tick);
     }
 

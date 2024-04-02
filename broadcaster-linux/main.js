@@ -29,6 +29,9 @@ function open_scene(){
     scene.loadFile("video.html");
 
 }
+function create_donate_window(parent){
+
+}
 function createmainwindow(){
     const window = new BrowserWindow({
         webPreferences: {
@@ -42,6 +45,25 @@ function createmainwindow(){
         icon: 'img/icon1024',
         frame: false,
         transparent: true
+    })
+    ipcMain.on("open_donate", () => {
+        const donate_window = new BrowserWindow({
+            webPreferences: {
+                allowRunningInsecureContent: true,
+                nodeIntegration: true,
+                contextIsolation: false},
+            parent: window,
+            height: 500,
+            minWidth: 400,
+            width:400,
+            minHeight: 500,
+            icon: 'img/icon1024',
+            frame: false,
+            transparent: true,
+
+        });
+        donate_window.loadFile("donate.html");
+
     })
 
     ipcMain.on('get-frame', () => {

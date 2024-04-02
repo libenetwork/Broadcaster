@@ -89,6 +89,11 @@
 .audio-source-tittle{
     display: flex;
     gap: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    max-width: 80%;
 
 }
 .range_input{

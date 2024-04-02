@@ -14,7 +14,8 @@ function return_data(){
 
         let YOUR_CLIENT_ID = obj.web.client_id;
         let YOUR_CLIENT_SECRET = obj.web.client_secret;
-        let YOUR_REDIRECT_URL = obj.web.redirect_uris;
+        let YOUR_REDIRECT_URL = obj.web.redirect_uris
+        ;
             resolve([YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REDIRECT_URL]);
     })});
 

@@ -94,11 +94,36 @@ wc.addEventListener("message", (e) =>
                     const progress = (tempSliderValue / system_range.max) * 100;
                     system_range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
                     system_range.addEventListener("input", (event) => {
-                        const tempSliderValue = event.target.value;
-                        const progress = (tempSliderValue / system_range.max) * 100;
-                        system_range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
-                    })
-                    container.appendChild(system_range);
+                        if (document.getElementsByClassName("back_cont")[Number(event.target.id.split("volume")[1])].children[1].classList.contains("mute")){}else {
+                            const tempSliderValue = event.target.value;
+                            const progress = (tempSliderValue / system_range.max) * 100;
+                            system_range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
+                        } });
+                    let back_cont = document.createElement("div");
+                    back_cont.appendChild(system_range);
+                    let mute = document.createElement('img');
+                    mute.src = "symbols/microphone-sensitivity-muted-symbolic.svg";
+                    mute.classList.add("highlight_icon");
+                    back_cont.classList.add("back_cont");
+                    mute.addEventListener("click", (e) => {
+                       if (mute.classList.contains("mute")){
+                           mute.classList.remove("mute");
+                           mute.classList.add("highlight_icon");
+
+                       }else{
+                           mute.classList.add("mute");
+                           mute.classList.remove("highlight_icon");
+                       }
+                    });
+                    back_cont.appendChild(mute);
+                    let delete_source = document.createElement("img");
+                    delete_source.src = "symbols/user-trash-symbolic.svg";
+                    delete_source.classList.add("highlight_icon");
+                    delete_source.onclick = function () {
+                        remove_source(id);
+                    };
+                    back_cont.appendChild(delete_source);
+                    container.appendChild(back_cont);
                     place_source.appendChild(container);
                     system_progress.id = "indicator" + id;
                     place_source.appendChild(system_indicator);
