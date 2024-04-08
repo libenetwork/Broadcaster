@@ -1,6 +1,7 @@
-const { app, BrowserWindow, ipcMain, desktopCapturer, session } = require('electron')
+const { app, BrowserWindow, ipcMain, desktopCapturer, session, clipboard } = require('electron')
 const electron = require("electron")
 const path = require("path");
+
 
 
 function open_scene(){
@@ -29,9 +30,7 @@ function open_scene(){
     scene.loadFile("video.html");
 
 }
-function create_donate_window(parent){
 
-}
 function createmainwindow(){
     const window = new BrowserWindow({
         webPreferences: {
@@ -46,6 +45,11 @@ function createmainwindow(){
         frame: false,
         transparent: true
     })
+    ipcMain.on("copy", (e, data) => {
+        clipboard.writeText(data);
+        let clipboardStr = clipboard.readText();
+        console.log(clipboardStr);
+    })
     ipcMain.on("open_donate", () => {
         const donate_window = new BrowserWindow({
             webPreferences: {
@@ -54,8 +58,10 @@ function createmainwindow(){
                 contextIsolation: false},
             parent: window,
             height: 500,
+            maxWidth: 400,
             minWidth: 400,
             width:400,
+            maxHeight: 500,
             minHeight: 500,
             icon: 'img/icon1024',
             frame: false,
@@ -63,6 +69,26 @@ function createmainwindow(){
 
         });
         donate_window.loadFile("donate.html");
+
+    })
+    ipcMain.on("open_broadcast", () => {
+        const broadcast_window = new BrowserWindow({
+            webPreferences: {
+                allowRunningInsecureContent: true,
+                nodeIntegration: true,
+                contextIsolation: false},
+            parent: window,
+            height: 500,
+            maxWidth: 400,
+            minWidth: 400,
+            width:400,
+            maxHeight: 500,
+            minHeight: 500,
+            icon: 'img/icon1024',
+            frame: false,
+            transparent: true,
+        });
+        broadcast_window.loadFile("broadcast_create.html");
 
     })
 
@@ -104,6 +130,9 @@ function createmainwindow(){
             .join('');
         return hashHex;
     }
+    ipcMain.on("ready", (e) => {
+        console.log("ready!");
+
      session.defaultSession.cookies.get({name: "token"})
         .then((cookies) => {
             console.log(cookies);
@@ -133,10 +162,11 @@ function createmainwindow(){
     console.log(error)
 
 
-});
+});});
 }
 //const nativeTheme = electron.remote.nativeTheme
 function createaddwindow(path){
+
     //console.log("yes");
     const window = new BrowserWindow({
         webPreferences: {
@@ -176,8 +206,8 @@ const createWindow = (path) => {
     ipcMain.on('close', () => {
         app.quit()
     })
-    ipcMain.on("closewindow", () => {
-        window.close();
+    ipcMain.on("closewindow", (event) => {
+        event.sender.close();
     })
     ipcMain.on("mainwindow", () => {
         createmainwindow();

@@ -27,6 +27,8 @@ body{
     justify-content: space-between;
     -webkit-app-region: drag;
     padding: 10px;
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.15);
+
 
 }
 .tittle{
@@ -252,3 +254,90 @@ Not supports in Firefox and IE */
     filter: brightness(0) saturate(100%) invert(100%) sepia(65%) saturate(0%) hue-rotate(170deg) brightness(102%) contrast(101%);
 }
 
+.collapsible{
+    border-radius: 1em !important;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.36) !important;
+    border: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+}
+.collapsible-header{
+    border-radius: inherit;
+    border: 0 !important;
+    background: #303030ff !important;
+
+
+}
+.collapsible-el:first-child{
+    border-radius: 1em 1em 0 0 !important;
+
+}
+.collapsible-el:last-child{
+    border-radius: 0 0 1em 1em !important;
+}
+.collapsible-el:only-child{
+    border-radius: 1em !important;
+}
+
+.collapsible-body{
+    display: flex;
+    align-content: center;
+    align-items: flex-start;font-weight: 300;
+    padding: 1rem !important;
+    border-radius: 0em;
+    border: 0 !important;
+}
+.badge{
+    font-family: 'Cantarell' !important;
+    font-weight: 500 !important;
+    color: white !important;
+    border-radius: 1em !important;
+}
+.collapsible-text{
+    margin: 0;
+}
+.collapsible-time{
+    margin: 0;
+    display: flex;
+    font-weight: 700;
+    font-size: 80%;
+    color: #888;
+}
+label{
+    left: 0 !important;
+}
+.input-row{
+    text-overflow: ellipsis;
+    margin: 0 !important;
+    border: 0 !important;
+    color: white !important;
+    font-family: "Cantarell";
+    height: 1.2rem !important;
+
+}
+.input-field{
+    margin: 0 !important;
+}
+.input-label{
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-family: 'Cantarell' !important;
+    font-style: normal !important;
+    font-size: 80% !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+    background: transparent !important;
+
+}
+.input-field-form{
+    padding: 1em;
+    border-radius: 1em;
+    background: #303030ff !important;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.36) !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}

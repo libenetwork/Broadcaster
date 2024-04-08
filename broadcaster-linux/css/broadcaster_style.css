@@ -77,3 +77,14 @@
 }
 .mute{
     filter: brightness(0) saturate(100%) invert(23%) sepia(98%) saturate(2053%) hue-rotate(339deg) brightness(85%) contrast(99%);}
+.donate-window{
+    display: flex;
+    flex-direction: column;
+    height: 65vh;
+    align-items: center;
+    justify-content: center;
+    gap: 2em
+}
+.donate-window > img{
+    width: 50%;
+}

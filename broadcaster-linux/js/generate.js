@@ -17,8 +17,16 @@ async function generate(text, e){
 
     let json = JSON.parse(decodeURI(e.data));
     json.link = link;
+    const currentdate = new Date();
+
+    json.datetime = currentdate.getDay() + "/" + currentdate.getMonth()
+        + "/" + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":" + currentdate.getSeconds();
+
     //return JSON.stringify(json);
     console.log("generated");
+    donate[donate.length] = json;
     bc.postMessage(JSON.stringify(json));
    // console.log(url);
 }

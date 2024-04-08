@@ -1,12 +1,13 @@
 const ipc = require('electron').ipcRenderer
 let token;
 let webhookclient;
-let webhook_uri;
+let donate = [];
+
 // close app
 function closeApp(e) {
     console.log("close");
     e.preventDefault()
-    ipc.send('close')
+    ipc.send('closewindow')
 }
 console.log(document.getElementsByClassName("close").length)
 document.getElementsByClassName("close")[0].addEventListener("click", closeApp);
@@ -23,24 +24,19 @@ ipc.on('return', function (e) {
 function open_donate_window(){
     ipc.send("open_donate");
 }
+function open_broadcast_window(){
+    ipc.send("open_broadcast");
+}
 
-ipc.on('cookie_token', (e,data) => {
-    token = data;
-    webhook_uri = 'https://broadcaster-uozh.onrender.com/webhook/' +
-        token;
-    webhookclient = new WebSocket(
-        'wss://broadcaster-uozh.onrender.com/webhook/' +
-        token
-    );
-    console.log(webhook_uri);
-    webhookclient.addEventListener("open", e => {console.log("Was connected!")})
-
-});
 
 const welcome = document.getElementsByClassName("welcome")[0];
 const start = document.getElementById("start");
 const connect = document.getElementById("connect");
-start.addEventListener("click", openintegrate);
+try {
+    start.addEventListener("click", openintegrate);
+}catch (e){
+    console.log(e);
+}
 
 function openintegrate(e){
     console.log("next");
