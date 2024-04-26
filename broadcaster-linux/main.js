@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, desktopCapturer, session, clipboard } = require('electron')
+const { app, BrowserWindow, ipcMain, desktopCapturer, session, clipboard, dialog } = require('electron')
 const electron = require("electron")
 const path = require("path");
 
@@ -78,18 +78,32 @@ function createmainwindow(){
                 nodeIntegration: true,
                 contextIsolation: false},
             parent: window,
-            height: 500,
+            height: 800,
             maxWidth: 400,
             minWidth: 400,
             width:400,
-            maxHeight: 500,
-            minHeight: 500,
+            maxHeight: 800,
+            minHeight: 800,
             icon: 'img/icon1024',
             frame: false,
             transparent: true,
         });
         broadcast_window.loadFile("broadcast_create.html");
-
+        ipcMain.on("open_cover", (e) => {
+            dialog.showOpenDialog(broadcast_window, {
+                properties: ['openFile'],
+                
+                    filters: [
+                      { name: 'Зображення', extensions: ['jpg', 'png', 'gif'] }
+                    ]
+                  
+              }).then(result => {
+                window.webContents.send("cover_file", result.filePaths)
+                
+              }).catch(err => {
+                console.log(err)
+              })
+        })
     })
 
     ipcMain.on('get-frame', () => {
@@ -104,7 +118,7 @@ function createmainwindow(){
             }
         })
     });
-
+  
 
     ipcMain.on("open_scene", (e) => {
         console.log("open_scene");

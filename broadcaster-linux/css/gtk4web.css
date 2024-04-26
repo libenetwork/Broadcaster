@@ -341,3 +341,11 @@ label{
     justify-content: space-between;
 
 }
+input[type=text]:focus{
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+input[type=text]::placeholder{
+    font-weight: 300;
+}
