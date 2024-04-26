@@ -3,10 +3,16 @@ const fs = require("fs");
 const sharp = require("sharp");
 const electron = require("electron")
 const path = require("path");
+let open_donate = false;
+let open_broadcast = false;
+let open_scene_w = false;
+let open_dialogue = false;
+let window;
 
 
-
+console.log ("Broadcaster, version 0.0.1. Naumenko \nApp for internet broadcasting!");
 function open_scene(){
+    if (!open_scene_w){
     const scene = new BrowserWindow({
         webPreferences: {
             allowRunningInsecureContent: true,
@@ -30,11 +36,15 @@ function open_scene(){
     });
 
     scene.loadFile("video.html");
-
+    scene.on("closed", () => {open_scene_w = false; window.webContents.send("scene_destroyed")})
+    open_scene_w = true;
+    }else{
+        window.webContents.send("scene_opened");
+    }
 }
 
 function createmainwindow(){
-    const window = new BrowserWindow({
+     window = new BrowserWindow({
         webPreferences: {
             allowRunningInsecureContent: true,
             nodeIntegration: true,
@@ -52,7 +62,12 @@ function createmainwindow(){
         let clipboardStr = clipboard.readText();
         console.log(clipboardStr);
     })
+    window.on("closed", () => {
+app.quit();
+    })
     ipcMain.on("open_donate", () => {
+        console.log(open_donate);
+        if (!open_donate){
         const donate_window = new BrowserWindow({
             webPreferences: {
                 allowRunningInsecureContent: true,
@@ -70,10 +85,16 @@ function createmainwindow(){
             transparent: true,
 
         });
+        donate_window.on("closed", (e) => {
+            open_donate = false;
+        })
         donate_window.loadFile("donate.html");
-
+        open_donate = true;
+    }
     })
     ipcMain.on("open_broadcast", () => {
+        console.log(open_broadcast);
+        if (!open_broadcast){
         const broadcast_window = new BrowserWindow({
             webPreferences: {
                 allowRunningInsecureContent: true,
@@ -183,8 +204,11 @@ function createmainwindow(){
                 console.log(err)
               })
         })
+        broadcast_window.on("closed", () => {open_broadcast = false;})
+        open_broadcast = true;
+    }
     })
-
+   
     ipcMain.on('get-frame', () => {
 
         return desktopCapturer.getSources({ types: ['window'] }).then(async sources => {
@@ -207,6 +231,15 @@ function createmainwindow(){
         window.webContents.send('maximize');
 
     });
+    window.onbeforeunload = (e) => {
+        console.log('I do not want to be closed')
+      
+        // Unlike usual browsers that a message box will be prompted to users, returning
+        // a non-void value will silently cancel the close.
+        // It is recommended to use the dialog API to let the user confirm closing the
+        // application.
+        e.returnValue = false
+      }
     window.loadFile("broadcaster.html");
 
     window.on("unmaximize", (e) =>{
@@ -229,7 +262,8 @@ function createmainwindow(){
      session.defaultSession.cookies.get({name: "token"})
         .then((cookies) => {
             console.log(cookies);
-
+            
+            
    let token_cookie = cookies[0].value;
 
     if (token_cookie === ""){
@@ -278,7 +312,7 @@ function createaddwindow(path){
         if (window.webContents.getURL().split("?")[0] === "https://broadcaster-uozh.onrender.com/"){
 
           BrowserWindow.getAllWindows()[1].webContents.send("response", window.webContents.getURL());
-            window.destroy();
+            window.close();
 
 
         }
@@ -300,7 +334,9 @@ const createWindow = (path) => {
         app.quit()
     })
     ipcMain.on("closewindow", (event) => {
-        event.sender.close();
+        
+        event.sender.destroy();
+       
     })
     ipcMain.on("mainwindow", () => {
         createmainwindow();
@@ -318,6 +354,8 @@ const createWindow = (path) => {
         window.webContents.send('return');
 
     });
+  
+  
     window.loadFile(path, this);
 }
 

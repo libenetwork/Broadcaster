@@ -11,6 +11,10 @@ wc.addEventListener("message", (e) =>
 {
 
     switch (e.data){
+       
+        case "scene_destroyed":
+
+            break;
         case "connected":
             alert("Поширте вікно створенної сцени");
 
