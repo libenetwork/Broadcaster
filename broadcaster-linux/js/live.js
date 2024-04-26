@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Broadcast was started at " + addres);
 
         const client = new WebSocket(
-            window.location.protocol.replace('http', 'ws') + '//' + // http: => ws:, https: -> wss:
-            window.location.host +
+            "wss://broadcaster-uozh.onrender.com/" +
             '/rtmp/' +
             addres
         );
@@ -28,21 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 videoBitsPerSecond: 3000000
             });
 
-            // console.log(URL.createObjectURL(stream));
-            // console.log(URL.createObjectURL(mixed_stream.getMixedStream()));
-
-            //let mediaRecorder = new MediaStreamRecorder(mediastreams);
-            /*   mediaRecorder.mimeType = 'video/webm';
-               mediaRecorder.samplerate = 96000;*/
+   
             mediaRecorder.start(1000);
             let recordedData = [];
 
             mediaRecorder.addEventListener('dataavailable', (e) => {
                 console.log(e.data);
-                //let video = document.createElement("video");
-               // setVideoFromBlob(e.data, {type: "video/mp4"},video);
-
-                //+
+        
                  client.send(e.data);
             });
 

@@ -252,7 +252,6 @@ function create_streame_from_track(track, id){
     function tick() {
         if (r === skip){
             const peak = getPeakLevel();
-            console.log('indicator' + id);
             let indicator =  document.getElementById('indicator' + id);
             anime({
                 targets: indicator,

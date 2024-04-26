@@ -36,7 +36,8 @@ function open_scene(){
     });
 
     scene.loadFile("video.html");
-    scene.on("closed", () => {open_scene_w = false; window.webContents.send("scene_destroyed")})
+    scene.on("closed", () => {try{open_scene_w = false; window.webContents.send("scene_destroyed")}
+catch(e){}});
     open_scene_w = true;
     }else{
         window.webContents.send("scene_opened");

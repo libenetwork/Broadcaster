@@ -6,11 +6,7 @@ wc.addEventListener("message", (e) => {
         case "get_donates":
             wc.postMessage(JSON.stringify(donate));
             break;
-        case "scene_opened":
-            alert("Сцена вже відкрита");
-            break;
-            
+   
 
     }
-    console.log()
 })

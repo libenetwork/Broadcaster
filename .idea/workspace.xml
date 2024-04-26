@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1056419f-a139-4a02-b61e-43c19802d4da" name="Changes" comment="Go online!">
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/broadcaster-linux/broadcast_create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/broadcaster-linux/js/donate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broadcaster-linux/css/gtk4web.css" beforeDir="false" afterPath="$PROJECT_DIR$/broadcaster-linux/css/gtk4web.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broadcaster-linux/donate.html" beforeDir="false" afterPath="$PROJECT_DIR$/broadcaster-linux/donate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broadcaster-linux/js/gtk4web.js" beforeDir="false" afterPath="$PROJECT_DIR$/broadcaster-linux/js/gtk4web.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broadcaster-linux/js/materialize.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/broadcaster-linux/js/materialize.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broadcaster-linux/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/broadcaster-linux/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broadcaster-linux/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/broadcaster-linux/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/broadcaster-linux/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/broadcaster-linux/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="1056419f-a139-4a02-b61e-43c19802d4da" name="Changes" comment="Go online!" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,6 +107,7 @@
       <workItem from="1713616994833" duration="51000" />
       <workItem from="1713775156290" duration="6000" />
       <workItem from="1713793870627" duration="8000" />
+      <workItem from="1714144077324" duration="40000" />
     </task>
     <task id="LOCAL-00001" summary="Main window">
       <option name="closed" value="true" />

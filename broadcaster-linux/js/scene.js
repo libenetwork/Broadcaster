@@ -7,14 +7,25 @@ onresize = (e) => {
     elem.style.maxHeight = window.innerHeight - elem.offsetTop - em2px(1) + "px";
 
 };
+ipc.on("scene_destroyed", function(e){
+    let delete_elem = document.getElementsByClassName("no-video");
+    for (let i = 0; i < delete_elem.length; i++){
+        delete_elem[i].style.display = "block";
+
+    }
+    document.getElementById("video").classList.add("not-show");
+    try{
+    remove_source(Array.from(document.getElementsByClassName("audio-source-tittle")).findIndex((x) => x.children[1].innerText === "Захоплення пристрою"));}
+    catch(e){
+
+    }
+})
 wc.addEventListener("message", (e) =>
 {
-
+    console.log(e.data);
     switch (e.data){
        
-        case "scene_destroyed":
-
-            break;
+     
         case "connected":
             alert("Поширте вікно створенної сцени");
 

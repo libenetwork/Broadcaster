@@ -137,7 +137,7 @@
 
 </div>                   <div class = "startbroadcast bottompanel">
     <div id = "create_button">
-      <div class="gtkbutton" style="justify-content: center;"><img class="button_icon" src="symbols/podcast-symbolic.svg">Створити трансляції</div>                  </div>  
+      <div class="gtkbutton" style="justify-content: center;"><img class="button_icon" onclick = "save();" src="symbols/podcast-symbolic.svg">Створити трансляції</div>                  </div>  
   </div>
          
 
@@ -151,6 +151,26 @@
 <script src="js/materialize.min.js"></script>
 
 <script>
+    class broadcast{
+      
+    constructor(name, image, description, acces, category, forkids) {
+        this.name = name;
+        this.image = image
+        this.description = description;
+        this.acces = acces;
+        this.category = category;
+        this.forkids = forkids;
+        this.servers;
+
+    }
+
+}
+    document.getElementsByClassName("close")[0].addEventListener("click", save);
+
+    let servers = [];
+    function save(){
+       JSON.stringify(new broadcast()); 
+    }
     function choose(dropdown, i){
             document.getElementsByClassName(dropdown)[0].children[0].innerText = document.getElementById(dropdown).children[i].innerText;
     }

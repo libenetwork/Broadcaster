@@ -6,6 +6,11 @@ let donate = [];
 
 // close app
 function closeApp(e) {
+    try{
+        save();
+    }catch(e){
+
+    }
     console.log("close");
     e.preventDefault()
     ipc.send('closewindow')
@@ -21,11 +26,9 @@ document.getElementsByClassName("gtk-window")[0].style = "border-radius:0";
     document.getElementsByClassName("gtkheader")[0].style = "border-radius:0";
 
 });
-ipc.on("scene_destroyed", function(e){
-    wc.postMessage("scene_destroyed")
-})
+
 ipc.on("scene_opened", function(e){
-    wc.postMessage("scene_opened")
+    alert("Cцена вже відкрита!");
 })
 ipc.on("cover_file", function(e, args) {
     wc.postMessage("file:" + args);
