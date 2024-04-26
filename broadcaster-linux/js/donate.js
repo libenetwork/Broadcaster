@@ -1,3 +1,19 @@
+let scrollbars = document.getElementsByClassName("no_scrollbar");
+for (let i; i < scrollbars.length; i++){
+ let elem = scrollbars[i];
+elem.addEventListener('scroll', function(e) {
+
+elem.classList.remove('no-scrollbar');
+elem.classList.add('scrollbar');
+ 
+
+clearTimeout(timer);
+timer = setTimeout(function() {
+  elem.classList.add('no-scrollbar');
+  elem.classList.remove('scrollbar');
+}, 100);
+
+})}
 if (document.getElementsByClassName("collapsible")[0].childElementCount === 0){
     document.getElementsByClassName("preferences-group")[0].classList.add("not-show");
     document.getElementsByClassName("preferences-group")[1].classList.add("not-show");

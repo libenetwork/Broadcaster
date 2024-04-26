@@ -24,15 +24,15 @@
 <div class = "gtk-window main-window" style="">
     <div class = "gtkheader">
         <div></div>
-        <div style="width: -webkit-fit-avalible; text-align: center">
-            <div class = "tittle" style="padding-top: 2px !important; padding: 0; ">Донати</div>
+        <div style="width: -webkit-fill-available; text-align: center">
+            <div class = "tittle" style="padding-top: 2px !important; padding: 0; ">Трансляції</div>
         </div>
         <div class="close">
             <img class = "close_icon" src="symbols/close.svg">
         </div>
     </div>
-    <div class = "content scrollbar" style="margin: 0; height: -webkit-fill-avaliable; overflow-y: scroll">
-        <div class="frame col s12" style=" margin-top: 0.5em;  padding: 0; height: 100%">
+    <div class = "content no-scrollbar" style="margin: 0; height: -webkit-fill-available; overflow-y: scroll; padding-bottom: 0;">
+        <div class="frame col s12" style=" margin-top: 0.5em;  padding: 0;">
 
             <div class="video-container" onclick="open_cover()" style="height: 25vh">
                 <div class = "no-video"><img src="symbols/image-missing-symbolic.svg" class = "disactive_icon" style ="height: 12vh">
@@ -40,6 +40,87 @@
                 <img width="100%" height="100%" class= "not-show" id = "cover">
   </div>
 
+                        <div id = "name" class="input-field col s12">
+                            <form class="input-field-form">
+                                <div>
+                                <label class = "input-label" for="token">Назва трансляції</label>
+
+                                <input id = "token" class = "input-row" value=""  type="text" class="validate" placeholder="Нова трансляція">
+                                </div>
+                            
+                            </form>
+                        </div>
+                        <div class="input-field col s12">
+                            <form class="input-field-form">
+                                <div style="width: -webkit-fill-available;">
+                                <label class = "input-label" for="description">Опис</label>
+
+                                <textarea id = "description"  maxlength="5000" class= "desc_row materialize-textarea scrollbar" value=""  type="text" class="validate" placeholder="Oпис"></textarea>
+                                </div>
+                            
+                            </form>
+                        </div>
+                        <div class="" style="
+                        display: flex;
+                        /* align-content: center; */
+                        align-items: center;
+                    ">
+                            <div class = "colrow s4" style="font-weight: 400;">Доступність</div>
+                        
+                            <div class = "colrow s8 listbox dropdown-trigger dropdown1"  data-target='dropdown1'>
+                                <div id = "accestype">Загальнодоступне</div>
+                                <img class= "button_icon" src="symbols/pan-down-symbolic.svg">
+                            </div>
+                            <ul id='dropdown1' class='dropdown-content listcontent'>
+                                <li><a onclick="choose('dropdown1', 0)">Загальнодоступне</a></li>
+                                <li><a onclick="choose('dropdown1', 1)">Для тих, в кого є посилання</a></li>
+                                <li><a onclick="choose('dropdown1', 2)">Приватне</a></li>
+                        </div>  <div class="" style="
+                        display: flex;
+                        /* align-content: center; */
+                        align-items: center;
+                    ">
+                        <div class = "colrow s4" style="font-weight: 400;">Категорія</div>
+                        
+                        <div class = "colrow s8 listbox dropdown-trigger dropdown2"  data-target='dropdown2'>
+                            <div id = "accestype">Ігри</div>
+                            <img class= "button_icon" src="symbols/pan-down-symbolic.svg">
+                        </div>
+                        <ul id='dropdown2' class='dropdown-content listcontent'>
+                            <li><a onclick="choose('dropdown2', 0)">Фільми й анімація</a></li>
+                            <li><a onclick="choose('dropdown2', 1)">Авто та транспорт</a></li>
+                            <li><a onclick="choose('dropdown2', 2)">Музика</a></li>
+                            <li><a onclick="choose('dropdown2', 3)">Тварини</a></li>
+                            <li><a onclick="choose('dropdown2', 4)">Спорт</a></li>
+                            <li><a onclick="choose('dropdown2', 5)">Подорожі та події</a></li>
+                            <li><a onclick="choose('dropdown2', 6)">Ігри</a></li>
+                            <li><a onclick="choose('dropdown2', 7)">Люди та блоги</a></li>
+                            <li><a onclick="choose('dropdown2', 8)">Комедії</a></li>
+                            <li><a onclick="choose('dropdown2', 9)">Розваги</a></li>
+                            <li><a onclick="choose('dropdown2', 10)">Новини та політика</a></li>
+                            <li><a onclick="choose('dropdown2', 11)">Навчання та стиль</a></li>
+                            <li><a onclick="choose('dropdown2', 12)">Освіта</a></li>
+                            <li><a onclick="choose('dropdown2', 13)">Наука та технологія</a></li>
+                            <li><a onclick="choose('dropdown2', 14)">Соціальне відео</a></li>
+
+                        </div>
+                        <div class="" style="
+                        display: flex;
+                        /* align-content: center; */
+                        align-items: center;
+
+                    ">
+                        <div class = "colrow s5" style="font-weight: 400; margin-left: 0;">Трансляція для дітей?</div>
+                        <div class = "colrow s5" style="font-weight: 400;"></div>
+                        <div class = "colrow s2" style="font-weight: 400;">  
+                            <label class="switch">
+                              <input type="checkbox">
+                              <span class="slider round"></span>
+                            </label>
+                            
+</div>
+                    </div>
+  
                         <div class="input-field col s12">
                             <form class="input-field-form">
                                 <div>
@@ -50,10 +131,16 @@
                             
                             </form>
                         </div>
+                      
        
 </div>
 
-</div>
+</div>                   <div class = "startbroadcast bottompanel">
+    <div id = "create_button">
+      <div class="gtkbutton" style="justify-content: center;"><img class="button_icon" src="symbols/podcast-symbolic.svg">Створити трансляції</div>                  </div>  
+  </div>
+         
+
 </div>
 <script src = "js/broadcaster.js"></script>
 <script src="js/gtk4web.js"></script>
@@ -64,15 +151,61 @@
 <script src="js/materialize.min.js"></script>
 
 <script>
+    function choose(dropdown, i){
+            document.getElementsByClassName(dropdown)[0].children[0].innerText = document.getElementById(dropdown).children[i].innerText;
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems, options);
+    });
+    let scrollbars = document.getElementsByClassName("no-scrollbar");
+   for (let i =0; i < scrollbars.length; i++){
+    let elem = scrollbars[i];
+   elem.addEventListener('scroll', function(e) {
+
+elem.classList.remove('no-scrollbar');
+elem.classList.add('scrollbar');
+    
+
+clearTimeout(timer);
+timer = setTimeout(function() {
+     elem.classList.add('no-scrollbar');
+     elem.classList.remove('scrollbar');
+}, 100);
+
+})}
+$(document).ready(function() {
+    $('textarea#description').characterCounter();
+  });
+        
+
+       M.AutoInit();
+
+       M.textareaAutoResize($('#description'));
+
     wc.addEventListener("message", (e) =>{
     let adress = e.data.split("file:")[1];
-    let caption = document.getElementsByClassName("no-video");
+        switch (adress){
+           case "err0":{
+            alert("Ваш файл завеликий для трансляції. Стисніть його, або використайте інший.")
+           } 
+           break;
+           case "err1":{
+            alert("Ширина вашого файлу мусить бути не менше 640 пікселів, а відношення сторін становити 16:9")
+           }
+           break;
+default: {
+let caption = document.getElementsByClassName("no-video");
     for (let i = 0; i < caption.length; i++){
         caption[i].classList.add("not-show");
     }
     let image = document.getElementById("cover");
     image.classList.remove("not-show");
     image.src = adress;
+}
+break;
+        }
+   
   
     
    });

@@ -99,3 +99,8 @@
 .range_input{
     width: 15em !important;
 }
+
+#create_button{
+    padding: 1.5em;
+    width: 100%;
+}

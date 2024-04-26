@@ -1,4 +1,6 @@
 const { app, BrowserWindow, ipcMain, desktopCapturer, session, clipboard, dialog } = require('electron')
+const fs = require("fs");
+const sharp = require("sharp");
 const electron = require("electron")
 const path = require("path");
 
@@ -94,13 +96,90 @@ function createmainwindow(){
                 properties: ['openFile'],
                 
                     filters: [
-                      { name: 'Зображення', extensions: ['jpg', 'png', 'gif'] }
+                      { name: 'Зображення', extensions: ['jpg', 'png', 'webp'] }
                     ]
                   
               }).then(result => {
-                window.webContents.send("cover_file", result.filePaths)
+                const fileBytes = require('file-bytes');
+                console.log(result.filePaths);
+                console.log(fileBytes.sync(result.filePaths[0]));
+                if (fileBytes.sync(result.filePaths[0]) > 2097152){
+                    console.log("compress!");
+                    fs.readFile(result.filePaths[0], async function(err, e){
+                  
+                    fs.access("./compressed", (error) => {
+                        if (error) {
+                          fs.mkdirSync("./compressed");
+                        }
+
+                      });
+                    switch (result.filePaths[0].split(".")[result.filePaths[0].split(".").length - 1]){
+                        case "jpg":{
+                         let dest = "./compressed/" + result.filePaths[0].split("/")[result.filePaths[0].split("/").length - 1];
+                        await sharp(e).jpeg({quality: 70}).toFile(dest).then(() => {
+                            if (fileBytes.sync(dest) > 2097152){
+                                window.webContents.send("cover_file", "err0");
+                            }else{
+                                const sizeOf = require("image-size");
+                                const dimmensions = sizeOf(result.filePaths[0]);
+                                if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
+                                    window.webContents.send("cover_file", dest);
+                                }else{
+                                    window.webContents.send("cover_file", "err1");
+                                }
+                            }
+                        });
+                        
+                        
+                        }
+                        break;
+                        case "png":
+                            {
+                                let dest = "./compressed/" + result.filePaths[0].split("/")[result.filePaths[0].split("/").length - 1];
+  
+                                await sharp(e).png({quality: 70}).toFile(dest).then(() => {
+                                    if (fileBytes.sync(dest) > 2097152){
+                                        window.webContents.send("cover_file", "err0");
+                                    }else{
+                                        const sizeOf = require("image-size");
+                                        const dimmensions = sizeOf(result.filePaths[0]);
+                                        if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
+                                            window.webContents.send("cover_file", dest);
+                                        }else{
+                                            window.webContents.send("cover_file", "err1");
+                                        }                                    }
+                                });
+                            }
+                            break;
+                            case "webp":
+                                {
+                                    let dest = "./compressed/" + result.filePaths[0].split("/")[result.filePaths[0].split("/").length - 1];
+      
+                                    await sharp(e).webp({quality: 70}).toFile(dest).then(() => {
+                                        const sizeOf = require("image-size");
+                                        const dimmensions = sizeOf(result.filePaths[0]);
+                                        if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
+                                            window.webContents.send("cover_file", dest);
+                                        }else{
+                                            window.webContents.send("cover_file", "err1");
+                                        }
+                                    });
+                                }  
+                                break;
+
+                    }
+                    });
+        }else{
+                const sizeOf = require("image-size");
+                const dimmensions = sizeOf(result.filePaths[0]);
+                if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
+                    window.webContents.send("cover_file", result.filePaths);
+                }else{
+                    window.webContents.send("cover_file", "err1");
+                }
+              //  window.webContents.send("cover_file", result.filePaths)
                 
-              }).catch(err => {
+            }  }).catch(err => {
                 console.log(err)
               })
         })
