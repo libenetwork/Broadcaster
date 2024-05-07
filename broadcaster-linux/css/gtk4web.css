@@ -23,8 +23,9 @@ body{
     border-radius: 1em 1em  0 0 ;
     /*background-color: #303030ff;*/
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
+    
     -webkit-app-region: drag;
     padding: 10px;
     /*box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.15);*/

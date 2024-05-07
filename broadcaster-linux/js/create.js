@@ -17,6 +17,9 @@ let actualcategory = 1;
     }
 
 }
+class youtube{
+    
+}
 class server{
         constructor(service, rtmp, id){
                 this.service = service;
@@ -427,14 +430,24 @@ timer = setTimeout(function() {
 }, 100);
 
 })}
-function create(){
-    let oldver = JSON.parse(localStorage.getItem("broadcast"));
-    let servers = JSON.parse(oldver.servers);
+document.getElementById("create_button").addEventListener("click", (e) => {
+    try{
+    let oldver = JSON.parse(localStorage.getItem("broadcast"));}
+    catch{
+        save();
+        let oldver = JSON.parse(localStorage.getItem("broadcast"));
+    }
     servers.forEach((element) => {
         if (element.service === "youtube"){
             if ((element.rtmp === "") || (oldver.name !== document.getElementById("name").value) || (oldver.description !== document.getElementById("description").value) ||  (decodeURI(oldver.image) !== decodeURI(document.getElementById("cover").src)) || (oldver.category !== document.getElementById("category").innerText) || (oldver.acces !== document.getElementById("accestype").innerText) || (oldver.forkids !== document.querySelector("input[type=checkbox]").checked)){
-               
+                console.log("youtube_create");
+                save();
             }
         }
+
     })
-}
+});
+document.getElementById("refresh").addEventListener("click", (e) =>{
+    localStorage.setItem("broadcast", "");
+    location.reload();
+}) 

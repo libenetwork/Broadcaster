@@ -110,7 +110,7 @@ function hasParents(elem, elem1){
                     let elem = document.getElementsByClassName("popr_content")[0];
                
 let ticking = false;
-
+try{
                     event.target.parentNode.parentNode.parentNode.parentNode.parentNode.addEventListener("scroll", (e) => {
                
                          if (!ticking) {
@@ -123,7 +123,9 @@ let ticking = false;
                               });
                         
                               ticking = true;}
-               });
+               });}catch{
+                    
+               }
                try{
                event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.addEventListener("scroll", (e) =>
                {
