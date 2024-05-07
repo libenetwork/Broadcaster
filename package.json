@@ -1,0 +1,22 @@
+{
+  "name": "Broadcaster-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@huggingface/inference": "^2.6.4",
+    "bluebird": "^3.7.2",
+    "express": "^4.19.1",
+    "googleapis": "^134.0.0",
+    "js-sha256": "^0.11.0",
+    "multistreamsmixer": "^1.2.2",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@gradio/client": "^0.13.0"
+  }
+}

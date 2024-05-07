@@ -1,0 +1,132 @@
+
+/*
+Popr 1.0
+Copyright (c) 2015 Tipue
+Popr is released under the MIT License
+http://www.tipue.com/popr
+*/
+
+
+.popr
+{
+     cursor: pointer;   
+}
+.popr a
+{
+     color: #fff !important;
+     text-decoration: none;
+     border: 0;    
+}
+.popr-box
+{
+     display: none;
+}
+.popr_content
+{
+
+     padding: 7px ;
+     margin: 0;
+	border-radius: 1em;
+	background-color: rgba(56, 56, 56, 1);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	overflow-y: scroll;
+
+}
+.popr-item
+{
+     padding: 10px 29px 10px 9px;
+	border-radius: 0.7em;
+	font-weight: 300;
+}
+.popr-elem{
+	display: flex;
+	align-items: center;
+	gap: 1em;
+}
+.popr-item:hover
+{
+     color: #ffffff !important;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.popr_container_bottom
+{
+     display: none;
+     position: absolute;
+	border-radius: 1em;
+	box-shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.13);
+     z-index: 1000;
+}
+.popr_container_top
+{
+     display: none;
+     position: absolute;
+     box-shadow: 2px 2px 5px #f9f9f9;
+     z-index: 1000;
+}
+.popr_point_top, .popr_point_bottom 
+{
+     position: relative;
+	background-color: rgba(56, 56, 56, 1);
+	border-radius: 1em;
+}
+.popr-caption{
+	white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+
+}
+.popr_point_top:after, .popr_point_top:before
+{
+	position: absolute;
+	pointer-events: none;
+	border: solid transparent;
+	top: 100%;
+	content: "";
+	height: 0;
+	width: 0;
+}
+.popr_point_top:after
+{
+	border-bottom-color: rgba(56, 56, 56, 1);
+
+	border-top-color: rgba(56, 56, 56, 1);
+	border-width: 8px;
+	left: 50%;
+	margin-left: -8px;
+}
+.popr_point_top:before 
+{
+	border-width: 9px;
+	left: 50%;
+	margin-left: -9px;
+}
+.popr_point_bottom:after, .popr_point_bottom:before
+{
+	position: absolute;
+	pointer-events: none;
+	border: solid transparent;
+	bottom: 100%;
+	content: "";
+	height: 0;
+	width: 0;
+}
+.popr_point_bottom:after
+{
+	border-bottom-color: rgba(56, 56, 56, 1);
+	border-width: 8px;
+	left: 50%;
+	margin-left: -8px;
+}
+.popr_point_bottom:before 
+{
+	border-width: 9px;
+	left: 50%;
+	margin-left: -9px;
+}
+.popr-text{
+	margin: 0;
+	width: -webkit-fill-available;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

@@ -1,0 +1,5 @@
+{
+    "editor.fontSize": 17,
+    "editor.fontFamily": "Cantarell, 'Droid Sans Mono', 'monospace', monospace",
+    "files.autoSave": "onFocusChange"
+}
