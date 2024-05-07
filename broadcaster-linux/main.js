@@ -103,9 +103,9 @@ app.quit();
                 contextIsolation: false},
             parent: window,
             height: 800,
-            maxWidth: 400,
-            minWidth: 400,
-            width:400,
+            maxWidth: 500,
+            minWidth: 500,
+            width:500,
             maxHeight: 800,
             minHeight: 800,
             icon: 'img/icon1024',
@@ -236,15 +236,7 @@ app.quit();
         window.webContents.send('maximize');
 
     });
-    window.onbeforeunload = (e) => {
-        console.log('I do not want to be closed')
-      
-        // Unlike usual browsers that a message box will be prompted to users, returning
-        // a non-void value will silently cancel the close.
-        // It is recommended to use the dialog API to let the user confirm closing the
-        // application.
-        e.returnValue = false
-      }
+
     window.loadFile("broadcaster.html");
 
     window.on("unmaximize", (e) =>{
@@ -267,20 +259,24 @@ app.quit();
      session.defaultSession.cookies.get({name: "token"})
         .then((cookies) => {
             console.log(cookies);
-            
-            
-   let token_cookie = cookies[0].value;
+            let token_cookie = ""
+            try{
+    token_cookie = cookies[0].value;
+            }catch{
 
+            }
+            
     if (token_cookie === ""){
         console.log("no token!");
         token = Math.random() * 10000;
         hash(token.toString()).then((hex) => { console.log(hex);
             token = hex;
             const cookie = {url: "https://broadcaster-uozh.onrender.com", name: "token", value: token, expirationDate: 1000000000000000};
+            
                 session.defaultSession.cookies.set(cookie)
             .then(() => {
                 console.log(cookie);
-                window.webContents.send("cookie_token", cookie);
+                window.webContents.send("cookie_token", cookie.value);
                     // success
                 }, (error) => {
                     console.error(error)

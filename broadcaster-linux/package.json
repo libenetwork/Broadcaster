@@ -19,7 +19,8 @@
   "author": "Naumenko",
   "license": "GPL-2.0",
   "devDependencies": {
-    "electron": "^29.1.5"
+    "electron": "^29.1.5",
+    "electron-builder": "^24.13.3"
   },
   "dependencies": {
     "bluebird": "^3.7.2",

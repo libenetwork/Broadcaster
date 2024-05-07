@@ -72,9 +72,9 @@ function copy_token(){
     let copy = document.getElementById("token").value;
     ipc.send("copy", copy);
 }
-let backgrounds = [
-    "linear-gradient(291deg, #178854 0%, #54cc59 45%, #53b784 100%)", "linear-gradient(287deg, #8a2995 0%, #f5576c 100%)", "linear-gradient(170deg, #6a11cb 0%, #2575fc 100%)",   "linear-gradient(204deg, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%)", "linear-gradient(190deg, #f43b47 0%, #453a94 100%)", "linear-gradient(5deg, #505285 0%, #585e92 12%, #65689f 25%, #7474b0 37%, #7e7ebb 50%, #8389c7 62%, #9795d4 75%, #a2a1dc 87%, #b5aee4 100%)", "linear-gradient(15deg, #13547a 0%, #80d0c7 100%)", "linear-gradient(204deg, #ffd166 0%, #ff7767 48%, #ff326d 100%)", "linear-gradient(325deg, #005d46 0%, #c64cff 20%, #b9b0ff 100%)"
-]
+const backgrounds = [
+    "#f8e45c", "#62a0ea", "#57e389",   "#ffa348", "#ed333b", "#c061cb", "#b5835a"
+];
 function cleare_max(){
     document.getElementsByClassName("collapsible")[0].innerHTML = "";
 }
@@ -112,8 +112,9 @@ function create_donate(obj, id){
     body.appendChild(time);
     li.appendChild(body);
     document.getElementsByClassName("collapsible")[id].insertBefore(li, document.getElementsByClassName("collapsible")[id].firstChild);
-
-   amount.style.background = backgrounds[Math.floor(Math.random()*backgrounds.length)];
+let color = Math.floor(Math.random()*backgrounds.length);
+   amount.style.background = backgrounds[color]  + "4c";
+   amount.style.setProperty("color", backgrounds[color], "important");
    // amount.style.color = "red";
 
 }

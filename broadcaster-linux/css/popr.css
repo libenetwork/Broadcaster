@@ -28,7 +28,7 @@ http://www.tipue.com/popr
      margin: 0;
 	border-radius: 1em;
 	background-color: rgba(56, 56, 56, 1);
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	border: 1px solid rgba(255, 255, 255, 0);
 	overflow-y: scroll;
 
 }

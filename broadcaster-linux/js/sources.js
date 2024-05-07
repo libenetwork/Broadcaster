@@ -22,6 +22,7 @@ function add_source(id){
             */
 
     let place_source = document.getElementById("source");
+    place_source.style.maxHeight = "100px";
     if (document.getElementsByClassName("no-sources")[0].classList.contains("not-show") === false){
         document.getElementsByClassName("no-sources")[0].classList.add("not-show");
         place_source.classList.remove("not-show");
@@ -46,7 +47,12 @@ function add_source(id){
     let range = document.createElement("input");
     range.type = "range";
     range.name = "micro" + id;
-    let i = place_source.childElementCount / 2;
+    let i = 0;
+    try{
+    i = Number(place_source.lastChild.children[0].id.split("indicator")[1]) + 1;
+    }catch{
+
+    }
     range.id = "volume" + i;
     range.min = "0";
     range.max = '100';
@@ -60,7 +66,9 @@ function add_source(id){
     const progress = (tempSliderValue / range.max) * 100;
     range.style.background = `linear-gradient(to right, #3584e4 ${progress}%,  #6d6d6dff ${progress}%)`;
     range.addEventListener("input", (event) => {
-        if (document.getElementsByClassName("back_cont")[Array.from(document.getElementsByClassName("back_cont")).findIndex((t) => Number(t.parentNode.children[1].children[0].id.split("volume")[1]) === Number(event.target.id.split("volume")[1]))].children[1].classList.contains("mute")){}else {
+        if (document.getElementsByClassName("back_cont")[Array.from(document.getElementsByClassName("back_cont")).findIndex((t) => 
+        Number(t.parentNode.children[1].children[0].id.split("volume")[1]) === Number(event.target.id.split("volume")[1]))].children[1].classList.contains("mute"))
+        {}else {
 
             const tempSliderValue = event.target.value;
         const progress = (tempSliderValue / range.max) * 100;
@@ -98,12 +106,25 @@ function add_source(id){
     sources[sources.length] = new source(text.innerText, micro[id], document.getElementById("volume" + i).value, i);
     create_stream(sources.length-1)
 }
+function array_remove(array, i){
+    let array1 = [];
+    for (let j = 0; j < i; j++){
+        array1[j] = array[j];
+
+    }
+    for (let j = i+ i; j < array.length; j++){
+        array1[j-1] = array[j];
+    }
+    return array1;
+}
+
+
 function remove_source(id){
     remove_stream(id);
     document.getElementById("volume" + id).parentElement.parentElement.remove();
     document.getElementById("indicator" + id).parentElement.remove();
     try {
-        sources.slice.call(sources.findIndex((e) => e.position === id));
+       sources = array_remove(sources, sources.findIndex((e) => e.position === id));
     }catch (e){
         console.log(e);
     }

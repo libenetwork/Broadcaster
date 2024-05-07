@@ -1,5 +1,5 @@
 .gtk-window{
-background-color: #303030ff;
+background-color: #242424;
 
     box-shadow: 0px 0px 34px -18px rgba(0,0,0,0.75);
 
@@ -21,25 +21,25 @@ body{
 }
 .gtkheader{
     border-radius: 1em 1em  0 0 ;
-    background-color: #303030ff;
+    /*background-color: #303030ff;*/
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     -webkit-app-region: drag;
     padding: 10px;
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.15);
+    /*box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.15);*/
 
 
 }
 .tittle{
-    font-size: 11pt;
+    font-size: 12pt;
     padding: 7px;
     -webkit-app-region: drag;
     font-weight: 400;
 }
 .close_icon{
 
-    height: 14pt;
+    height: 12pt;
 
      filter: invert(91%) sepia(100%) saturate(25%) hue-rotate(74deg) brightness(106%) contrast(107%);
 
@@ -94,6 +94,7 @@ body{
 }
 .content{
     padding: 1em;
+    padding-top: 0;
 }
 .gtkbutton{
     padding: 0.5em 1em;
@@ -154,7 +155,7 @@ body{
     display: none !important;
 }
 .preferences-group-element{
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.36);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -174,7 +175,7 @@ body{
     /* padding: 1em; */
     border-radius: 1em;
     background-color: rgba(36, 36, 36, 1);
-    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.36);
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -196,6 +197,7 @@ Not supports in Firefox and IE */
     width:4px
 }
 
+
 /* background of the scrollbar except button or resizer */
 .scrollbar::-webkit-scrollbar-track {
     background-color:rgba(0,0,0,0);
@@ -216,9 +218,9 @@ Not supports in Firefox and IE */
 }
 
 /* set button(top and bottom of the scrollbar) */
-.scrollbar::-webkit-scrollbar-button {display:none}
+.scrollbar::-webkit-scrollbar-button {opacity: 0;}
 .no-scrollbar::-webkit-scrollbar {
-    width: 0;
+    width: 4px;
 }
 .range_input {
     -webkit-appearance: none;
@@ -256,19 +258,24 @@ Not supports in Firefox and IE */
 
 .collapsible{
     border-radius: 1em !important;
-    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.36) !important;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.15) !important;
     border: 0 !important;
     display: flex;
     flex-direction: column;
     gap: 1px;
 
+
 }
 .collapsible-header{
     border-radius: inherit;
     border: 0 !important;
-    background: #303030ff !important;
+    background: #353535ff !important;
+    transition: all 0.3s;
 
 
+}
+.collapsible-header:hover{
+    background: #3b3b3bff !important;
 }
 .collapsible-el:first-child{
     border-radius: 1em 1em 0 0 !important;
@@ -288,7 +295,14 @@ Not supports in Firefox and IE */
     padding: 1rem !important;
     border-radius: 0em;
     border: 0 !important;
+    background: #2b2b2bff !important;
+    border-radius: 0 0 1em 1em;
+    transition: all 0.3s;
 }
+.collapsible-body:hover{
+    background-color: #323232ff !important;
+}
+
 .badge{
     font-family: 'Cantarell' !important;
     font-weight: 500 !important;
@@ -343,15 +357,24 @@ label{
 
 }
 .input-field-form{
+    padding-top: 0.5em !important;
     padding: 1em;
     border-radius: 1em;
-    background: #303030ff !important;
-    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.36) !important;
+    background: #353535ff !important;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.15) !important;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    transition: 0.2s all;
 
+}
+.input-field-form:hover{
+    background: #3b3b3bff !important;
+}
+.input-field-form:has(.input_higlight:focus){
+   /* background: #353535ff !important*/
+    background: #3584e4 !important;
 }
 .input-row:focus{
     border-bottom: 0 !important;
@@ -361,9 +384,12 @@ label{
 .input-row::placeholder{
     font-weight: 300;
 }
+#description::placeholder{
+    font-weight: 300;
+}
 .listbox{
     text-align: left;
-    background: rgb(255 255 255 / 10%);
+    background: #353535ff;
     padding: 0.6em !important;
     padding-left: 1em !important;
     padding-right: 1em !important;
@@ -497,3 +523,37 @@ label{
     padding: 0;
     z-index: 10;
   }
+  .active :first-child > .collapsible-header{
+   border-radius: 1em 1em 0 0 !important;
+  }
+
+  .active:last-child  > .collapsible-body{
+    border-radius: 0 0 1em 1em  !important;
+   }
+   .active:only-child  > .collapsible-body{
+    border-radius: 0 0 1em 1em !important;
+   }
+   .active  > .collapsible-body{
+    border-radius: 0 !important;
+   }
+   .time_input{
+    width: 75%;
+    border-radius: 0.5em 0 0em 0.5em;
+   }
+   .time_button{
+    padding: 0.5em !important;
+    padding-left: 0.779em !important;
+    padding-right: 0.779em !important;
+   }
+.time{
+    display: flex;
+    gap: 1px;
+    border-radius: 0.5em !important;
+    background-color: #5e5e5eff;
+}
+.plus{
+    border-radius: 0 0.5em  0.5em 0 !important;
+}
+.minus{
+    border-radius: 0 !important;
+}

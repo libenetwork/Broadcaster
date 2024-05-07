@@ -9,8 +9,8 @@
 
 .welcome_label{
     margin-top: 0.5em;
-    font-weight: 500;
-    font-size: 3em;
+    font-weight: 700;
+    font-size: 2em;
 }
 .gtk-window{
     display: flex;
@@ -21,15 +21,15 @@
     display: flex;
     justify-content: center;
     color: #6b6b6b;
-    font-weight: 400;
+    font-weight: 800;
     padding: 1em;
 
 }
 #connect{
     position: absolute;
     top: 7%;
-    left: 115%;
-    display: flex;
+opacity: -100%;
+    display: none;
     width: 100%;
     height: 100%;
     justify-content: center;
@@ -40,7 +40,7 @@
 #register_text{
     text-align: center;
     font-size: 2em;
-    font-weight: 300;
+    font-weight: 500;
 }
 .block {
     width: 100px;
@@ -103,4 +103,7 @@
 #create_button{
     padding: 1.5em;
     width: 100%;
+}
+.time{
+    width: 35%;
 }

@@ -47,18 +47,121 @@ try {
 }
 
 function openintegrate(e){
-    console.log("next");
     const first = anime({
         targets: welcome,
-        translateX: '-100%',
-        autoplay: false
+        opacity: '-100%',
+        autoplay: false,
+        duration: 3000
     });
     const second = anime({
         targets: connect,
-        left: '0',
+        opacity: '100%',
         autoplay: false
     });
     first.play();
+    connect.style.display = "flex";
     second.play();
 
 }
+Array.from(document.querySelectorAll("input[type=text]")).forEach((e) => {
+    e.addEventListener("focus", (x) => {
+      
+        if ((hasParents(e, document.getElementsByClassName("time")[0])) || (hasParents(e, document.getElementsByClassName("time")[1]))){
+            getParents(e)[2].setAttribute("style", " border: 3px solid #677a93ff !important")
+        }
+         else if  ((Array.from(e.parentElement.parentElement.parentElement.children).findIndex((x) => x === e.parentElement.parentElement) === 0) && (Array.from(e.parentElement.parentElement.parentElement.parentElement.children).length !=   1) && (!e.parentElement.parentElement.parentElement.parentElement.children[0].classList.contains("video-container") )){
+            e.parentElement.parentElement.setAttribute("style", "border-radius: 1em 1em 0 0; border: 3px solid #677a93ff !important");
+        }else if  ((Array.from(e.parentElement.parentElement.parentElement.children).findIndex((x) => x === e.parentElement.parentElement) === Array.from(e.parentElement.parentElement.parentElement.children).length-1) && (Array.from(e.parentElement.parentElement.parentElement.parentElement.children).length !=   1) && (!e.parentElement.parentElement.parentElement.parentElement.children[0].classList.contains("video-container") ))
+        {
+            e.parentElement.parentElement.setAttribute("style", "border-radius: 0 0 1em 1em; border: 3px solid #677a93ff !important");
+        }else{
+            e.parentElement.parentElement.setAttribute("style", " border: 3px solid #677a93ff !important");
+
+        }
+    })
+    e.addEventListener("focusout", (x) => {
+        if ((hasParents(e, document.getElementsByClassName("time")[0])) || (hasParents(e, document.getElementsByClassName("time")[1]))){
+            getParents(e)[2].setAttribute("style", " ")
+        }
+        else if (e.parentElement.parentElement.parentElement.parentElement.children[0].classList.contains("video-container")){
+            e.parentElement.parentElement.setAttribute("style", "border: 0 !important; ");
+
+        }else if(e.parentElement.parentElement.classList.contains("calendar"))
+        {
+            e.parentElement.parentElement.setAttribute("style", "border: 0 !important; border-radius: 0.5em !important");
+
+        } else{
+        e.parentElement.parentElement.setAttribute("style", "border: 0 !important; border-radius: 0 !important");
+        }
+    })
+})
+
+Array.from(document.querySelectorAll("textarea")).forEach((e) => {
+    e.addEventListener("focus", (x) => {
+         e.parentElement.parentElement.setAttribute("style", " border: 3px solid #677a93ff !important; ");
+         
+    })
+    e.addEventListener("focusout", (x) => {
+        e.parentElement.parentElement.setAttribute("style", "border: ");
+
+    })
+})
+let calendar_focused = false;
+Array.from(document.querySelectorAll("input[type=date]")).forEach((e) => {
+    e.addEventListener("focus", (x) => {
+         e.parentElement.parentElement.setAttribute("style", " border: 3px solid #677a93ff !important; width: 40%");
+         calendar_focused = true;
+         
+    })
+    e.addEventListener("focusout", (x) => {
+        e.parentElement.parentElement.setAttribute("style", "width: 40% ");
+        calendar_focused = false;
+
+    })
+})
+Array.from(document.getElementsByClassName("plus")).forEach((elem) => {
+    elem.addEventListener("click", (e) => {
+        let new_value = getParents(elem)[0].children[0].children[0].children[0].value;
+        let max_offset;
+        switch (getParents(elem)[0].children[0].children[0].children[0].id){
+            case "hours":
+               max_offset = 23;
+                break;
+                case "minutes":
+                    max_offset = 59;
+                    break;
+        }
+        if (new_value < max_offset){
+            new_value++;
+        }else{ 
+            new_value = 0;
+        }
+        getParents(elem)[0].children[0].children[0].children[0].value = new_value;
+        
+        
+    });});
+    Array.from(document.getElementsByClassName("minus")).forEach((elem) => {
+        elem.addEventListener("click", (e) => {
+            let new_value = getParents(elem)[0].children[0].children[0].children[0].value;
+            let max_offset;
+            switch (getParents(elem)[0].children[0].children[0].children[0].id){
+                case "hours":
+                   max_offset = 23;
+                    break;
+                    case "minutes":
+                        max_offset = 59;
+                        break;
+            }
+            if (new_value < max_offset){
+                new_value--;
+            }else{ 
+                new_value = 0;
+            }
+            if (new_value < 0){
+                new_value = 0;
+            }
+            getParents(elem)[0].children[0].children[0].children[0].value = new_value;
+            
+            
+        });
+});

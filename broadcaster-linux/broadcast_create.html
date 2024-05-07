@@ -14,11 +14,14 @@
 
     <link rel = "stylesheet" href = "css/materialize.min.css">
     <link rel = "stylesheet" href = "css/broadcaster_style.css">
+
+    <link rel = "stylesheet" href = "css/datepicker.css">
+
     <script src="js/communicator.js"></script>
     <link rel="stylesheet" type="text/css" href="css/popr.css">
     <script>window.$ = window.jQuery = require('./js/jquery-3.7.1.min.js');</script>
     <script type="text/javascript" src="./js/popr.js"></script>
-
+    <script src = "js/jquery.fancy-scroll.js"></script>
 
 </head>
 <body>
@@ -33,10 +36,11 @@
             <img class = "close_icon" src="symbols/close.svg">
         </div>
     </div>
-    <div class = "content no-scrollbar" style="margin: 0; height: -webkit-fill-available; overflow-y: scroll; padding-bottom: 0;">
+    <div class="scroller no-scrollbar" style="margin: 0; height: -webkit-fill-available; overflow-y: scroll; padding-bottom: 0;">
+    <div class = "content" >
         <div class="frame col s12" style=" margin-top: 0.5em;  padding: 0;">
 
-            <div class="video-container" onclick="open_cover()" style="height: 25vh">
+            <div class="video-container" onclick="open_cover()" style="height: 262px">
                 <div class = "no-video"><img src="symbols/image-missing-symbolic.svg" class = "disactive_icon" style ="height: 12vh">
                 </div> <div class="no-video"> <p class="no-sources-text">Натисніть, щоб обрати обкладинку</p></div>
                 <img width="100%" height="100%" class= "not-show" id = "cover">
@@ -44,8 +48,8 @@
 
                         <div id = "" class="input-field col s12">
                             <form class="input-field-form">
-                                <div>
-                                <label class = "input-label" for="token">Назва трансляції</label>
+                                <div class="input_higlight">
+                                <label class = "input-label" for="name">Назва трансляції</label>
 
                                 <input id = "name" class = "input-row" value=""  type="text" class="validate" placeholder="Нова трансляція">
                                 </div>
@@ -54,7 +58,7 @@
                         </div>
                         <div class="input-field col s12">
                             <form class="input-field-form">
-                                <div style="width: -webkit-fill-available;">
+                                <div style="width: -webkit-fill-available;" class = "input_higlight">
                                 <label class = "input-label" for="description">Опис</label>
 
                                 <textarea id = "description"  maxlength="5000" class= "desc_row materialize-textarea scrollbar" value=""  type="text" class="validate" placeholder="Oпис"></textarea>
@@ -62,11 +66,80 @@
                             
                             </form>
                         </div>
+                        <div class = "colrow s5" style="font-weight: 400; margin-left: 0;">Час трансляції</div>
+<div style="display: flex; gap: 5px; align-items: center;">
+                        <div style="border-radius: 0.5em !important; width: 40%;" class = "calendar colrow listbox "  >
+         
+         <div>      <input class = "input-row" type = "date" id = "date">
+          
+         </div>    
+             
+         <div class="popr" data-id="2" style="
+         display: flex;
+         align-content: center;
+     "><img src = "symbols/pan-down-symbolic.svg" class="highlight_icon">          
+         </div>
+         <div class="popr-box  not-hide" data-box-id="2">
+           <div id="date_picker">
+            
+               <div id="date_picker_calendar" class=""> 
+                 <div id="calendar_header">
+                   <button class="cal-btn back "><img class ="button_icon" src="symbols/pan-down-symbolic.svg"></button>
+                   <span></span>
+                   <button class="cal-btn front "><img class ="button_icon" src="symbols/pan-down-symbolic.svg"></button>
+                     <button class="cal-btn back-year "><img class ="button_icon" src="symbols/pan-down-symbolic.svg"></button>
+                   <span></span>
+                   <button class="cal-btn front-year "><img class ="button_icon" src="symbols/pan-down-symbolic.svg"></button>
+                 
+                 </div>
+                 
+                 <div id="cal_wrapper">
+                   <div id="cal_days"></div>
+                   <div id="calendar_main"></div>
+                 </div>
+               </div>
+             </div>
+       </div>
+
+           </div>
+           <div class="time">
+           <div  class = "time_input colrow listbox "  >
+            <div>      <input class = "input-row" type = "text" width="90%" id = "hours" maxlength="2"> 
+            </div>    
+             </div>
+             <div class = "time_button  minus colrow listbox "  >
+                  <img class="button_icon" src="symbols/minus-large-symbolic.svg"> 
+          
+                 </div>
+                 <div class = "time_button  plus colrow listbox "  >
+                    <img class="button_icon" src="symbols/plus-large-symbolic.svg"> 
+            
+                   </div>
+            </div>
+            :
+            <div class="time">
+                <div  class = "time_input colrow listbox "  >
+                 <div>      <input class = "input-row" type = "text" width="90%" id = "minutes" maxlength="2"> 
+                 </div>    
+                  </div>
+                  <div class = "time_button  minus colrow listbox "  >
+                       <img class="button_icon" src="symbols/minus-large-symbolic.svg"> 
+               
+                      </div>
+                      <div class = "time_button  plus colrow listbox "  >
+                         <img class="button_icon" src="symbols/plus-large-symbolic.svg"> 
+                 
+                        </div>
+                 </div>
+                  
+            </div>
+           
                         <div class="" style="
                         display: flex;
                         /* align-content: center; */
                         align-items: center;
                     ">
+                    
                             <div class = "colrow s4" style="font-weight: 400;">Доступність</div>
                         
                             <div class = "colrow s8 listbox dropdown-trigger dropdown1"  data-target='dropdown1'>
@@ -103,25 +176,27 @@
                             <li><a onclick="choose('dropdown2', 11)">Навчання та стиль</a></li>
                             <li><a onclick="choose('dropdown2', 12)">Освіта</a></li>
                             <li><a onclick="choose('dropdown2', 13)">Наука та технологія</a></li>
-                            <li><a onclick="choose('dropdown2', 14)">Соціальне відео</a></li>
 
                         </div>
-                        <div class="" style="
-                        display: flex;
-                        /* align-content: center; */
-                        align-items: center;
+                       
+                    <div class="" style="
+                    display: flex;
+                    /* align-content: center; */
+                    align-items: center;
 
-                    ">
-                        <div class = "colrow s5" style="font-weight: 400; margin-left: 0;">Трансляція для дітей?</div>
-                        <div class = "colrow s5" style="font-weight: 400;"></div>
-                        <div class = "colrow s2" style="font-weight: 400;">  
-                            <label class="switch">
-                              <input type="checkbox">
-                              <span class="slider round"></span>
-                            </label>
-                            
+                ">
+                    <div class = "colrow s5" style="font-weight: 400; margin-left: 0;">Трансляція для дітей?</div>
+                    <div class = "colrow s5" style="font-weight: 400;"></div>
+                    <div class = "colrow s2" style="font-weight: 400;">  
+                        <label class="switch">
+                          <input type="checkbox">
+                          <span class="slider round"></span>
+                        </label>
+                        
 </div>
-                    </div>
+                </div>
+  
+                  
                     <div class = "preferences-group" style="padding: 0;">
                         <div class = 'preferences_header' style="padding-bottom: 0; padding-top: 0;"><div class = "caption"><div class = "preferences_caption">Cервіси</div> </div>
                             <div class = " popr" data-id="1"><div class = "preferences_sufix" style="width: min-content;"><img class = "sufix_icon button_icon" src="symbols/plus-large-symbolic.svg">Cервіс</div></div>
@@ -147,187 +222,40 @@
                         </div>
                     </div>
                     <div class="preferences-group-body" id="servers" style="overflow-y: auto;">
-                        <div class="input-field col s12">
-                            <form class="input-field-form" style="border-radius: 0;">
-                                <div>
-                                <label class = "input-label" for="rtmp0">Адреса RTMP-клієнта</label>
-
-                                <input id = "rtmp0" class = "input-row" value="" placeholder="rtpm://localhost:3000/default/" type="text" class="validate">
-                                </div>
-                            
-                            </form>
-                        </div>
+                      
                     </div>
                       
        
 </div>
 
-</div>                   <div class = "startbroadcast bottompanel">
+
+</div>     </div>              <div class = "startbroadcast bottompanel">
     <div id = "create_button">
-      <div class="gtkbutton" style="justify-content: center;"><img class="button_icon" onclick = "save();" src="symbols/podcast-symbolic.svg">Створити трансляції</div>                  </div>  
+      <div class="gtkbutton" style="justify-content: center;"><img class="button_icon" onclick = "create();" src="symbols/podcast-symbolic.svg">Створити трансляції</div>                  </div>  
   </div>
-         
+         <script>
+            $(".scroller").fancy_scroll({
+                innerWrapper: ".content",
+                animation: "glow",
+                glowColor: "rgba(255,255,255,0.15)",
+                animDuration: "0.3s",
+                animEasing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)",
+            });
+         </script>
 
 </div>
 <script src = "js/broadcaster.js"></script>
 <script src="js/gtk4web.js"></script>
 <script src = "js/openblock.js"></script>
-<script type="module" src = "gtk.js"></script>
-<script type = "module" src = "theme.js"></script>
 <script src = "js/coockie.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js"></script>
 <script src="js/materialize.min.js"></script>
-
+<script src="js/datepicker.js"></script>
+<script src="js/create.js"></script>
 <script>
-    class broadcast{
-      
-    constructor(name, image, description, acces, category, forkids, servers) {
-        this.name = name;
-        this.image = image
-        this.description = description;
-        this.acces = acces;
-        this.category = category;
-        this.forkids = forkids;
-        this.servers;
-
-    }
-
-}
-    document.getElementsByClassName("close")[0].addEventListener("click", save);
-    restore();
-    function restore(){
-        try{
-            let obj = JSON.parse(localStorage.getItem("broadcast"));
-            document.getElementById("name").value = obj.name;
-            if ( obj.cover != undefined ||  obj.cover != ""){
-            let caption = document.getElementsByClassName("no-video");
-            
-    for (let i = 0; i < caption.length; i++){
-        caption[i].classList.add("not-show");
-    }
-    let image = document.getElementById("cover");
-    image.classList.remove("not-show");
-    image.src = obj.image;}
-    document.getElementById("description").value = obj.description;
-                document.getElementById("accestype").innerText = obj.acces;
-                document.getElementById("category").innerText = obj.category;
-                document.querySelector("input[type=checkbox]").checked =obj.forkids;
-        }catch{
-
-        }
     
-                
-    }
-    class server{
-        constructor(service, rtmp){
-                this.service = service;
-                this.rtmp = rtmp;
-      
-      
-        }
-    }
-
-    let servers = [];
-    let servercounts = 1;
-    function add_server(num){
-        let serverel = document.getElementById("servers");
-        let container = document.createElement("div");
-        container.classList.add("input-field");
-        container.classList.add("col");
-        container.classList.add("s12");
-        let form = document.createElement("form");
-        form.classList.add("input-field-form");
-        form.style.borderRadius = "0";
-        container.appendChild(form);
-       
-        switch (num){
-            case 0:
-                
-                console.log("youtube");
-                let youtube = document.createElement("div");
-                let youtube_icon = document.createElement("img");
-                youtube_icon.src = "symbols/youtube-icon.svg"
-                youtube_icon.classList.add("button_icon");
-                youtube_icon.style.height = "23px";
-                youtube.style.display = "flex";
-                youtube.style.alignItems = "center";
-                youtube.style.gap = "0.5em"
-                youtube.innerText = "Youtube";
-                let server_container = document.createElement("div");
-                server_container.style.width = "100%";
-                server_container.style.display = "flex";
-                server_container.style.justifyContent = "space-between"
-                youtube.insertBefore(youtube_icon, youtube.firstChild);
-                server_container.append(youtube);
-                form.append(server_container);
-                document.getElementsByClassName("popr-box")[0].children[num].style.display = "none";
-                break;
-            case 1:
-                console.log("RTMP");
-                let rtmp_label = document.createElement("label");
-                rtmp_label.classList.add("input-label");
-                rtmp_label.classList.add("active");
-                rtmp_label.forhtml = "rtmp" + servercounts;
-                rtmp_label.innerText = "Адреса RTMP-клієнта";
-                let rtmp = document.createElement("input");
-                rtmp.id = "rtmp" + servercounts;
-                rtmp.classList = "input-row";
-                rtmp.placeholder = "rtpm://localhost:3000/default/";
-                let rtmp_container = document.createElement("div");
-                rtmp_container.append(rtmp_label);
-                rtmp_container.append(rtmp);
-                form.append(rtmp_container);
-
-            
-                break;
-        }
-        serverel.append(container);
-        servercounts++;
-    }
-    function save(){
-      localStorage.setItem("broadcast", JSON.stringify(new broadcast(document.getElementById("name").value,
-       decodeURI(document.getElementById("cover").src),
-            document.getElementById("description").value,
-        document.getElementById("accestype").innerText,
-        document.getElementById("category").innerText,
-        document.querySelector("input[type=checkbox]").checked,
-        ["rtmp::::" + document.getElementById("rtmp").value])
-
-    )); 
-    }
-    function choose(dropdown, i){
-            document.getElementsByClassName(dropdown)[0].children[0].innerText = document.getElementById(dropdown).children[i].innerText;
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(elems, options);
-    });
-    let scrollbars = document.getElementsByClassName("no-scrollbar");
-   for (let i =0; i < scrollbars.length; i++){
-    let elem = scrollbars[i];
-   elem.addEventListener('scroll', function(e) {
-
-elem.classList.remove('no-scrollbar');
-elem.classList.add('scrollbar');
-    
-
-clearTimeout(timer);
-timer = setTimeout(function() {
-     elem.classList.add('no-scrollbar');
-     elem.classList.remove('scrollbar');
-}, 100);
-
-})}
-$(document).ready(function() {
-    $('textarea#description').characterCounter();
-  });
-        
-
-       M.AutoInit();
-
-       M.textareaAutoResize($('#description'));
-
     wc.addEventListener("message", (e) =>{
+        if (decodeURI(e.data).startsWith("file:")){
     let adress = e.data.split("file:")[1];
         switch (adress){
            case "err0":{
@@ -347,12 +275,120 @@ let caption = document.getElementsByClassName("no-video");
     image.classList.remove("not-show");
     image.src = adress;
 }
-break;
+break;}
         }
-   
-  
-    
    });
+
+ //  M.AutoInit();
+       document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems);
+      });
+    
+       M.textareaAutoResize($('#description'));
+$(document).ready(function() {
+    $('textarea#description').characterCounter();
+  });
+
+
+</script>
+<script>
+
+
+document.getElementById("hours").addEventListener('input', function (e) {
+    if (this.value.length === 2){
+    let dig1 = Number(this.value[0]);
+    let dig2 = Number(this.value[1]);
+     if (isNaN(dig1)){
+        if (!isNaN(dig2)){
+            this.value = dig2;
+        }else{
+            this.value = "0";
+        }
+     }
+    else if (dig1 > 2){
+
+        this.value =  dig1;
+
+    }
+    try{
+    if (isNaN(dig2)){
+        if (!isNaN(dig1)){
+        this.value = dig1;}
+        else{ 
+            this.value = "0";
+        }
+    }else if (dig2 > 3){
+        if (!isNaN(dig1)){
+            if (dig1 >=2)
+        this.value = dig1;
+        }else{
+            this.value = "0";
+        }
+    }
+}catch{
+
+}
+}else
+    if (this.value.length === 1){
+        if (isNaN(Number(this.value))){
+            this.value = "0";
+        }
+    }
+else{
+    this.value = "0";
+}
+    
+  
+});
+document.getElementById("minutes").addEventListener('input', function (e) {
+    if (this.value.length === 2){
+    let dig1 = Number(this.value[0]);
+    let dig2 = Number(this.value[1]);
+     if (isNaN(dig1)){
+        if (!isNaN(dig2)){
+            this.value = dig2;
+        }else{
+            this.value = "0";
+        }
+     }
+    else if (dig1 > 5){
+
+        this.value =  dig1;
+
+    }
+    try{
+    if (isNaN(dig2)){
+        if (!isNaN(dig1)){
+        this.value = dig1;}
+        else{ 
+            this.value = "0";
+        }
+    }else if (dig2 > 9){
+        if (!isNaN(dig1)){
+            if (dig1 >=5)
+        this.value = dig1;
+        }else{
+            this.value = "0";
+        }
+    }
+}catch{
+
+}
+}else
+    if (this.value.length === 1){
+        if (isNaN(Number(this.value))){
+            this.value = "0";
+        }
+    }
+else{
+    this.value = "0";
+}
+    
+  
+});
+
+//datepicker_init(calendar, input, calMonthTitle, calYearTitle, calDays);
 </script>
 
 </body>
