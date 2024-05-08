@@ -28,6 +28,7 @@ function youtube_authorise() {
             });
         }else if (e.data.toString().startsWith("{\"tokens\":")){
             console.log(e.data);
+            localStorage.setItem("youtube_token", e.data);
 
             ipc.send("mainwindow");
             ipc.send("closewindow");

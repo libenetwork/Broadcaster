@@ -1,4 +1,4 @@
-
+let broadcast_creating = false;
 const categorysnippet = [1, 2,10,15,17, 19,20,  22, 23, 24, 25, 26,27, 28]
 let actualcategory = 1;
     class broadcast{
@@ -32,8 +32,6 @@ class server{
     }
 let servers = [];
     let servercounts = 0;
-    /*let nullserver = new server("rtmp", document.getElementById("rtmp0").value, 0);
-    servers[0] =nullserver;*/
 
     document.getElementsByClassName("close")[0].addEventListener("click", save);
    window.onload = restore();
@@ -431,6 +429,7 @@ timer = setTimeout(function() {
 
 })}
 document.getElementById("create_button").addEventListener("click", (e) => {
+    if (!broadcast_creating){
     try{
     let oldver = JSON.parse(localStorage.getItem("broadcast"));}
     catch{
@@ -439,13 +438,37 @@ document.getElementById("create_button").addEventListener("click", (e) => {
     }
     servers.forEach((element) => {
         if (element.service === "youtube"){
-            if ((element.rtmp === "") || (oldver.name !== document.getElementById("name").value) || (oldver.description !== document.getElementById("description").value) ||  (decodeURI(oldver.image) !== decodeURI(document.getElementById("cover").src)) || (oldver.category !== document.getElementById("category").innerText) || (oldver.acces !== document.getElementById("accestype").innerText) || (oldver.forkids !== document.querySelector("input[type=checkbox]").checked)){
-                console.log("youtube_create");
+            if ((element.rtmp === "") || (oldver.name !== document.getElementById("name").value) || (oldver.description !== document.getElementById("description").value) ||  (decodeURI(oldver.image) !== decodeURI(document.getElementById("cover".src))) || (oldver.category !== document.getElementById("category").innerText) || (oldver.acces !== document.getElementById("accestype").innerText) || (oldver.forkids !== document.querySelector("input[type=checkbox]").checked)){
+           //     console.log("youtube_create");
+           let acces;
+                switch (document.getElementById("accestype").innerText){
+                    case "Загальнодоступне":
+                        acces = "public"
+                        break;
+                    case "Для тих, в кого є посилання":
+                        acces = "unlisted";
+                        break;
+                    case "Приватне":
+                        acces = "private";
+                        break;
+
+                }
+                let timedate; 
+                try{
+                    timedate = new Date(document.getElementById("date").value + " " +document.getElementById("hours").value + ":" + document.getElementById("minutes").value).toISOString()
+                }catch{
+                    
+                }
+                generate_youtube_broadcast(document.getElementById("name").value,
+                 document.getElementById("description").value, 
+                 document.getElementById("cover"),
+                 actualcategory, acces, document.querySelector("input[type=checkbox]").checked, timedate);
+                broadcast_creating = true;
                 save();
             }
         }
 
-    })
+    })}
 });
 document.getElementById("refresh").addEventListener("click", (e) =>{
     localStorage.setItem("broadcast", "");

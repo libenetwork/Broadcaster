@@ -171,7 +171,7 @@ app.quit();
                                         if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
                                             window.webContents.send("cover_file", dest);
                                         }else{
-                                            window.webContents.send("cover_file", "err1");
+                                            window.webContents.send("cover_file", dest);
                                         }                                    }
                                 });
                             }
@@ -186,7 +186,7 @@ app.quit();
                                         if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
                                             window.webContents.send("cover_file", dest);
                                         }else{
-                                            window.webContents.send("cover_file", "err1");
+                                            window.webContents.send("cover_file", dest);
                                         }
                                     });
                                 }  
@@ -200,7 +200,7 @@ app.quit();
                 if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
                     window.webContents.send("cover_file", result.filePaths);
                 }else{
-                    window.webContents.send("cover_file", "err1");
+                    window.webContents.send("cover_file", dest);
                 }
               //  window.webContents.send("cover_file", result.filePaths)
                 
