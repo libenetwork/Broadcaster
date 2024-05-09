@@ -1,3 +1,5 @@
+const e = require("express");
+
 class source {
     constructor(name, device, volume, position) {
         this.name = name;
@@ -10,7 +12,7 @@ class source {
 let sources = [];
 let audiostreams = [];
 
-function add_source(id){
+function add_source(id, issys, stream){
     console.log("ok!" + id);
            /* let append = "<td>" + document.getElementsByClassName("microphone")[0].innerText + "</td><td><input type=\"range\" id=\"volume" + (sources.length) + "\" name=\"volume\" min=\"0\" max=\"100\" value='100' /></td><td><div class=\"bar\"> <div class=\"indicator\" id=\"indicator"+ (sources.length) +"\"></div>\</div></td>";
             // document.getElementsByClassName("sources")[0].innerHTML += append;
@@ -26,17 +28,24 @@ function add_source(id){
     if (document.getElementsByClassName("no-sources")[0].classList.contains("not-show") === false){
         document.getElementsByClassName("no-sources")[0].classList.add("not-show");
         place_source.classList.remove("not-show");
-
     }
     let container = document.createElement("div");
           //  create_stream(sources.length-1);
     let sound = document.createElement("div");
     let icon = document.createElement("img");
+    if (issys === undefined){
     icon.src = "symbols/microphone2-symbolic.svg";
+    }else{
+      icon.src =  "symbols/audio-volume-high-symbolic.svg";
+    }
     icon.classList.add("button_icon");
     sound.appendChild(icon);
     let text = document.createElement("div");
+    if (issys === undefined){
     text.innerText = document.getElementsByClassName("popr-item")[id].children[1].innerText;
+    }else{
+        text.innerText = "Захоплення пристрою";
+    }
     text.style.fontWeight = "300";
     text.style.overflowX = "hidden";
     text.style.textOverflow = "ellipsis";
@@ -46,7 +55,11 @@ function add_source(id){
     container.appendChild(sound);
     let range = document.createElement("input");
     range.type = "range";
+    if (issys === undefined){
     range.name = "micro" + id;
+    }else {
+        range.name = "system_volume"
+    }
     let i = 0;
     try{
     i = Number(place_source.lastChild.children[0].id.split("indicator")[1]) + 1;
@@ -77,6 +90,7 @@ function add_source(id){
     let back_cont = document.createElement("div");
     back_cont.appendChild(range);
     let mute = document.createElement('img');
+    mute.id = "mute" + i;
     mute.src = "symbols/microphone-sensitivity-muted-symbolic.svg";
     mute.classList.add("highlight_icon");
     back_cont.classList.add("back_cont");
@@ -92,6 +106,7 @@ function add_source(id){
     });
     back_cont.appendChild(mute);
     let delete_source = document.createElement("img");
+    delete_source.id = "trash" + i;
     delete_source.src = "symbols/user-trash-symbolic.svg";
     delete_source.classList.add("highlight_icon");
     delete_source.onclick = function (e) {
@@ -104,18 +119,12 @@ function add_source(id){
     progressbar.id = "indicator" + i;
     place_source.appendChild(indicator);
     sources[sources.length] = new source(text.innerText, micro[id], document.getElementById("volume" + i).value, i);
-    create_stream(sources.length-1)
-}
-function array_remove(array, i){
-    let array1 = [];
-    for (let j = 0; j < i; j++){
-        array1[j] = array[j];
-
-    }
-    for (let j = i+ i; j < array.length; j++){
-        array1[j-1] = array[j];
-    }
-    return array1;
+   
+        if (issys !== undefined){
+            create_streame_from_track(stream.getAudioTracks()[0], i);
+        }else{
+ 
+    create_stream(sources.length-1)}
 }
 
 
@@ -149,33 +158,38 @@ function create_stream(id){
             const destination = context.createMediaStreamDestination();
             const gain = context.createGain();
             source.connect(gain);
+            let index = Number(document.getElementById("source").children[document.getElementById("source").
+            children.length-1].children[0].id.split("indicator")[1]);
+            gain.id = index;
+            gain.gain.value = 0.5;
             gain.connect(destination);
             // destination.connect(analyzer);
             let muted = false; let save ;
-            document.getElementsByClassName("back_cont")[sources[id].position].children[1].onclick = function (){
-                if (document.getElementsByClassName("back_cont")[sources[id].position].children[1].classList.contains("mute")) {
+            document.getElementById("mute" + sources[id].position).addEventListener("click", (e) => {
+
+                if (e.target.classList.contains("mute")) {
                     muted = true;
                     gain.gain.value = 0;
-                    document.getElementById('indicator' + sources[id].position).style.width = 0;
-                    save = document.getElementById('volume' + sources[id].position).value;
-                    document.getElementById('volume' + sources[id].position).value = 0;
-                    document.getElementById('volume' + sources[id].position).style.background ="#6d6d6dff";
+                    document.getElementById('indicator' + e.target.id.split("mute")[1]).style.width = 0;
+                    save = document.getElementById('volume' +  e.target.id.split("mute")[1]).value;
+                    document.getElementById('volume' +  e.target.id.split("mute")[1]).value = 0;
+                    document.getElementById('volume' +  e.target.id.split("mute")[1]).style.background ="#6d6d6dff";
 
                 }else {muted = false;
-                    document.getElementById('volume' + sources[id].position).value = save;
+                    document.getElementById('volume' +  e.target.id.split("mute")[1]).value = save;
                     gain.gain.value = Number(save) / 100; // Any number between 0 and 1.
-                    document.getElementById('volume' + sources[id].position).style.background = `linear-gradient(to right, #3584e4 ${save}%,  #6d6d6dff ${save}%)`;
+                    document.getElementById('volume' +  e.target.id.split("mute")[1]).style.background = `linear-gradient(to right, #3584e4 ${save}%,  #6d6d6dff ${save}%)`;
                 }
-            }
-            document.getElementById('volume' + sources[id].position).onchange = function () {
+            });
+            document.getElementById('volume' + sources[id].position).addEventListener("change", (e) => {
                 if (muted){
                     gain.gain.value = 0;
-                    document.getElementById('volume' + sources[id].position).value = 0;
-                    document.getElementById('volume' + sources[id].position).style.backgroundColor ="#6d6d6dff";
+                    e.target.value = 0;
+                    e.target.style.backgroundColor ="#6d6d6dff";
                 }else {
-                    gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
+                    gain.gain.value = Number(e.target.value) / 100; // Any number between 0 and 1.
                 }
-            };
+            });
             gain.connect(analyzer);
 
             //source.connect(analyzer);
@@ -193,7 +207,8 @@ function create_stream(id){
             function tick() {
                 if (r === skip){
                 const peak = getPeakLevel();
-                let indicator =  document.getElementById('indicator' + sources[id].position)
+                try{
+                let indicator =  document.getElementById("indicator" + gain.id)
                 anime({
                     targets: indicator,
                     width: [`${peakp * 100}%`,`${peak * 100}%`],
@@ -207,8 +222,14 @@ function create_stream(id){
                 {
                    indicator.style.backgroundColor = "#3584e4";
                 }
+            }catch{
+
+            }
+                console.log(gain.id);
                 r = 0;
-                peakp = peak;}
+
+                peakp = peak;
+            }
                 else{
                     r++;
                 }
@@ -272,6 +293,7 @@ function create_streame_from_track(track, id){
     let peakp; const skip = 3;
     function tick() {
         if (r === skip){
+            try{
             const peak = getPeakLevel();
             let indicator =  document.getElementById('indicator' + id);
             anime({
@@ -288,7 +310,9 @@ function create_streame_from_track(track, id){
                 indicator.style.backgroundColor = "#3584e4";
             }
             r = 0;
-            peakp = peak;}
+            peakp = peak;}catch{
+
+            }}
         else{
             r++;
         }
@@ -303,7 +327,11 @@ function create_streame_from_track(track, id){
 }
 function remove_stream(id){
     try {
-        audiostreams.splice(id, 1);
+        audiostreams[id].getTracks().forEach(element => {
+            audiostreams[id].removeTrack(element);
+        });
+        audiostreams = array_remove(audiostreams, id)
+    //    audiostreams.splice(id, 1);
         //remove_audio_stream(id);
     }catch (e){
 

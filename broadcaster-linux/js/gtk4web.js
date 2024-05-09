@@ -3,10 +3,21 @@ let token;
 let webhookclient;
 let donate = [];
 let broadcast_creating = false;
+function array_remove(array, i){
+    let array1 = [];
+    for (let j = 0; j < i; j++){
+        array1[j] = array[j];
+
+    }
+    for (let j = i + 1; j < array.length; j++){
+        array1[j-1] = array[j];
+    }
+    return array1;
+}
 
 // close app
 function closeApp(e) {
-    if (!broadcast_creating){
+    if (!broadcast_creating){}
     try{
         save();
     }catch(e){
@@ -15,7 +26,6 @@ function closeApp(e) {
     console.log("close");
     e.preventDefault()
     ipc.send('closewindow')
-}
 }
 
 

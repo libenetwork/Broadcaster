@@ -5,10 +5,12 @@ function checkstreams(){
         if (JSON.parse(JSON.parse(localStorage.getItem("broadcast")).servers).length > 0){
             if (!active){
             active = true;
-            console.log("streams");}
+            console.log("streams");
+            document.querySelector('[data-action="goLive"]').classList.remove("inactive");
+        }
         }else{
             active = false;
-            
+            document.querySelector('[data-action="goLive"]').classList.add("inactive");
         }
     }
 }

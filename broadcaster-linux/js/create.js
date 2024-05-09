@@ -137,17 +137,6 @@ image.src = obj.cover;}
                 
     }
 
-    function array_remove(array, i){
-    let array1 = [];
-    for (let j = 0; j < i; j++){
-        array1[j] = array[j];
-
-    }
-    for (let j = i+ i; j < array.length; j++){
-        array1[j-1] = array[j];
-    }
-    return array1;
-}
 
     function add_server(num){
         let serverel = document.getElementById("servers");

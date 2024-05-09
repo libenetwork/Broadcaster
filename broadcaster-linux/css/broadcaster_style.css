@@ -44,9 +44,14 @@
 .live-button:hover{
     background-color: rgba(192, 28, 40, 0.8);
 }
-.main-window{
-
+.inactive:not(img){
+    background-color: hsl(0 40% 27% / 1) !important;
+    color: #929292ff !important;
 }
+.inactive > img{
+    filter: invert(91%) sepia(100%) saturate(25%) hue-rotate(323deg) brightness(106%) contrast(0%) !important;
+}
+
 .no-sources{
     display: flex;
     justify-content: center;
