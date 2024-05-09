@@ -2,10 +2,11 @@ const ipc = require('electron').ipcRenderer
 let token;
 let webhookclient;
 let donate = [];
-
+let broadcast_creating = false;
 
 // close app
 function closeApp(e) {
+    if (!broadcast_creating){
     try{
         save();
     }catch(e){
@@ -14,6 +15,7 @@ function closeApp(e) {
     console.log("close");
     e.preventDefault()
     ipc.send('closewindow')
+}
 }
 
 

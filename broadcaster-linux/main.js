@@ -120,7 +120,7 @@ app.quit();
                 properties: ['openFile'],
                 
                     filters: [
-                      { name: 'Зображення', extensions: ['jpg', 'png', 'webp'] }
+                      { name: 'Зображення', extensions: ['jpg', 'png'] }
                     ]
                   
               }).then(result => { 
@@ -147,7 +147,7 @@ app.quit();
                             }else{
                                 const sizeOf = require("image-size");
                                 const dimmensions = sizeOf(result.filePaths[0]);
-                                if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
+                                if ((dimmensions.width > 640) ){
                                     window.webContents.send("cover_file", dest);
                                 }else{
                                     window.webContents.send("cover_file", "err1");
@@ -168,29 +168,15 @@ app.quit();
                                     }else{
                                         const sizeOf = require("image-size");
                                         const dimmensions = sizeOf(result.filePaths[0]);
-                                        if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
+                                        if ((dimmensions.width > 640) ){
                                             window.webContents.send("cover_file", dest);
                                         }else{
-                                            window.webContents.send("cover_file", dest);
+                                            window.webContents.send("cover_file", "err1");
                                         }                                    }
                                 });
                             }
                             break;
-                            case "webp":
-                                {
-                                    let dest = "./compressed/" + result.filePaths[0].split("/")[result.filePaths[0].split("/").length - 1];
-      
-                                    await sharp(e).webp({quality: 70}).toFile(dest).then(() => {
-                                        const sizeOf = require("image-size");
-                                        const dimmensions = sizeOf(result.filePaths[0]);
-                                        if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
-                                            window.webContents.send("cover_file", dest);
-                                        }else{
-                                            window.webContents.send("cover_file", dest);
-                                        }
-                                    });
-                                }  
-                                break;
+                        
 
                     }
                     });
@@ -200,7 +186,7 @@ app.quit();
                 if ((dimmensions.width > 640) && (dimmensions.width / dimmensions.height === 16/9)){
                     window.webContents.send("cover_file", result.filePaths);
                 }else{
-                    window.webContents.send("cover_file", dest);
+                    window.webContents.send("cover_file", "err1");
                 }
               //  window.webContents.send("cover_file", result.filePaths)
                 

@@ -1,4 +1,4 @@
-let broadcast_creating = false;
+
 const categorysnippet = [1, 2,10,15,17, 19,20,  22, 23, 24, 25, 26,27, 28]
 let actualcategory = 1;
     class broadcast{
@@ -29,6 +29,38 @@ class server{
       
         }
       
+    }
+    function checkdate(obj){
+        if ((obj.date != undefined) && (obj.date != "") && (obj.time != undefined) && (obj.time != "") ){
+            let hours = obj.time.split(":")[0]; let minutes = obj.time.split(":")[1];
+          
+            if (new Date(obj.date + " " + hours + ":" + minutes).getTime() > Date.now()){
+        document.getElementById("date").valueAsDate = new Date(obj.date);
+        afterdate = obj.date;
+        aftertimestamp = getTimestampfromday(obj.date);
+        if (obj.time.split(":")[0][0] === "0"){
+        document.getElementById("hours").value = obj.time.split(":")[0][1];}
+            else{
+                document.getElementById("hours").value = obj.time.split(":")[0];
+            }
+            if (obj.time.split(":")[1][0] === "0"){
+                document.getElementById("minutes").value = obj.time.split(":")[1][1];}
+                    else{
+                        document.getElementById("minutes").value = obj.time.split(":")[1];
+                    }
+
+        }
+        else{
+            document.querySelector("#date").valueAsDate = new Date();
+            document.getElementById("hours").value = new Date().getHours();
+            document.getElementById("minutes").value = new Date().getMinutes();
+
+        }}else{
+            document.querySelector("#date").valueAsDate = new Date();
+            document.getElementById("hours").value = new Date().getHours();
+            document.getElementById("minutes").value = new Date().getMinutes();
+
+        }
     }
 let servers = [];
     let servercounts = 0;
@@ -63,164 +95,34 @@ image.src = obj.cover;}
                 document.getElementById("category").innerText = obj.category;
                 actualcategory = categorysnippet[Array.from(document.getElementById("dropdown2").children).findIndex((x) => x.innerText === obj.category)];
                 document.querySelector("input[type=checkbox]").checked =obj.forkids;
-                if ((obj.date != undefined) && (obj.date != "") && (obj.time != undefined) && (obj.time != "") ){
-                    let hours = obj.time.split(":")[0]; let minutes = obj.time.split(":")[1];
-                  
-                    if (new Date(obj.date + " " + hours + ":" + minutes).getTime() > Date.now()){
-                document.getElementById("date").valueAsDate = new Date(obj.date);
-                afterdate = obj.date;
-                aftertimestamp = getTimestampfromday(obj.date);
-                if (obj.time.split(":")[0][0] === "0"){
-                document.getElementById("hours").value = obj.time.split(":")[0][1];}
-                    else{
-                        document.getElementById("hours").value = obj.time.split(":")[0];
-                    }
-                    if (obj.time.split(":")[1][0] === "0"){
-                        document.getElementById("minutes").value = obj.time.split(":")[1][1];}
-                            else{
-                                document.getElementById("minutes").value = obj.time.split(":")[1];
-                            }
-        
-                }
-                else{
-                    document.querySelector("#date").valueAsDate = new Date();
-                    document.getElementById("hours").value = new Date().getHours();
-                    document.getElementById("minutes").value = new Date().getMinutes();
-
-                }}else{
-                    document.querySelector("#date").valueAsDate = new Date();
-                    document.getElementById("hours").value = new Date().getHours();
-                    document.getElementById("minutes").value = new Date().getMinutes();
-
-                }
+                checkdate(obj);
                 if (JSON.parse(obj.servers).length === 0 ){
                         add_server(1);
                     }
-          
+                    let i = 0;
                 JSON.parse(obj.servers).forEach(element => {
-                    
                
-                  /*  if (element.id === 0){
-                        document.getElementById("rtmp0").value = element.rtmp;
-                        servers[0].rtmp = element.rtmp;
-                    }else{*/
-                        let serverel = document.getElementById("servers");
-        let container = document.createElement("div");
-        container.classList.add("input-field");
-        container.classList.add("col");
-        container.classList.add("s12");
-        let form = document.createElement("form");
-        form.classList.add("input-field-form");
-        form.style.borderRadius = "0";
-        container.appendChild(form);
                         switch (element.service){
+                          
                             case "rtmp":
-                            let rtmp_label = document.createElement("label");
-                rtmp_label.classList.add("input-label");
-                rtmp_label.classList.add("active");
-                rtmp_label.forhtml = "rtmp" + servercounts;
-                rtmp_label.innerText = "Адреса RTMP-клієнта";
-                let rtmp = document.createElement("input");
- 
-                rtmp.addEventListener("focus", (x) => {
-         rtmp.parentElement.parentElement.setAttribute("style", " border: 3px solid #677a93ff !important");
-         if  ((Array.from(rtmp.parentElement.parentElement.parentElement.parentElement.children).findIndex((x) => x === rtmp.parentElement.parentElement.parentElement) === 0) && (Array.from(rtmp.parentElement.parentElement.parentElement.parentElement.children).length !=   1) ){
-            rtmp.parentElement.parentElement.setAttribute("style", "border-radius: 1em 1em 0 0; border: 3px solid #677a93ff !important");
-        }else if  ((Array.from(rtmp.parentElement.parentElement.parentElement.parentElement.children).findIndex((x) => x === rtmp.parentElement.parentElement.parentElement) === Array.from(rtmp.parentElement.parentElement.parentElement.parentElement.children).length-1) && (Array.from(rtmp.parentElement.parentElement.parentElement.parentElement.children).length !=   1) )
-        {
-            rtmp.parentElement.parentElement.setAttribute("style", "border-radius: 0 0 1em 1em; border: 3px solid #677a93ff !important");
-        }
-    })
-    rtmp.addEventListener("focusout", (x) => {
-        rtmp.parentElement.parentElement.setAttribute("style", "border: 0 !important; border-radius: 0 !important");
+                                add_server(1);
+                                try{
+                                        document.getElementById("servers").children[i].children[0].children[0].children[1].value = element.rtmp;
+                                    
+                                }catch{
 
-    })
-                rtmp.id = "rtmp" + servercounts;
-                rtmp.classList = "input-row";
-                rtmp.placeholder = "rtpm://localhost:3000/default/";
-                let rtmp_container = document.createElement("div");
-                rtmp_container.style.width = "92%";
-                rtmp_container.append(rtmp_label);
-                rtmp_container.append(rtmp);
-                form.append(rtmp_container);
-                let service = new server("rtmp", rtmp.value, servercounts);
-           
-                let rtrash = document.createElement("img");
-              rtrash.classList.add("highlight_icon");
-              rtrash.src = "symbols/user-trash-symbolic.svg";
-              rtrash.addEventListener("click", (e) => {
-                
-                servers = array_remove(servers, Array.from(e.target.parentNode.parentNode.parentNode.children).findIndex((x) =>
-          
-                x === e.target.parentNode.parentNode));
-                if (Array.from(e.target.parentNode.parentNode.parentNode.children).length == 2){
-                    Array.from(e.target.parentNode.parentNode.parentNode.children).forEach((x) => {
-                        x.children[0].children[1].style.display = "none"     
-                    })     
-
-}
-                e.target.parentNode.parentNode.remove();
-                if (document.getElementById("servers").children.length === 0){
-                        add_server(1)
-                }
-              });
-              form.append(rtrash);
-                servers[servers.length] = service;
-                rtmp.value = element.rtmp;
-                serverel.append(container);
-        servercounts++;
+                                }
+        
                                 break;
                                 case "youtube":
-                                       
-                console.log("youtube");
-                let youtube = document.createElement("div");
-                let youtube_icon = document.createElement("img");
-                youtube_icon.src = "symbols/youtube-icon.svg"
-                youtube_icon.classList.add("button_icon");
-                youtube_icon.style.height = "23px";
-                youtube.style.display = "flex";
-                youtube.style.alignItems = "center";
-                youtube.style.gap = "0.5em"
-                youtube.innerText = "Youtube";
-                let server_container = document.createElement("div");
-                server_container.style.width = "100%";
-                server_container.style.display = "flex";
-                server_container.style.justifyContent = "space-between"
-                youtube.insertBefore(youtube_icon, youtube.firstChild);
-                server_container.append(youtube);
-                form.append(server_container);
-
-               document.getElementsByClassName("popr-box")[1].children[0].style.display = "none";
-              //  <img src="symbols/user-trash-symbolic.svg" class="highlight_icon">
-              let trash = document.createElement("img");
-              trash.classList.add("highlight_icon");
-              trash.src = "symbols/user-trash-symbolic.svg";
-              form.append(trash);
-              let servic = new server("youtube", element.rtmp);
-                servers[servers.length] =servic;
-            trash.addEventListener("click", (e) => {
-                document.getElementsByClassName("popr-box")[1].children[0].style.display = "block";
-                if (Array.from(e.target.parentNode.parentNode.parentNode.children).length == 2){
-                    Array.from(e.target.parentNode.parentNode.parentNode.children).forEach((x) => {
-                        x.children[0].children[1].style.display = "none"     
-                    })     
-            
-                }
-                if (e.target.parentNode.parentElement.parentElement.children.length === 1){
-                    add_server(1);
-                }
-                e.target.parentNode.parentNode.remove();
-
-                servers = array_remove(servers, servers.findIndex((e) => e.service === "youtube"));
-});
-         
-            serverel.append(container);
-        servercounts++;
+             
+                            add_server(0);
                                     break;
                         }
                    
                     
-                });
+            i++;
+                    });
         }catch(e){
              //   if (String(e))
            if (String(e).startsWith("SyntaxError: Unexpected end of JSON input")){
@@ -376,7 +278,7 @@ image.src = obj.cover;}
         servers.forEach((e) => {
             
             if (e.service === "rtmp"){
-                if (document.getElementById("rtmp" + e.id).value !== ""){
+                if (String(document.getElementById("rtmp" + e.id).value).includes("://")){
                     e.rtmp = document.getElementById("rtmp" + e.id).value;
                 }else{ 
                     servers = array_remove(servers, i);
@@ -430,41 +332,18 @@ timer = setTimeout(function() {
 })}
 document.getElementById("create_button").addEventListener("click", (e) => {
     if (!broadcast_creating){
+        let oldver;
     try{
-    let oldver = JSON.parse(localStorage.getItem("broadcast"));}
+    oldver = JSON.parse(localStorage.getItem("broadcast"));}
     catch{
         save();
-        let oldver = JSON.parse(localStorage.getItem("broadcast"));
+      oldver = JSON.parse(localStorage.getItem("broadcast"));
     }
     servers.forEach((element) => {
         if (element.service === "youtube"){
             if ((element.rtmp === "") || (oldver.name !== document.getElementById("name").value) || (oldver.description !== document.getElementById("description").value) ||  (decodeURI(oldver.image) !== decodeURI(document.getElementById("cover".src))) || (oldver.category !== document.getElementById("category").innerText) || (oldver.acces !== document.getElementById("accestype").innerText) || (oldver.forkids !== document.querySelector("input[type=checkbox]").checked)){
            //     console.log("youtube_create");
-           let acces;
-                switch (document.getElementById("accestype").innerText){
-                    case "Загальнодоступне":
-                        acces = "public"
-                        break;
-                    case "Для тих, в кого є посилання":
-                        acces = "unlisted";
-                        break;
-                    case "Приватне":
-                        acces = "private";
-                        break;
-
-                }
-                let timedate; 
-                try{
-                    timedate = new Date(document.getElementById("date").value + " " +document.getElementById("hours").value + ":" + document.getElementById("minutes").value).toISOString()
-                }catch{
-                    
-                }
-                generate_youtube_broadcast(document.getElementById("name").value,
-                 document.getElementById("description").value, 
-                 document.getElementById("cover"),
-                 actualcategory, acces, document.querySelector("input[type=checkbox]").checked, timedate);
-                broadcast_creating = true;
-                save();
+                generate_youtube_rtmp(element); 
             }
         }
 
@@ -474,3 +353,37 @@ document.getElementById("refresh").addEventListener("click", (e) =>{
     localStorage.setItem("broadcast", "");
     location.reload();
 }) 
+async function generate_youtube_rtmp(element){
+    let acces;
+    switch (document.getElementById("accestype").innerText){
+        case "Загальнодоступне":
+            acces = "public"
+            break;
+        case "Для тих, в кого є посилання":
+            acces = "unlisted";
+            break;
+        case "Приватне":
+            acces = "private";
+            break;
+
+    }
+    let timedate; 
+    try{
+        timedate = new Date(document.getElementById("date").value + " " 
+        +document.getElementById("hours").value + ":" +
+         document.getElementById("minutes").value).toISOString()
+    }catch{
+        
+    }
+    broadcast_creating = true;
+
+    const link = await generate_youtube_broadcast(document.getElementById("name").value,
+     document.getElementById("description").value, 
+     document.getElementById("cover"),
+     actualcategory, acces, document.querySelector("input[type=checkbox]").checked, timedate);
+    console.log(link);
+   element.rtmp = link;
+   save();
+    console.log(servers);
+   broadcast_creating = false;
+}
