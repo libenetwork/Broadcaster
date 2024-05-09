@@ -304,6 +304,7 @@ function create_streame_from_track(track, id){
 function remove_stream(id){
     try {
         audiostreams.splice(id, 1);
+        //remove_audio_stream(id);
     }catch (e){
 
     }

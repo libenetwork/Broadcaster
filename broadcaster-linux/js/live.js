@@ -1,13 +1,26 @@
-
+let isLive = false; let active = false;
+window.setInterval(checkstreams, 1000);
+function checkstreams(){
+    if (!isLive){
+        if (JSON.parse(JSON.parse(localStorage.getItem("broadcast")).servers).length > 0){
+            if (!active){
+            active = true;
+            console.log("streams");}
+        }else{
+            active = false;
+            
+        }
+    }
+}
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('[data-action="goLive"]').addEventListener('click', (e) => {
 
 
         let addres = "noname";
-        if (url.value != "" || key.value != "")
+      /*  if (url.value != "" || key.value != "")
             addres = url.value + "/" + key.value;
-        alert("Broadcast was started at " + addres);
-
+        alert("Broadcast was started at " + addres);*/
+        let clients = [];
         const client = new WebSocket(
             "wss://broadcaster-uozh.onrender.com/" +
             '/rtmp/' +
