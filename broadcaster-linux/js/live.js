@@ -1,6 +1,7 @@
 let isLive = false; let active = false;
 window.setInterval(checkstreams, 1000);
 function checkstreams(){
+    if(connected){
     if (!isLive){
         if (JSON.parse(JSON.parse(localStorage.getItem("broadcast")).servers).length > 0){
             if (!active){
@@ -12,23 +13,43 @@ function checkstreams(){
             active = false;
             document.querySelector('[data-action="goLive"]').classList.add("inactive");
         }
+    }}else{
+        active = false;
+            document.querySelector('[data-action="goLive"]').classList.add("inactive");
     }
 }
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('[data-action="goLive"]').addEventListener('click', (e) => {
+if (e.target.classList.contains("inactive") &&
+(document.getElementsByClassName("live-indicator")[0].classList.contains(not-show))){}else{
+    let living = false;
+    
+        if (!living){
+            living = true; let countdown = 10;
+            let indicator = document.getElementsByClassName("live-indicator")[0];
 
+           const interval = setInterval(function () {
+            indicator.classList.remove("not-show");
 
+                  indicator.children[1].innerText = "Почнемо через " + countdown;
+                  countdown--;
+                  if (countdown === -1) {
+                    clearInterval(interval);
+                    indicator.children[1].innerText = "Live";
+                    
+                  }
+            }, 1000);
+        }
+ 
+    /*
         let addres = "noname";
-      /*  if (url.value != "" || key.value != "")
-            addres = url.value + "/" + key.value;
-        alert("Broadcast was started at " + addres);*/
         let clients = [];
         const client = new WebSocket(
             "wss://broadcaster-uozh.onrender.com/" +
             '/rtmp/' +
             addres
         );
-
+    
         client.addEventListener('open', (e) => {
 
             document.getElementById("live").innerText = "LIVE!";
@@ -86,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
 
-        });
-
+        });*/
+    }
     });
 });

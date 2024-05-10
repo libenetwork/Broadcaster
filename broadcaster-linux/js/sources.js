@@ -208,7 +208,9 @@ function create_stream(id){
                 if (r === skip){
                 const peak = getPeakLevel();
                 try{
+                
                 let indicator =  document.getElementById("indicator" + gain.id)
+                if (indicator === null) gain.break = true;
                 anime({
                     targets: indicator,
                     width: [`${peakp * 100}%`,`${peak * 100}%`],
@@ -233,7 +235,11 @@ function create_stream(id){
                 else{
                     r++;
                 }
+                if (gain.break === undefined){
                 requestAnimationFrame(tick);
+                }else{
+                    console.log("end");
+                }
             }
 
             tick();
@@ -253,30 +259,30 @@ function create_streame_from_track(track, id){
     gain.connect(destination);
     // destination.connect(analyzer);
     let muted = false; let save ;
-    document.getElementsByClassName("back_cont")[id].children[1].onclick = function (){
-        if (document.getElementsByClassName("back_cont")[id].children[1].classList.contains("mute")) {
+    document.getElementsByClassName("back_cont")[id].children[1].addEventListener("click", (e) => {
+        if (e.target.classList.contains("mute")) {
             muted = true;
             gain.gain.value = 0;
-            document.getElementById("indicator" + id).style.width = 0;
-            save = document.getElementById('volume' + id).value;
-            document.getElementById('volume' + id).value = 0;
-            document.getElementById('volume' + id).style.background ="#6d6d6dff";
+            document.getElementById("indicator" + e.target.id.split("mute")[1]).style.width = 0;
+            save = document.getElementById('volume' + e.target.id.split("mute")[1]).value;
+            document.getElementById('volume' + e.target.id.split("mute")[1]).value = 0;
+            document.getElementById('volume' + e.target.id.split("mute")[1]).style.background ="#6d6d6dff";
 
         }else {muted = false;
-        document.getElementById('volume' + id).value = save;
+        document.getElementById('volume' + e.target.id.split("mute")[1]).value = save;
             gain.gain.value = Number(save) / 100; // Any number between 0 and 1.
-            document.getElementById('volume' + id).style.background = `linear-gradient(to right, #3584e4 ${save}%,  #6d6d6dff ${save}%)`;
+            document.getElementById('volume' + e.target.id.split("mute")[1]).style.background = `linear-gradient(to right, #3584e4 ${save}%,  #6d6d6dff ${save}%)`;
         }
-        }
-     document.getElementById('volume' + id).onchange = function () {
+        });
+     document.getElementById('volume' + id).addEventListener("change", (e) => {
         if (muted){
             gain.gain.value = 0;
-            document.getElementById('volume' + id).value = 0;
-            document.getElementById('volume' + id).style.backgroundColor ="#6d6d6dff";
+            e.target.value = 0;
+            e.target.style.backgroundColor ="#6d6d6dff";
         }else {
-            gain.gain.value = Number(this.value) / 100; // Any number between 0 and 1.
+            gain.gain.value = Number(e.target.value) / 100; // Any number between 0 and 1.
         }
-    };
+    });
     gain.gain.value = Number(document.getElementById('volume' + id).value) / 100;
     gain.connect(analyzer);
 
@@ -296,6 +302,7 @@ function create_streame_from_track(track, id){
             try{
             const peak = getPeakLevel();
             let indicator =  document.getElementById('indicator' + id);
+            if (indicator === null){gain.break = true;}
             anime({
                 targets: indicator,
                 width: [`${peakp * 100}%`,`${peak * 100}%`],
@@ -316,8 +323,11 @@ function create_streame_from_track(track, id){
         else{
             r++;
         }
-
+        if (gain.break === undefined){
         requestAnimationFrame(tick);
+        }else{
+            console.log("end");
+        }
     }
 
     tick();
