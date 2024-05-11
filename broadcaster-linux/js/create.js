@@ -108,7 +108,7 @@ image.src = obj.cover;}
                                 add_server(1);
                                 try{
                                         document.getElementById("servers").children[i].children[0].children[0].children[1].value = element.rtmp;
-                                    
+                                        servers[servers.length-1].rtmp = element.rtmp;
                                 }catch{
 
                                 }
@@ -117,6 +117,7 @@ image.src = obj.cover;}
                                 case "youtube":
              
                             add_server(0);
+                            servers[servers.length-1].rtmp = element.rtmp;
                                     break;
                         }
                    
@@ -126,7 +127,7 @@ image.src = obj.cover;}
         }catch(e){
              //   if (String(e))
            if (String(e).startsWith("SyntaxError: Unexpected end of JSON input")){
-            add_server(1);
+            add_server(1);trash
            }
            document.querySelector("#date").valueAsDate = new Date();
            document.getElementById("hours").value = new Date().getHours();
@@ -184,19 +185,20 @@ image.src = obj.cover;}
               let servic = new server("youtube", "");
                 servers[servers.length] =servic;
             trash.addEventListener("click", (e) => {
-                e.target.parentNode.parentNode.remove();
+                servers = array_remove(servers, servers.findIndex((e) => e.service === "youtube"));
+
                 document.getElementsByClassName("popr-box")[1].children[num].style.display = "block";
                 if (Array.from(e.target.parentNode.parentNode.parentNode.children).length == 2){
                     Array.from(e.target.parentNode.parentNode.parentNode.children).forEach((x) => {
                         
                         x.children[0].children[1].style.display = "none"     
                     })     
-                
+             
             }
-            if (e.target.parentNode.parentElement.parentElement.children.length === 1){
+            else if (e.target.parentNode.parentElement.parentElement.children.length === 1){
                     add_server(1);
                 }
-            servers = array_remove(servers, servers.findIndex((e) => e.service === "youtube"));
+                e.target.parentNode.parentNode.remove();
 
         });
          

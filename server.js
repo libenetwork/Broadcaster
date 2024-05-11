@@ -79,9 +79,9 @@ function  makeyoutubeserver(){
     try{
     let rtmps = JSON.parse(decodeURI(req.url).slice(6,decodeURI(req.url).length));
     console.log(rtmps);
-    let response = [""];
+    let response = ['-i', '-'];
     rtmps.forEach((url) => {
-       response = response.concat(['-i', '-', '-c:v',  'libx264','-crf','15','-c:a','aac', '-strict','-2','-ar', '44100', '-b:a','64k',
+       response = response.concat(['-c:v',  'libx264','-crf','15','-c:a','aac', '-strict','-2','-ar', '44100', '-b:a','64k',
    '-y',    '-use_wallclock_as_timestamps','1','-async', '1',  '-f',  'flv', url]);
     });
     console.log(response);
@@ -147,7 +147,7 @@ function  makeyoutubeserver(){
     // FFmpeg outputs all of its messages to STDERR.  Let's log them to the console.
     ffmpeg.stderr.on('data', (data) => {
       console.log('FFmpeg STDERR:', data.toString());
-      if (data.toString().contains("fps")) ws.send(data.toString());
+      if (data.toString().includes("fps")) ws.send(data.toString());
     });
 
     // When data comes in from the WebSocket, write it to FFmpeg's STDIN.

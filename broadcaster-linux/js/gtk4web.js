@@ -17,7 +17,7 @@ function array_remove(array, i){
 
 // close app
 function closeApp(e) {
-    if (!broadcast_creating){}
+    if (!broadcast_creating){
     try{
         save();
     }catch(e){
@@ -25,7 +25,7 @@ function closeApp(e) {
     }
     console.log("close");
     e.preventDefault()
-    ipc.send('closewindow')
+    ipc.send('closewindow')}
 }
 
 

@@ -1,10 +1,23 @@
 import { client } from "https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js";
+ipc.send("ready");
+let webhookclient;
+ipc.on('cookie_token', (e,data) => {
+    token = data;
+    localStorage.setItem("token", 'https://broadcaster-uozh.onrender.com/webhook/' + token);
 
-webhookclient.addEventListener("message", e => {
-    let data = JSON.parse(decodeURI(e.data)).name.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":") + " задон+атив " + JSON.parse(decodeURI(e.data)).amount + " гривень і сказав «" + JSON.parse(decodeURI(e.data)).message.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":") + "»";
+    webhookclient = new WebSocket(
+        'wss://broadcaster-uozh.onrender.com/webhook/' +
+        token
+    );
+    webhookclient.addEventListener("open", e => {console.log("Was connected!")})
+    webhookclient.addEventListener("message", e => {
+        let data = JSON.parse(decodeURI(e.data)).name.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").
+        replaceAll("%3A", ":") + " задон+атив " + JSON.parse(decodeURI(e.data)).amount + " гривень і сказав «" + JSON.parse(decodeURI(e.data)).message.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":").replaceAll("Франко", "Фанк+о") + "»";
+    
+        generate(data, e);
+    })
+});
 
-    generate(data, e);
-})
 async function generate(text, e){
     console.log("generation started!");
     const app = await client("https://robinhad-ukrainian-tts.hf.space/");
