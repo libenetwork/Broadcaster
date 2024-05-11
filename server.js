@@ -75,20 +75,36 @@ function  makeyoutubeserver(){
 
 
   function makevideoserver() {
-    const Url = req.url.split("/rtmp/")[1];
+    //const Urls = JSON.parse(req.url.split("/rtmp/")[1]);
+    try{
+    let rtmps = JSON.parse(decodeURI(req.url).slice(6,decodeURI(req.url).length));
+    console.log(rtmps);
+    let response = [""];
+    rtmps.forEach((url) => {
+       response = response.concat(['-i', '-', '-c:v',  'libx264','-crf','15','-c:a','aac', '-strict','-2','-ar', '44100', '-b:a','64k',
+   '-y',    '-use_wallclock_as_timestamps','1','-async', '1',  '-f',  'flv', url]);
+    });
+    console.log(response);
+    const ffmpeg = child_process.spawn('ffmpeg',response);
+   ffmpeg.on('close', (code, signal) => {
+      console.log('FFmpeg child process closed, code ' + code + ', signal ' + signal);
+      ws.send('FFmpeg child process closed, code ' + code + ', signal ' + signal);
+      ws.terminate();
+    });
+  
    // console.log(Url);
-    console.log('Target RTMP URL:', Url);
 
     // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP
-    const ffmpeg = child_process.spawn('ffmpeg', [
+  /*  const ffmpeg = child_process.spawn('ffmpeg', [
         '-i',
         '-',
 
         // video codec config: low latency, adaptive bitrate
         '-c:v',
         'libx264',
-        '-tune',
-        'zerolatency',
+        '-crf',
+        '5',
+
 
         // audio codec config: sampling frequency (11025, 22050, 44100), bitrate 64 kbits
         '-c:a',
@@ -99,6 +115,7 @@ function  makeyoutubeserver(){
         '44100',
         '-b:a',
         '64k',
+    
 
         //force to overwrite
         '-y',
@@ -111,18 +128,14 @@ function  makeyoutubeserver(){
 
         //'-filter_complex', 'aresample=44100', // resample audio to 44100Hz, needed if input is not 44100
         //'-strict', 'experimental',
-        '-bufsize',
-        '1000',
+
         '-f',
         'flv',
       Url
     ]);
-
+*/
     // If FFmpeg stops for any reason, close the WebSocket connection.
-   ffmpeg.on('close', (code, signal) => {
-      console.log('FFmpeg child process closed, code ' + code + ', signal ' + signal);
-      ws.terminate();
-    });
+   
 
     // Handle STDIN pipe errors by logging to the console.
     // These errors most commonly occur when FFmpeg closes and there is still
@@ -134,6 +147,7 @@ function  makeyoutubeserver(){
     // FFmpeg outputs all of its messages to STDERR.  Let's log them to the console.
     ffmpeg.stderr.on('data', (data) => {
       console.log('FFmpeg STDERR:', data.toString());
+      if (data.toString().contains("fps")) ws.send(data.toString());
     });
 
     // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
@@ -144,7 +158,13 @@ function  makeyoutubeserver(){
     });
 
     // If the client disconnects, stop FFmpeg.
+    ws.on("close", (e) => {
+      ffmpeg.kill();
 
+    })
+  }catch{
+
+  }
   }
   function makewebhookserver(){
     const Url = req.url.split("/")[2];
