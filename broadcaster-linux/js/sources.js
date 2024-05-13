@@ -141,7 +141,7 @@ function remove_source(id){
         document.getElementById("source").classList.add("not-show");
         document.getElementsByClassName("no-sources")[0].classList.remove("not-show");
     }
-
+    
 
 }
 function create_stream(id){
@@ -244,6 +244,10 @@ function create_stream(id){
 
             tick();
             audiostreams[audiostreams.length] = destination.stream;
+            if (contexts !== undefined){
+                contexts[contexts.length] = audioContext.createMediaStreamSource(audiostreams[audiostreams.length-1]);
+                contexts[contexts.length -1].connect(destination);
+            }
         });
 
 }
@@ -333,6 +337,10 @@ function create_streame_from_track(track, id){
     tick();
 
     audiostreams[audiostreams.length] = destination.stream;
+    if (contexts !== undefined){
+        contexts[contexts.length] = audioContext.createMediaStreamSource(audiostreams[audiostreams.length-1]);
+        contexts[contexts.length -1].connect(destination);
+    }
 
 }
 function remove_stream(id){
@@ -343,6 +351,10 @@ function remove_stream(id){
         audiostreams = array_remove(audiostreams, id)
     //    audiostreams.splice(id, 1);
         //remove_audio_stream(id);
+        if (contexts !== undefined){
+            console.log("delete" + id);
+            contexts[id].disconnect();
+        }
     }catch (e){
 
     }

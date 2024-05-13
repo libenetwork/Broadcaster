@@ -18,7 +18,6 @@ async function generate_youtube_broadcast(name, description, thumbnail, category
 
             }
         });
-        console.log(body);
         let link = ""; let data;
         try{
         const response = await fetch(
@@ -35,12 +34,16 @@ async function generate_youtube_broadcast(name, description, thumbnail, category
           switch (response.status){
             case 200:
            data = await response.json();
-
+            console.log(data);
+         
          await setthumbnail(data.id, thumbnail);
          await setinfo(data.id, name, description, category);
          let stream =await generate_stream(name);
          await bind(data.id, stream.id);
-         link = stream.cdn.ingestionInfo.ingestionAddress + "/" + stream.cdn.ingestionInfo.streamName;
+         link = JSON.stringify({
+            rtmp: stream.cdn.ingestionInfo.ingestionAddress + "/" + stream.cdn.ingestionInfo.streamName,
+            chat: data.snippet.liveChatId
+         });
         break;
         case 401:
             break;

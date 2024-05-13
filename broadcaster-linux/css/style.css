@@ -107,3 +107,20 @@ opacity: -100%;
 .time{
     width: 35%;
 }
+#no_comments{
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.comments_icon{
+    width: 20%;
+}
+#comments_section{
+    padding-left: 2em;
+}
+.chat_header{
+    font-size: 2em;
+    margin: 0;
+    font-weight: 800;
+
+}

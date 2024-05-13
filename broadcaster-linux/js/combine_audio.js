@@ -1,8 +1,10 @@
 let destination;
+let contexts = [];
+let audioContext;
 function combineaudio(){
   
-    const audioContext = new AudioContext();
-    let contexts = [];
+     audioContext = new AudioContext();
+    
     audiostreams.forEach(stream => {
             contexts[contexts.length] = audioContext.createMediaStreamSource(stream);
     });

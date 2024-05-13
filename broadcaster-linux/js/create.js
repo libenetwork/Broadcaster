@@ -21,17 +21,18 @@ class youtube{
     
 }
 class server{
-        constructor(service, rtmp, id){
+        constructor(service, rtmp, id, chat){
                 this.service = service;
                 this.rtmp = rtmp;
                 this.id = id;
+                this.chat = chat;
       
       
         }
       
     }
     function checkdate(obj){
-        if ((obj.date != undefined) && (obj.date != "") && (obj.time != undefined) && (obj.time != "") ){
+        if ((obj.date !== undefined) && (obj.date !== "") && (obj.time !== undefined) && (obj.time !== "") ){
             let hours = obj.time.split(":")[0]; let minutes = obj.time.split(":")[1];
           
             if (new Date(obj.date + " " + hours + ":" + minutes).getTime() > Date.now()){
@@ -72,7 +73,7 @@ let servers = [];
         try{
             let obj = JSON.parse(localStorage.getItem("broadcast"));
             document.getElementById("name").value = obj.name;
-            if ( obj.cover != undefined){
+            if (( obj.cover !== undefined) && (obj.cover !== "")){
             let caption = document.getElementsByClassName("no-video");
             
     for (let i = 0; i < caption.length; i++){
@@ -81,7 +82,7 @@ let servers = [];
     let image = document.getElementById("cover");
     image.classList.remove("not-show");
     image.src = obj.image;}
-    if ((obj.cover != undefined) && ( obj.cover != "")){
+    if ((obj.cover !== undefined) && ( obj.cover !== "")){
         let caption = document.getElementsByClassName("no-video");
         
 for (let i = 0; i < caption.length; i++){
@@ -109,6 +110,7 @@ image.src = obj.cover;}
                                 try{
                                         document.getElementById("servers").children[i].children[0].children[0].children[1].value = element.rtmp;
                                         servers[servers.length-1].rtmp = element.rtmp;
+                                        servers[servers.length-1].chat = element.chat;
                                 }catch{
 
                                 }
@@ -118,6 +120,8 @@ image.src = obj.cover;}
              
                             add_server(0);
                             servers[servers.length-1].rtmp = element.rtmp;
+                            servers[servers.length-1].chat = element.chat;
+
                                     break;
                         }
                    
@@ -127,7 +131,7 @@ image.src = obj.cover;}
         }catch(e){
              //   if (String(e))
            if (String(e).startsWith("SyntaxError: Unexpected end of JSON input")){
-            add_server(1);trash
+            add_server(1);
            }
            document.querySelector("#date").valueAsDate = new Date();
            document.getElementById("hours").value = new Date().getHours();
@@ -368,12 +372,13 @@ async function generate_youtube_rtmp(element){
     }
     broadcast_creating = true;
 
-    const link = await generate_youtube_broadcast(document.getElementById("name").value,
+    const link = await JSON.parse(await generate_youtube_broadcast(document.getElementById("name").value,
      document.getElementById("description").value, 
      document.getElementById("cover"),
-     actualcategory, acces, document.querySelector("input[type=checkbox]").checked, timedate);
+     actualcategory, acces, document.querySelector("input[type=checkbox]").checked, timedate));
     console.log(link);
-   element.rtmp = link;
+   element.rtmp = link.rtmp;
+   element.chat = link.chat;
    save();
     console.log(servers);
    broadcast_creating = false;
