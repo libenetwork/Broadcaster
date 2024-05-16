@@ -65,7 +65,8 @@ function  makeyoutubeserver(){
     ws.on("message", (msg) =>{
         //console.log(msg.toString());
         try{
-        youtube.get_token(msg.toString(), ws);}
+        youtube.get_token(msg.toString(), ws);
+      }
         catch (e){
             console.log(e);
         }
@@ -92,54 +93,6 @@ function  makeyoutubeserver(){
       ws.terminate();
     });
   
-   // console.log(Url);
-
-    // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP
-  /*  const ffmpeg = child_process.spawn('ffmpeg', [
-        '-i',
-        '-',
-
-        // video codec config: low latency, adaptive bitrate
-        '-c:v',
-        'libx264',
-        '-crf',
-        '5',
-
-
-        // audio codec config: sampling frequency (11025, 22050, 44100), bitrate 64 kbits
-        '-c:a',
-        'aac',
-        '-strict',
-        '-2',
-        '-ar',
-        '44100',
-        '-b:a',
-        '64k',
-    
-
-        //force to overwrite
-        '-y',
-
-        // used for audio sync
-        '-use_wallclock_as_timestamps',
-        '1',
-        '-async',
-        '1',
-
-        //'-filter_complex', 'aresample=44100', // resample audio to 44100Hz, needed if input is not 44100
-        //'-strict', 'experimental',
-
-        '-f',
-        'flv',
-      Url
-    ]);
-*/
-    // If FFmpeg stops for any reason, close the WebSocket connection.
-   
-
-    // Handle STDIN pipe errors by logging to the console.
-    // These errors most commonly occur when FFmpeg closes and there is still
-    // data to write.  If left unhandled, the server will crash.
     ffmpeg.stdin.on('error', (e) => {
       console.log('FFmpeg STDIN Error', e);
     });

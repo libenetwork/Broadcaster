@@ -11,7 +11,7 @@
     <link rel = "stylesheet" href="css/style.css">
     <script src = "js/anime.min.js"></script>
     <link rel = "icon" href="img/icon1024.png">
-
+    <script src = "js/anime.min.js"></script>
     <link rel = "stylesheet" href = "css/materialize.min.css">
     <link rel = "stylesheet" href = "css/broadcaster_style.css">
     <script src="js/communicator.js"></script>
@@ -36,7 +36,7 @@
             <img class = "close_icon" src="symbols/close.svg">
         </div>
     </div>
-    <div class = "content row" style="margin: 0;">
+    <div class = "content row" style="margin: 0; height: 100%;">
         <div class="frame col s12 m12 l9 xl7" style=" margin-top: 0.5em;  padding: 0; height: 100%">
            <div class="video-container">
             <div class = "live-indicator not-show"><img class="button_icon" src="symbols/media-record-symbolic.svg"><div>Live</div></div>
@@ -80,7 +80,7 @@
                         <div class = "no-sources-text">Нема звуку. Без звуку неможливо почати трансляцію</div>
                     </div>
                     <div id = "source" class="not-show audio_sources preferences-group-body no-scrollbar">
-
+                        
                     </div>
                 </div>
             </div>
@@ -89,11 +89,44 @@
 <img src="symbols/chat-bubbles-empty-inverted-symbolic.svg" class="disactive_icon comments_icon" >
 <p class="no-sources-text">Тут буде чат вашої трансляції</p></div>
 <div class="frame col l3 xl5 not-show" id = "comments_section">
-    <p class="chat_header">Чат трансляції</p></div>
+    <p class="chat_header">Чат трансляції</p>
+    <div class = "comments_section"><div style="display: flex; gap: 5px; align-items: center;">
+<div class="type_panel">  
+    <img class="button_icon" id = "smile" src = "symbols/sentiment-very-satisfied-symbolic.svg">
+    <form class="input-field-form message_form" style="width: 100%;" action="javascript:;" onsubmit="postmessage();">
+        <div style="width: -webkit-fill-available;" class = "input_higlight">
+        <input id = "message"  maxlength="5000" class= "desc_row materialize-textarea scrollbar" placeholder="Написати в чат" value=""  type="text" class="validate"></textarea>
+        </div>
     
+    </form>
+  <div id = "post" onclick="postmessage();">
+  <img class="button_icon"  src = "symbols/paper-plane-symbolic.svg">
+</div>
+</div>
+
+
+</div>
+
+<div class = "messages no-scrollbar">
+ </div>
+</div></div>
+<div class = "context_menu">
+    <ul class = "context_menu">
+        <li>
+            <div></div>
+            <div></div>
+        </li>
+        <li><img src = "symbols/user-trash-symbolic.svg" class="button_icon">Вилучити</li>
+        <li><img src = "symbols/security-medium-rtl-symbolic.svg" class="button_icon">Зробити модератором</li>
+        <li><img src = "symbols/stop-sign-large-symbolic.svg" class="button_icon">Заблокувати користувача</li>
+
+    </ul>
+</div>
+</div>
     </div>
 
 </div>
+
 
 </div>
 <script src = "js/broadcaster.js"></script>
@@ -106,6 +139,7 @@
 <script src = "js/coockie.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js"></script>
 <script src = "js/audio.js"></script>
+<script src="js/materialize.min.js"></script>
 <script src="js/generate.js" type="module"></script>
 <script src = "js/sources.js"></script>
 <script src = "js/grab.js"></script>
@@ -114,6 +148,27 @@
 <script src = "js/sockets.js"></script>
 <script src="js/live.js"></script>
 <script src="js/chat.js" ></script>
+<script>     
+ let scrollbars = document.getElementsByClassName("no-scrollbar");
+   for (let i =0; i < scrollbars.length; i++){
+    let elem = scrollbars[i];
+    let timer;
+   elem.addEventListener('scroll', function(e) {
+
+elem.classList.remove('no-scrollbar');
+elem.classList.add('scrollbar');
+    
+
+clearTimeout(timer);
+timer = setTimeout(function() {
+     elem.classList.add('no-scrollbar');
+     elem.classList.remove('scrollbar');
+}, 100);
+
+})}
+
+
+</script>
 </body> 
 </html>
 

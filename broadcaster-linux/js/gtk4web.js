@@ -77,7 +77,7 @@ function openintegrate(e){
 }
 Array.from(document.querySelectorAll("input[type=text]")).forEach((e) => {
     e.addEventListener("focus", (x) => {
-      
+      if (e.id !== "message"){
         if ((hasParents(e, document.getElementsByClassName("time")[0])) || (hasParents(e, document.getElementsByClassName("time")[1]))){
             getParents(e)[2].setAttribute("style", " border: 3px solid #677a93ff !important")
         }
@@ -89,9 +89,10 @@ Array.from(document.querySelectorAll("input[type=text]")).forEach((e) => {
         }else{
             e.parentElement.parentElement.setAttribute("style", " border: 3px solid #677a93ff !important");
 
-        }
+        }}
     })
     e.addEventListener("focusout", (x) => {
+        if (e.id !== "message"){
         if ((hasParents(e, document.getElementsByClassName("time")[0])) || (hasParents(e, document.getElementsByClassName("time")[1]))){
             getParents(e)[2].setAttribute("style", " ")
         }
@@ -105,10 +106,11 @@ Array.from(document.querySelectorAll("input[type=text]")).forEach((e) => {
         } else{
         e.parentElement.parentElement.setAttribute("style", "border: 0 !important; border-radius: 0 !important");
         }
-    })
+}})
 })
 
 Array.from(document.querySelectorAll("textarea")).forEach((e) => {
+    if (e.id !== "message"){
     e.addEventListener("focus", (x) => {
          e.parentElement.parentElement.setAttribute("style", " border: 3px solid #677a93ff !important; ");
          
@@ -117,7 +119,7 @@ Array.from(document.querySelectorAll("textarea")).forEach((e) => {
         e.parentElement.parentElement.setAttribute("style", "border: ");
 
     })
-})
+}});
 let calendar_focused = false;
 Array.from(document.querySelectorAll("input[type=date]")).forEach((e) => {
     e.addEventListener("focus", (x) => {
