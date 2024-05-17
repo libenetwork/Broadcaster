@@ -50,7 +50,7 @@ Socketserver.on('connection', (ws, req) => {
     makevideoserver();
   }
   else if (req.url.includes("refresh")){
-    ws.send(youtube.maketokenrefresh(req.url.split("refresh/")[1]));
+   youtube.maketokenrefresh(req.url.split("refresh/")[1],ws);
   }
   else if(req.url.includes("youtube")){
       if (req.url.split("/youtube/")[1] === "auth"){

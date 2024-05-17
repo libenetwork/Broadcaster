@@ -21,7 +21,7 @@ function return_data(){
     })});
 
 }
-async function maketokenrefresh(refresh_token){
+async function maketokenrefresh(refresh_token, ws){
     const data = await return_data();
     const header = new Headers({
         'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ async function maketokenrefresh(refresh_token){
 
     }
     );
-    return JSON.stringify(response.json);
+    ws.send(JSON.stringify(response.json));
 }
 async function makeauth() {
     const data = await return_data();
