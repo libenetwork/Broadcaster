@@ -59,7 +59,10 @@ async function generate_youtube_broadcast(name, description, thumbnail, category
                 break;
                 case "Scheduled start time is required":
                     alert("Дата чи час введенні некоректно");
-                    
+                  case "Scheduled start time must be in the future and close enough to the current date that a broadcast could be reliably scheduled at that time.":
+                 link =   generate_youtube_broadcast(name, description,thumbnail,category,acces,forkids,new Date().toISOString());    
+                 
+                  break;  
              }
              broadcast_creating = false;
             break;

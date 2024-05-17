@@ -10,6 +10,10 @@ function open_broadcast_window(){
  
     ipc.send("open_broadcast");}
     
+    function open_chat_window(){
+ 
+        ipc.send("open_chat");}
+        
 
 function open_cover(){
   

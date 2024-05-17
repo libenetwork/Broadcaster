@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+
+    <title>Чат трансляцій</title>
+    <link rel = "stylesheet" href="css/gtk4web.css">
+    <link rel = "stylesheet" href="css/fonts.css">
+    <link rel = "stylesheet" href="css/style.css">
+    <script src = "js/anime.min.js"></script>
+    <link rel = "icon" href="img/icon1024.png">
+
+    <link rel = "stylesheet" href = "css/materialize.min.css">
+    <link rel = "stylesheet" href = "css/broadcaster_style.css">
+    <script src="js/communicator.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/popr.css">
+    <script>window.$ = window.jQuery = require('./js/jquery-3.7.1.min.js');</script>
+
+</head>
+<body>
+
+<div class = "gtk-window main-window" style="">
+    <div class = "gtkheader">
+        <div></div>
+        <div style="width: -webkit-fill-available; text-align: center">
+            <div class = "tittle" style="padding-top: 2px !important; padding: 0; ">Чат трансляцій</div>
+        </div>
+        <div class="close" >
+            <img class = "close_icon" src="symbols/close.svg" >
+        </div>
+    </div>
+    <div class = "content scrollbar" style="margin: 0; overflow-y: scroll;  height: 100%;">
+        <div id = "chat" style="height: 100%;"></div>
+    </div>
+
+</div>
+</div>
+<script>
+    $('#chat').load(__dirname + "/сhat.html");
+let scrollbars = document.getElementsByClassName("no-scrollbar");
+   for (let i =0; i < scrollbars.length; i++){
+    let elem = scrollbars[i];
+    let timer;
+   elem.addEventListener('scroll', function(e) {
+
+elem.classList.remove('no-scrollbar');
+elem.classList.add('scrollbar');
+    
+
+clearTimeout(timer);
+timer = setTimeout(function() {
+     elem.classList.add('no-scrollbar');
+     elem.classList.remove('scrollbar');
+}, 100);
+
+})}
+
+
+</script>
+</script>
+<script src = "js/broadcaster.js"></script>
+<script src="js/gtk4web.js"></script>
+<script type="module" src = "gtk.js"></script>
+<script type = "module" src = "theme.js"></script>
+<script src = "js/coockie.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<script src="js/chat.js" ></script>
+
+</body>
+</html>
+
+

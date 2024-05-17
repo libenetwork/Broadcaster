@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain, desktopCapturer, session, clipboard, dialog } = require('electron')
+const { localStorage, sessionStorage } = require('electron-browser-storage');
 const fs = require("fs");
 const sharp = require("sharp");
 const electron = require("electron")
@@ -7,6 +8,8 @@ let open_donate = false;
 let open_broadcast = false;
 let open_scene_w = false;
 let open_dialogue = false;
+let open_chat = false;
+
 let window;
 
 
@@ -66,8 +69,31 @@ function createmainwindow(){
     window.on("closed", () => {
 app.quit();
     })
+    ipcMain.on('close', () => {
+        app.quit()
+    })
+    ipcMain.on("closewindow", (event) => {
+        
+        event.sender.destroy();
+       
+    })
+    ipcMain.on("mainwindow", () => {
+        createmainwindow();
+    })
+    ipcMain.on('window', (e, url) =>
+    {
+        createaddwindow(url);
+    });
+    window.on("maximize", (e) =>{
+        window.webContents.send('maximize');
+
+    });
+    window.on("unmaximize", (e) =>{
+
+        window.webContents.send('return');
+
+    });
     ipcMain.on("open_donate", () => {
-        console.log(open_donate);
         if (!open_donate){
         const donate_window = new BrowserWindow({
             webPreferences: {
@@ -93,8 +119,35 @@ app.quit();
         open_donate = true;
     }
     })
+
+    ipcMain.on("open_chat", () => {
+        
+        if (!open_chat){
+        const chat_window = new BrowserWindow({
+            webPreferences: {
+                allowRunningInsecureContent: true,
+                nodeIntegration: true,
+                contextIsolation: false},
+            parent: window,
+            height: 800,
+            maxWidth: 500,
+            minWidth: 500,
+            width:500,
+            maxHeight: 800,
+            minHeight: 800,
+            icon: 'img/icon1024',
+            frame: false,
+            transparent: true,
+
+        });
+        chat_window.on("closed", (e) => {
+            open_chat = false;
+        })
+        chat_window.loadFile("chat_window.html");
+        open_chat = true;
+    }
+    })
     ipcMain.on("open_broadcast", () => {
-        console.log(open_broadcast);
         if (!open_broadcast){
         const broadcast_window = new BrowserWindow({
             webPreferences: {
@@ -347,11 +400,14 @@ const createWindow = (path) => {
 }
 
 app.whenReady().then(() => {
-    if (localStorage.getItem("refresh_token") === undefined){
+    const token = new Promise(resolve => resolve(localStorage.getItem('refresh_token'))).then( value=> {
+    if (value === undefined){
     createWindow("index.html");
     }else{
         createmainwindow();
+        
     }
+});
 })
 app.on("browser-window-created", (e, win) => {
     //win.removeMenu();
