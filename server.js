@@ -24,7 +24,7 @@ const server = http.createServer(app).listen(3000, () => {
 app.use(bodyParser.json());
 
 youtube.makeauth();
-console.log("OATH2client generated");
+//console.log("OATH2client generated");
 
 const Socketserver = new WebSocketServer({
 server:server
@@ -48,7 +48,9 @@ Socketserver.on('connection', (ws, req) => {
   }else if (req.url.includes("rtmp")){
     makevideoserver();
   }
-
+  else if (req.url.includes("revoke")){
+      maketokenrevoke();
+  }
   else if(req.url.includes("youtube")){
       if (req.url.split("/youtube/")[1] === "auth"){
           //console.log(youtube.get_autorizationURL());
@@ -58,6 +60,37 @@ Socketserver.on('connection', (ws, req) => {
   else{
     ws.terminate(); // No match, reject the connection.
     return;
+  }
+  function maketokenrevoke(){
+    let postData = "token=" + req.url.split("/")[2];
+
+    // Options for POST request to Google's OAuth 2.0 server to revoke a token
+    let postOptions = {
+      host: 'oauth2.googleapis.com',
+      port: '443',
+      path: '/revoke',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    };
+
+    // Set up the request
+    const postReq = https.request(postOptions, function (res) {
+      res.setEncoding('utf8');
+      res.on('data', d => {
+        console.log('Response: ' + d);
+      });
+    });
+
+    postReq.on('error', error => {
+      console.log(error)
+    });
+
+    // Post the request with data
+    postReq.write(postData);
+    postReq.end();
   }
 function  makeyoutubeserver(){
 

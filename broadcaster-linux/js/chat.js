@@ -2,6 +2,7 @@ const API_KEY = "AIzaSyAMeKqorMHCc910lG6t-uDa0LX3xl5swB0";
 let chatitems = [];
 let youtube_chat_id;
 let last = "";
+let last_message;
 let can = true;
 document.addEventListener("mousedown", e => {
   if (document.getElementsByClassName("context_menu")[0].style.display === "block"){
@@ -12,7 +13,7 @@ can = false;
 }})
 const chatinterval = setInterval(function() {
         checkchats();
-}, 2000);
+}, 3000);
  function checkchats(){
     if (chatitems.length === 0){
         document.getElementById("no_comments").classList.remove("not-show");
@@ -40,6 +41,23 @@ const chatinterval = setInterval(function() {
     });}
 
 }
+async function get_moderators_list(id){
+
+  const headers = new Headers({
+    'Authorization': `Bearer ${JSON.parse(localStorage.getItem("youtube_token")).tokens.access_token}`,
+    'Content-Type': 'application/json'
+});
+const response = await fetch(
+  `https://www.googleapis.com/youtube/v3/liveChat/moderators?liveChatId=${id}&part=snippet`,
+  {
+    method: 'GET',
+    headers: headers
+  });
+  let moderators = await response.json();
+  first_moderators = false;
+  return moderators;
+  }
+
 async function getyoutubechat(id){
   youtube_chat_id = id;
     const headers = new Headers({
@@ -315,14 +333,26 @@ findIndex(x => x === obj)].authorDetails.displayName;
   if (data.items[Array.from(document.getElementsByClassName("messages")[0].children).findIndex(x => x === obj)].authorDetails.isChatOwner){
     menu.children[0].children[2].style.display = "none";
     menu.children[0].children[3].style.display = "none";
-
-  }else{
+ }else{
     menu.children[0].children[2].style.display = "flex"; 
     menu.children[0].children[3].style.display = "flex"; 
 
   }
+  if (data.items[Array.from(document.getElementsByClassName("messages")[0].children).findIndex(x => x === obj)].authorDetails.isChatModerator)
+  {
+    menu.children[0].children[2].children[0].src = "symbols/security-low-symbolic.svg"; 
+    menu.children[0].children[2].children[1].innerText = "Скасувати статус модератора";
+  
+  } else{
+    menu.children[0].children[2].children[0].src = "symbols/security-medium-rtl-symbolic.svg"; 
+    menu.children[0].children[2].children[1].innerText = "Зробити модератором";
+
+  }
   menu.children[0].children[1].addEventListener("mousedown", e=> {
     message_delete(data.items[Array.from(document.getElementsByClassName("messages")[0].children).findIndex(x => x === obj)]);
+  })
+  menu.children[0].children[2].addEventListener("mousedown", e=> {
+    make_moderator(data.items[Array.from(document.getElementsByClassName("messages")[0].children).findIndex(x => x === obj)]);
   })
 anime({
   targets: menu,
@@ -352,4 +382,59 @@ async function message_delete(message){
     });
 
   }
+}
+ function make_moderator(message){
+    switch (message.authorDetails.isChatModerator){
+      case false:
+        set_moderator(message);
+        break;
+      case true:
+        delete_moderator(message);
+        break;
+    }
+}
+async function set_moderator(message){
+  const headers = new Headers({
+    'Authorization': `Bearer ${JSON.parse(localStorage.getItem("youtube_token")).tokens.access_token}`,
+    'Content-Type': 'application/json'
+});
+const body = JSON.stringify({
+  "snippet": {
+    "moderatorDetails":{
+    "channelId": message.snippet.authorChannelId
+  },
+    "liveChatId": message.snippet.liveChatId
+    
+  }
+});
+const response = await fetch(
+  `https://www.googleapis.com/youtube/v3/liveChat/moderators?key=${API_KEY}&part=snippet`,
+  {
+    method: 'POST',
+    headers: headers,
+    body: body
+  });
+  alert("Наступні пости "+ message.snippet.displayName + " будуть від імені модератора");
+
+}
+async function delete_moderator(message){
+  if (last_message !== message){
+  let moderators = await get_moderators_list(youtube_chat_id);
+  let moderator_id = moderators.items.find(x => x.snippet.moderatorDetails.channelId === message.snippet.authorChannelId);
+  if (moderator_id !== undefined){
+  const headers = new Headers({
+    'Authorization': `Bearer ${JSON.parse(localStorage.getItem("youtube_token")).tokens.access_token}`,
+    'Content-Type': 'application/json'
+});
+const response = await fetch(
+  `https://www.googleapis.com/youtube/v3/liveChat/moderators?key=${API_KEY}&id=${moderator_id.id}`,
+  {
+    method: 'DELETE',
+    headers: headers
+  });
+  }else{
+    alert("Користувач вже не є модератором або є супермодератором. Перейдіть на сторінку трансляції");
+  }
+}
+last_message = message;
 }
