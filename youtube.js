@@ -92,3 +92,4 @@ module.exports.return_data = return_data;
 module.exports.makeauth = makeauth;
 module.exports.get_autorizationURL = get_autorizationURL;
 module.exports.get_token = get_token;
+module.exports.maketokenrefresh = maketokenrefresh;
