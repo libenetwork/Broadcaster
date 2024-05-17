@@ -32,6 +32,7 @@ async function maketokenrefresh(refresh_token, ws){
         refresh_token: refresh_token,
         grant_type: refresh_token
     })
+    console.log(body);
     const response = await fetch("https://www.googleapis.com/oauth2/v3/token",{
         method: 'POST',
         headers: header,
