@@ -38,7 +38,7 @@ async function maketokenrefresh(refresh_token){
 
     }
     );
-    console.log(await response.json);
+    return JSON.stringify(response.json);
 }
 async function makeauth() {
     const data = await return_data();
