@@ -2,6 +2,7 @@ const {google} = require('googleapis');
 let oauth2Client;
 const fs = require('fs');
 const url = require('url');
+const { method } = require('bluebird');
 const scopes = [
     'https://www.googleapis.com/auth/youtube.force-ssl'
 ];
@@ -19,6 +20,26 @@ function return_data(){
             resolve([YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REDIRECT_URL]);
     })});
 
+}
+async function maketokenrefresh(refresh_token){
+    const data = await return_data();
+    const headers = new Headers({
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem("youtube_token")).tokens.access_token}`,
+        'Content-Type': 'application/json'
+    });
+    const body = JSON.stringify({
+        client_id: data[0],
+        client_secret: data[1],
+        refresh_token: refresh_token,
+        grant_type: refresh_token
+    })
+    const response = await fetch("https://www.googleapis.com/oauth2/v3/token",{
+        method: 'POST',
+        headers: header,
+
+    }
+    );
+    console.log(await response.json);
 }
 async function makeauth() {
     const data = await return_data();
@@ -52,6 +73,7 @@ function get_autorizationURL(){
          try{
                       resolve(oauth2Client.getToken(q.code))}catch (e){
              console.log(e);
+             
          }
      });
      //console.log(ws);
