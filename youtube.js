@@ -23,7 +23,7 @@ function return_data(){
 }
 async function maketokenrefresh(refresh_token){
     const data = await return_data();
-    const headers = new Headers({
+    const header = new Headers({
         'Content-Type': 'application/json'
     });
     const body = JSON.stringify({
