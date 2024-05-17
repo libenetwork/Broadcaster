@@ -24,7 +24,6 @@ function return_data(){
 async function maketokenrefresh(refresh_token){
     const data = await return_data();
     const headers = new Headers({
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem("youtube_token")).tokens.access_token}`,
         'Content-Type': 'application/json'
     });
     const body = JSON.stringify({
