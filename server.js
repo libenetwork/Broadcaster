@@ -50,8 +50,6 @@ Socketserver.on('connection', (ws, req) => {
     makevideoserver();
   }
   else if (req.url.includes("refresh")){
-    console.log(req.url);
-    console.log(req.url.split("refresh/")[1]);
    youtube.maketokenrefresh(req.url.split("refresh/")[1],ws);
   }
   else if(req.url.includes("youtube")){

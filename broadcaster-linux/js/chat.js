@@ -53,9 +53,17 @@ const response = await fetch(
     method: 'GET',
     headers: headers
   });
+  switch (response.status){
+    case 200:
   let moderators = await response.json();
   first_moderators = false;
   return moderators;
+  break;
+  case 401:
+    await refresh_youtube();
+    get_moderators_list(id);
+    break;
+  }
   }
 
 async function getyoutubechat(id){
@@ -72,10 +80,19 @@ async function getyoutubechat(id){
         }
         
       );
+      switch (response.status){
+        case 200:
       data = await response.json();
       data.items = unbandata(data.items);
       detect(data);
-      chatitems = data.items;}
+      chatitems = data.items;
+      break;
+      case 401:
+        refresh_youtube();
+        getyoutubechat(id);
+        break;
+    }
+    }
       function unbandata(data){
         let new_data = [];
           data.forEach(element => {
@@ -83,6 +100,7 @@ async function getyoutubechat(id){
                 new_data[new_data.length] = element;
               }
           });
+          
           return new_data;
       }
      // console.log(data.items);
@@ -288,8 +306,6 @@ async function postmessage(){
    message =     document.getElementById("message").value;}else{
      message = "ТАНЦЮВАЛА РИБА З РАКОМ РИБА З РАКОМ А ПЕТРУШКА З ПАСТЕРНАКОМ З ПАСТЕРНАКОМ А ЦИБУЛЯ З ЧАСНИКОМ А ДІВЧИНА З КОЗАКОМ"
   }
-  document.getElementById("message").value = "";
-  document.getElementById("message").style.height = "1rem";
       const headers = new Headers({
         'Authorization': `Bearer ${JSON.parse(localStorage.getItem("youtube_token")).tokens.access_token}`,
         'Content-Type': 'application/json',
@@ -315,6 +331,14 @@ async function postmessage(){
         body: body
       }
     ); 
+    switch (response.status){
+      case 401:
+        refresh_youtube();
+        postmessage();
+        break;
+    }
+    document.getElementById("message").value = "";
+
      //console.log(await response.json());
  
      
@@ -380,6 +404,12 @@ async function message_delete(message){
       method: 'DELETE',
       headers: headers
     });
+    switch (response.status){
+      case 401:
+        refresh_youtube();
+        message_delete(message);
+        break;
+    }
 
   }
 }
@@ -414,6 +444,12 @@ const response = await fetch(
     headers: headers,
     body: body
   });
+  switch (response.status){
+    case 401:
+      refresh_youtube();
+      set_moderator(message);
+      break;
+  }
   alert("Наступні пости "+ message.snippet.displayName + " будуть від імені модератора");
 
 }
@@ -432,6 +468,12 @@ const response = await fetch(
     method: 'DELETE',
     headers: headers
   });
+  switch(response.status){
+    case 401:
+      refresh_youtube();
+      delete_moderator(message);
+      break;
+  }
   }else{
     alert("Користувач вже не є модератором або є супермодератором. Перейдіть на сторінку трансляції");
   }

@@ -47,7 +47,8 @@ async function generate_youtube_broadcast(name, description, thumbnail, category
          });
         break;
         case 401:
-        
+            await refresh_youtube();
+            generate_youtube_broadcast();
             break;
         case 400:
              data = await response.json();
