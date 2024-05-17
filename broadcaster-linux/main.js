@@ -347,7 +347,11 @@ const createWindow = (path) => {
 }
 
 app.whenReady().then(() => {
+    if (localStorage.getItem("refresh_token") === undefined){
     createWindow("index.html");
+    }else{
+        createmainwindow();
+    }
 })
 app.on("browser-window-created", (e, win) => {
     //win.removeMenu();
