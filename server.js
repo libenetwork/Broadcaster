@@ -10,6 +10,7 @@ const child_process = require('child_process');
 const express = require('express');
 const bodyParser = require('body-parser');
 const youtube = require('./youtube.js');
+const https = require('https');
 const WebSocketServer = require('ws').Server;
 const url = require('url');
 //import { HfInference } from "npm:@huggingface/inference"

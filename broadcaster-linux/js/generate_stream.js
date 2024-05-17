@@ -1,10 +1,5 @@
 const API_KEY = "AIzaSyAMeKqorMHCc910lG6t-uDa0LX3xl5swB0";
-function revoke_youtube(){
-    let revoke_token = new WebSocket("wss://broadcaster-uozh.onrender.com/revoke_youtube/"  + JSON.parse(localStorage.youtube_token).tokens.access_token);
-    revoke_token.addEventListener("message", e => {
-        console.log(JSON.parse(e.data));
-    })
-}
+
 async function generate_youtube_broadcast(name, description, thumbnail, category, acces, forkids, time){
         
         const headers = new Headers({

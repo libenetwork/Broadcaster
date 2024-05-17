@@ -10,3 +10,9 @@ wc.addEventListener("message", (e) => {
 
     }
 })
+function revoke_youtube(){
+    let revoke_token = new WebSocket("wss://broadcaster-uozh.onrender.com/revoke_youtube/"  + JSON.parse(localStorage.youtube_token).tokens.access_token);
+    revoke_token.addEventListener("message", e => {
+        console.log(JSON.parse(e.data));
+    })
+}
