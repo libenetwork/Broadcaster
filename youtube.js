@@ -3,6 +3,7 @@ let oauth2Client;
 const fs = require('fs');
 const url = require('url');
 const { method } = require('bluebird');
+const { resolve } = require('path');
 const scopes = [
     'https://www.googleapis.com/auth/youtube.force-ssl'
 ];
@@ -25,29 +26,27 @@ function return_data(){
 async function maketokenrefresh(refresh_token, ws){
     const data = await return_data();
     const header = new Headers({
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+
     });
-    const body = JSON.stringify({
-        client_id: data[0],
-        client_secret: data[1],
-        refresh_token: refresh_token,
-        grant_type: 'refresh_token'
-    })
-    console.log(body);
-    const response = new Promise((resolve) =>  resolve(fetch("https://www.googleapis.com/oauth2/v3/token",{
-        method: 'POST',
-        headers: header,
-        body: body
+    const body = {
+        client_id:data[0],
+        client_secret:data[1],
+        refresh_token:refresh_token,
+        grant_type:"refresh_token"
+    };
+
+    const response = new Promise((resolve) =>  resolve(fetch(`https://oauth2.googleapis.com/token?client_id=${data[0]}&client_secret=${data[1]}&refresh_token=${refresh_token}&grant_type=refresh_token`,{
+        method: 'POST'
     }
     ))).then((value) =>{
-        let result = JSON.stringify(value.json) ;
-        console.log(result);
-        ws.send(result);
-    })
-
-    
-    
-}
+        new Promise((resolve) => resolve(value.json())).then((result) =>
+{
+    ws.send(JSON.stringify(result));
+})});
+        
+        
+    }
 async function makeauth() {
     const data = await return_data();
     oauth2Client = new google.auth.OAuth2(
