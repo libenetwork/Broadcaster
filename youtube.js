@@ -34,16 +34,17 @@ async function maketokenrefresh(refresh_token, ws){
         grant_type: 'refresh_token'
     })
     console.log(body);
-    const response = await fetch("https://www.googleapis.com/oauth2/v3/token",{
+    const response = new Promise((resolve) =>  resolve(fetch("https://www.googleapis.com/oauth2/v3/token",{
         method: 'POST',
         headers: header,
         body: body
     }
-    );
-    let result = await JSON.stringify(await response.json).then((value => {
-        console.log(value);
-        ws.send(value);
-    }));
+    ))).then((value) =>{
+        let result = JSON.stringify(value.json) ;
+        console.log(result);
+        ws.send(result);
+    })
+
     
     
 }
