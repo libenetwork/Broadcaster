@@ -29,6 +29,7 @@ function youtube_authorise() {
         }else if (e.data.toString().startsWith("{\"tokens\":")){
             console.log(e.data);
             localStorage.setItem("youtube_token", e.data);
+            localStorage.setItem("refresh_token", JSON.parse(e.data).tokens.refresh_token);
 
             ipc.send("mainwindow");
             ipc.send("closewindow");

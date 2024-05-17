@@ -21,10 +21,11 @@ function return_data(){
     })});
 
 }
+
 async function maketokenrefresh(refresh_token, ws){
     const data = await return_data();
     const header = new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
     });
     const body = JSON.stringify({
         client_id: data[0],
@@ -39,9 +40,12 @@ async function maketokenrefresh(refresh_token, ws){
         body: body
     }
     );
-    let result = await JSON.stringify(await response.json);
-    console.log(result);
-    ws.send(result);
+    let result = await JSON.stringify(await response.json).then((value => {
+        console.log(value);
+        ws.send(value);
+    }));
+    
+    
 }
 async function makeauth() {
     const data = await return_data();
