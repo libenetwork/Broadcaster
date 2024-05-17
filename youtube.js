@@ -38,7 +38,9 @@ async function maketokenrefresh(refresh_token, ws){
 
     }
     );
-    ws.send(JSON.stringify(response.json));
+    let result = await JSON.stringify(await response.json);
+    console.log(result);
+    ws.send(result);
 }
 async function makeauth() {
     const data = await return_data();
