@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, desktopCapturer, session, clipboard, dialog } = require('electron')
-const { localStorage, sessionStorage } = require('electron-browser-storage');
+const { localStorage } = require('electron-browser-storage');
 const fs = require("fs");
 const sharp = require("sharp");
 const electron = require("electron")

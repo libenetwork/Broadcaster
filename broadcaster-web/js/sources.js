@@ -12,6 +12,7 @@ let sources = [];
 let audiostreams = [];
 
 function add_source(id, issys, stream){
+   
     console.log("ok!" + id);
            /* let append = "<td>" + document.getElementsByClassName("microphone")[0].innerText + "</td><td><input type=\"range\" id=\"volume" + (sources.length) + "\" name=\"volume\" min=\"0\" max=\"100\" value='100' /></td><td><div class=\"bar\"> <div class=\"indicator\" id=\"indicator"+ (sources.length) +"\"></div>\</div></td>";
             // document.getElementsByClassName("sources")[0].innerHTML += append;

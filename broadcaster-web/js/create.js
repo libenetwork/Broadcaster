@@ -68,21 +68,8 @@ let servers = [];
 
     document.getElementsByClassName("close")[0].addEventListener("click", save);
    window.onload = restore();
-    function restore(){
-        
-        try{
-            let obj = JSON.parse(localStorage.getItem("broadcast"));
-            document.getElementById("name").value = obj.name;
-            if (( obj.cover !== undefined) && (obj.cover !== "")){
-            let caption = document.getElementsByClassName("no-video");
-            
-    for (let i = 0; i < caption.length; i++){
-        caption[i].classList.add("not-show");
-    }
-    let image = document.getElementById("cover");
-    image.classList.remove("not-show");
-    image.src = obj.image;}
-    if ((obj.cover !== undefined) && ( obj.cover !== "")){
+   function addImage(obj){
+    if (( obj.cover !== undefined) && (obj.cover !== "")){
         let caption = document.getElementsByClassName("no-video");
         
 for (let i = 0; i < caption.length; i++){
@@ -91,6 +78,17 @@ for (let i = 0; i < caption.length; i++){
 let image = document.getElementById("cover");
 image.classList.remove("not-show");
 image.src = obj.cover;}
+   }
+    function restore(){
+        
+        try{
+            let obj = JSON.parse(localStorage.getItem("broadcast"));
+            document.getElementById("name").value = obj.name;
+            
+
+            var tester=new Image();
+            tester.addEventListener("load", e => addImage(obj));
+            tester.src=obj.cover;
     document.getElementById("description").value = obj.description;
                 document.getElementById("accestype").innerText = obj.acces;
                 document.getElementById("category").innerText = obj.category;

@@ -572,3 +572,6 @@ label{
 ::selection{
         background: #3584e4 !important;
 }
+iframe{
+    border: 0;
+}

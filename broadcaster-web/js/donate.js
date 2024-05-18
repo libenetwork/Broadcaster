@@ -70,7 +70,7 @@ document.getElementsByClassName("copy")[0].addEventListener("click", copy_token)
 document.getElementById("token").addEventListener("click", copy_token);
 function copy_token(){
     let copy = document.getElementById("token").value;
-    ipc.send("copy", copy);
+    navigator.clipboard.writeText(copy);
 }
 const backgrounds = [
     "#f8e45c", "#62a0ea", "#57e389",   "#ffa348", "#ed333b", "#c061cb", "#b5835a"

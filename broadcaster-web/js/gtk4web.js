@@ -75,6 +75,10 @@ function openintegrate(e){
     second.play();
 
 }
+let close = document.getElementsByClassName("close")[0];
+close.addEventListener("click", (e) => {
+   wc.postMessage("window_close")
+})
 Array.from(document.querySelectorAll("input[type=text]")).forEach((e) => {
     e.addEventListener("focus", (x) => {
       if (e.id !== "message"){

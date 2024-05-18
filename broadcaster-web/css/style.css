@@ -1,3 +1,51 @@
+@media only screen and (min-width: 601px){ #header_image{
+    width: 90vw !important;
+}
+
+}
+@media only screen and (min-width: 900px){ #header_image{
+    width: 85vw !important;
+}}
+@media only screen and (min-width: 1100px){ #header_image{
+    width: 60vw !important;
+}
+#first_flour_block{
+    display: flex !important;
+}
+#first_flour{
+    width: 100%;
+}
+#first_flour_small{
+    display: none;
+}
+}
+@media only screen and (min-width: 1300px){ .video-container{
+    width:  50vw !important;
+}}
+@media only screen and (min-width: 1400px){ .video-container{
+    width:  50vw !important;
+}}
+#first_flour{
+    display: flex;
+    gap: 2.5vw;
+    flex-direction: row;
+}
+#first_flour_block{
+   
+  display: none;
+  flex-direction: column;
+  gap: 0.5em;
+}
+#first_flour_text{
+    font-size: 5em !important;
+  
+}
+#first_flour_subtext{
+    font-size: 1.49em;
+    /* text-align: justify; */
+    font-weight: 400;
+
+}
 .welcome{
     display: flex;
     flex-direction: column;
@@ -271,4 +319,26 @@ opacity: -100%;
     display: flex;
     align-items: center;
     gap: 5px;
+}
+.open_window{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    opacity: 0%;
+}
+#logo img{
+    height: 2em;
+}
+#logo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 1.75em;
 }

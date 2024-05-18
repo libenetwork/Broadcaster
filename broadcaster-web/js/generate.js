@@ -1,10 +1,22 @@
 import { client } from "https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js";
-ipc.send("ready");
-let webhookclient;
-ipc.on('cookie_token', (e,data) => {
-    token = data;
-    localStorage.setItem("token", 'https://broadcaster-uozh.onrender.com/webhook/' + token);
-
+async function hash(string) {
+    const utf8 = new TextEncoder().encode(string);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+        .map((bytes) => bytes.toString(16).padStart(2, '0'))
+        .join('');
+    return hashHex;
+}
+if (localStorage.token === undefined){
+    token = Math.random() * 10000;
+    hash(token.toString()).then((hex) => { console.log(hex);
+        localStorage.setItem("token", 'https://broadcaster-uozh.onrender.com/webhook/' + hex);
+    });
+}else{
+    let webhookclient;
+    token = localStorage.token;
+ 
     webhookclient = new WebSocket(
         'wss://broadcaster-uozh.onrender.com/webhook/' +
         token
@@ -16,7 +28,8 @@ ipc.on('cookie_token', (e,data) => {
     
         generate(data, e);
     })
-});
+
+}
 
 async function generate(text, e){
     console.log("generation started!");

@@ -31,8 +31,17 @@ wc.addEventListener("message", (e) =>
                             height: 1920,
                             width: 1080
                         },
-                        audio: true
-                    });2000
+                        audio: true,
+                        systemAudio: "include",
+
+                    });
+                    stream.addEventListener("stop", (event) => {
+                        document.getElementById("video").classList.add("not-show");
+                        let delete_elem = document.getElementsByClassName("no-video");
+                        for (let i = 0; i < delete_elem.length; i++){
+                            delete_elem[i].style.display = "flex";
+                        }
+                    });
        /*           stream = await navigator.mediaDevices.getUserMedia({
                         audio: {
                             mandatory: {
@@ -56,9 +65,14 @@ wc.addEventListener("message", (e) =>
                     let container = document.createElement("div");
                     document.getElementById("video").classList.remove("not-show");
                     document.getElementById("video").srcObject = stream;
-                    document.getElementsByClassName("no-sources")[0].classList.add("not-show");
-                    document.getElementById("source").classList.remove("not-show");
-                    add_source(-1, true, stream);
+               
+                        if (stream.getAudioTracks().length !== 0){
+                            document.getElementsByClassName("no-sources")[0].classList.add("not-show");
+                            document.getElementById("source").classList.remove("not-show");        
+                            add_source(-1, true, stream);
+                        }
+                    
+                    
 
                     // wc.postMessage("connected")
                 }catch (e){

@@ -19,7 +19,7 @@
 
     <script src="js/communicator.js"></script>
     <link rel="stylesheet" type="text/css" href="css/popr.css">
-    <script>window.$ = window.jQuery = require('./js/jquery-3.7.1.min.js');</script>
+    <script src = 'js/jquery-3.7.1.min.js'></script>
     <script type="text/javascript" src="./js/popr.js"></script>
     <script src = "js/jquery.fancy-scroll.js"></script>
 
@@ -40,7 +40,6 @@
     <div class="scroller no-scrollbar" style="margin: 0; height: -webkit-fill-available; overflow-y: scroll; padding-bottom: 0;">
     <div class = "content" >
         <div class="frame col s12" style=" margin-top: 0.5em;  padding: 0;">
-
             <div class="video-container" onclick="open_cover()" style="height: 262px">
                 <div class = "no-video"><img src="symbols/image-missing-symbolic.svg" class = "disactive_icon" style ="height: 12vh">
                 </div> <div class="no-video"> <p class="no-sources-text">Натисніть, щоб обрати обкладинку</p></div>
@@ -243,6 +242,8 @@
                 animEasing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)",
             });
          </script>
+                     <input type = "file" accept=".png, .jpg" id = "file" style="display: none;">
+
 
 </div>
 <script src = "js/broadcaster.js"></script>
