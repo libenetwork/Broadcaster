@@ -62,6 +62,7 @@ wc.addEventListener("message", (e) =>
                             }
                         }
                     });
+            
                     let delete_elem = document.getElementsByClassName("no-video");
                     for (let i = 0; i < delete_elem.length; i++){
                         delete_elem[i].style.display = "none";

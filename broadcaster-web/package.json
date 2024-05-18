@@ -1,0 +1,47 @@
+{
+  "name": "broadcaster-linux",
+  "version": "0.1.0",
+  "description": "Broadcaster app linux client",
+  "main": "main.js",
+  "scripts": {
+    "test": "electron . --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto",
+    "start": "electron . --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform-hint=auto",
+    "dist:linux": "electron-builder --linux"
+  },
+  "repository": {
+    "type": "git",
+    "url": "broadcaster-linux"
+  },
+  "keywords": [
+    "rtmp",
+    "client",
+    "streaming"
+  ],
+  "author": "Naumenko",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "electron": "^29.1.5",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "compressorjs": "^1.2.1",
+    "file-bytes": "^2.0.3",
+    "google-auth-library": "^9.7.0",
+    "googleapis": "^134.0.0",
+    "image-size": "^1.1.1",
+    "jquery": "^3.7.1",
+    "js-sha256": "^0.11.0",
+    "sharp": "^0.33.3"
+  },
+  "build":{
+      "appId": "com.naumenko.broadcaster",
+      "linux": {
+          "target": [
+            "rpm",
+            "flathub"
+          ],
+          "category": "video"
+      }
+  }
+}

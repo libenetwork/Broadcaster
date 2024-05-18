@@ -1,0 +1,116 @@
+@media only screen and (min-width: 601px){ .video-container{
+    height: 40vw !important;
+}
+
+}
+@media only screen and (min-width: 900px){ .video-container{
+    height: 35vw !important;
+}}
+@media only screen and (min-width: 1100px){ .video-container{
+    height: 30vw !important;
+}
+#comments{
+    display: none;
+}}
+@media only screen and (min-width: 1300px){ .video-container{
+    height: 22vw !important;
+}}
+@media only screen and (min-width: 1400px){ .video-container{
+    height: 25vw !important;
+}}
+
+
+.frame{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.video-container{
+    height: 30vw; background: #303030;
+    border-radius: 1em;
+    padding: 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.gtk-window{
+    justify-content: flex-start !important; background-color: #242424 !important;
+}
+.live-button{
+    background-color: rgba(192, 28, 40, 0.7);
+}
+.live-button:hover{
+    background-color: rgba(192, 28, 40, 0.8);
+}
+.inactive:not(img){
+    background-color: hsl(0 40% 27% / 1) !important;
+    color: #929292ff !important;
+}
+.inactive > img{
+    filter: invert(91%) sepia(100%) saturate(25%) hue-rotate(323deg) brightness(106%) contrast(0%) !important;
+}
+
+.no-sources{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    gap: 1vh;
+    align-items: center;
+}
+.no-source-icon{
+    height: 8vh;
+}
+.no-sources-text{
+    color: #a7a7a7
+}
+.indicator_body{
+    width: 100%;
+    height: 2px;
+}
+.indicator{
+    height: inherit;
+    background-color: rgba(53, 132, 228, 1);
+
+}
+.back_cont{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.mute{
+    filter: brightness(0) saturate(100%) invert(23%) sepia(98%) saturate(2053%) hue-rotate(339deg) brightness(85%) contrast(99%);}
+.donate-window{
+    display: flex;
+    flex-direction: column;
+    height: 65vh;
+    align-items: center;
+    justify-content: center;
+    gap: 2em
+}
+.donate-window > img{
+    width: 50%;
+}
+.live-indicator{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #a4202a;
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+#logo img{
+    height: 2em;
+}
+#logo{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

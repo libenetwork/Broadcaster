@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+
+    <title>Broadcaster</title>
+    <link rel = "stylesheet" href="css/gtk4web.css">
+    <link rel = "stylesheet" href="css/fonts.css">
+    <link rel = "stylesheet" href="css/style.css">
+    <script src = "js/anime.min.js"></script>
+    <link rel = "icon" href="img/icon1024.png">
+    <script src = "js/anime.min.js"></script>
+    <link rel = "stylesheet" href = "css/materialize.min.css">
+    <link rel = "stylesheet" href = "css/broadcaster_style.css">
+
+    <link rel="stylesheet" type="text/css" href="css/popr.css">
+
+
+
+</head>
+<body>
+
+    <div class="frame col l3 xl6 " id = "no_comments">
+        <img src="symbols/chat-bubbles-empty-inverted-symbolic.svg" class="disactive_icon comments_icon" >
+        <p class="no-sources-text">Тут буде чат вашої трансляції</p></div>
+<div class="frame col l3 xl6 not-show" id = "comments_section">
+    <p class="chat_header">Чат трансляції</p>
+   
+    <div class = "comments_section"><div style="display: flex; gap: 5px; align-items: center;">
+<div class="type_panel">  
+    <img class="button_icon" id = "smile" src = "symbols/sentiment-very-satisfied-symbolic.svg">
+    <form class="input-field-form message_form" style="width: 100%;" action="javascript:;" onsubmit="postmessage();">
+        <div style="width: -webkit-fill-available;" class = "input_higlight">
+        <input id = "message"  maxlength="5000" class= "desc_row materialize-textarea scrollbar" placeholder="Написати в чат" value=""  type="text" class="validate"></textarea>
+        </div>
+    
+    </form>
+  <div id = "post" onclick="postmessage();">
+  <img class="button_icon"  src = "symbols/paper-plane-symbolic.svg">
+</div>
+</div>
+
+
+</div>
+
+<div class = "messages no-scrollbar">
+ </div>
+</div></div>
+<div class = "context_menu">
+    <ul class = "context_menu">
+        <li>
+            <div></div>
+            <div></div>
+        </li>
+        <li><img src = "symbols/user-trash-symbolic.svg" class="button_icon">Вилучити</li>
+        <li><img src = "symbols/security-medium-rtl-symbolic.svg" class="button_icon"><div>Зробити модератором</div></li>
+        <li><img src = "symbols/stop-sign-large-symbolic.svg" class="button_icon">Заблокувати користувача</li>
+
+    </ul>
+</div>
+
+
+
+</div>
+<script>     
+ 
+
+</script>
+</body> 
+</html>
+
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+
+
+    <title>Пожертви</title>
+    <link rel = "stylesheet" href="css/gtk4web.css">
+    <link rel = "stylesheet" href="css/fonts.css">
+    <link rel = "stylesheet" href="css/style.css">
+    <script src = "js/anime.min.js"></script>
+    <link rel = "icon" href="img/icon1024.png">
+
+    <link rel = "stylesheet" href = "css/materialize.min.css">
+    <link rel = "stylesheet" href = "css/broadcaster_style.css">
+    <script src="js/communicator.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/popr.css">
+    <script>window.$ = window.jQuery = require('./js/jquery-3.7.1.min.js');</script>
+
+</head>
+<body>
+
+<div class = "gtk-window main-window" style="">
+    <div class = "gtkheader">
+        <div></div>
+        <div style="width: -webkit-fill-available; text-align: center">
+            <div class = "tittle" style="padding-top: 2px !important; padding: 0; ">Донати</div>
+        </div>
+        <div class="close" >
+            <img class = "close_icon" src="symbols/close.svg" >
+        </div>
+    </div>
+    <div class = "content scrollbar" style="margin: 0; overflow-y: scroll; ">
+        <div class="frame col s12" style=" margin-top: 0.5em;  padding: 0; height: max-content">
+
+
+
+                        <div class="input-field col s12">
+                            <form class="input-field-form">
+                                <div>
+                                <label class = "input-label" for="disabled">Ваш токен для Вебгуків</label>
+
+                                <input id = "token" class = "input-row" disabled value="I am not editable" id="disabled" type="text" class="validate">
+                                </div>
+                                <img src="symbols/copy-symbolic.svg" class="highlight_icon copy" style="
+    height: 1.5rem;
+">
+                            </form>
+                        </div>
+            <div class = "preferences-group" style="gap: 1em">
+                <div class = 'preferences_header'><div class = "caption"><div class = "preferences_caption">Найбільший донат</div> <div class="preferences_subcaption" >Цей донат найбільший</div>
+
+                </div></div>
+            <ul class="collapsible not-show">
+
+
+            </ul>
+            </div>
+            <div class = "preferences-group" style="gap: 1em">
+                <div class = 'preferences_header'><div class = "caption"><div class = "preferences_caption">Усі донати</div> <div class="preferences_subcaption" >Решта не менш важливі</div>
+
+                </div></div>
+                <ul class="collapsible not-show">
+
+
+                </ul>
+            </div>
+
+            <div class="donate-window">
+                <img src="symbols/donut.svg" style="filter: invert(30%) sepia(90%) saturate(10%) hue-rotate(60deg) brightness(50%) contrast(120%)">
+            </div>
+</div>
+
+</div>
+</div>
+<script src = "js/broadcaster.js"></script>
+<script src="js/gtk4web.js"></script>
+<script type="module" src = "gtk.js"></script>
+<script type = "module" src = "theme.js"></script>
+<script src = "js/coockie.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js"></script>
+<script src="js/materialize.min.js"></script>
+
+<script src = "js/donate.js"></script>
+
+</body>
+</html>
+
+

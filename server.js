@@ -39,7 +39,7 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use(express.static(__dirname + '/www'));
+app.use(express.static(__dirname + '/broadcaster-web'));
 
 
 Socketserver.on('connection', (ws, req) => {

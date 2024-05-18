@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+progress {
+    box-sizing: border-box;
+    border: solid 0.15em #242b35;
+    width: 12.5em;
+    height: 1em;
+    border-radius: 0.5em;
+    background: linear-gradient(#191c23, #2d3341);
+    font: clamp(0.625em, 7.5vw, 5em) monospace;
+}
+progress::-webkit-progress-bar {
+    background: transparent;
+}
+progress::-webkit-progress-value {
+    border-radius: 0.35em;
+    box-shadow: inset 0 0.05em 0.05em rgba(255, 255, 255, 0.35);
+    background: var(--fill);
+}
+progress::-moz-progress-bar {
+    border-radius: 0.35em;
+    box-shadow: inset 0 0.05em 0.05em rgba(255, 255, 255, 0.35);
+    background: var(--fill);
+}
+#p0{
+    --fill:
+            repeating-linear-gradient(90deg,
+            transparent 0 0.15em, #f1c00c 0 0.5em) 0.25em,
+            linear-gradient(#f3c402, #ed7401) ;
+}
+#p1 {
+    --fill:
+            linear-gradient(#ffec9d, transparent 85%),
+            linear-gradient(90deg, #ffe94b, #f94745) ;
+}
+#p2 {
+    --fill:
+            linear-gradient(rgba(226, 102, 76, 0.65), transparent),
+            repeating-linear-gradient(135deg,
+            #a22215 0 0.25em, #be2a20 0 0.5em) ;
+}
+#p3 {
+    --fill:
+            linear-gradient(rgba(215, 131, 227, 0.5), transparent),
+            conic-gradient(from -30deg at 25%,
+            transparent 240deg, #8b42ab 0%) 0/ 0.7em,
+            conic-gradient(from -30deg at 75%,
+            #8b42ab 240deg, #9956b3 0%) 0/ 0.7em ;
+}
+#p4{
+    --fill:
+            linear-gradient(#ffffff, transparent 95%),
+            linear-gradient(90deg, #F2F1F5, #ffce00, #FB7488, #F05165, #AA4DB9, #4E3064) ;
+   /* background: linear-gradient(90deg, #f2f1f570, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0.65));*/
+
+    border: solid 0.15em #242b35;
+
+}
+#p5{
+    --fill:
+            linear-gradient(rgba(90, 240, 255, 0.85), transparent),
+            repeating-linear-gradient(90deg,
+            #123c92 0 0.0625em, #1b5ec6 0 1em) ;
+}
+p {
+    font-size: 20px;
+}
+
+.progress {
+    background-color: rgb(219, 219, 219);
+    width: 100%;
+    border-radius: 3em;
+}
+@font-face {
+    font-family: Blogger Sans;
+    src: url("../fonts/Blogger_Sans.otf");
+}
+@font-face {
+    font-family: Blogger Sans Bold;
+    src: url("../fonts/Blogger_Sans-Bold.otf");
+}
+.skill {
+    background: linear-gradient(115deg, #f9ce34, #ee2a7b, #6228d7);
+    color: white;
+    padding: 1%;
+    text-align: right;
+    font-size: 5.5vh;
+    border-radius: 3em;
+    font-family: "Blogger Sans";
+    font-weight: 400;
+    display: flex; justify-content: flex-end;
+}
+.badge{
+    padding: 7vh;
+    background: white;
+    border-radius: 10vh;
+}
+.indicator{
+    font-family: "Blogger Sans";
+    margin-top: 0.5em;
+    font-size: 5.5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+.tittle{
+    font-family: "Montserrat";
+    margin-bottom: 4vh;
+    font-size: 8vh;
+    display: flex;
+    font-weight: 800;
+    background: linear-gradient(60deg, rgba(255, 135, 0, 0.8), #ee2a7b, #f9ce34);
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+    justify-content: space-between;
+}
+#descripion{
+    font-family: "Montserrat";
+    margin-top: 0.5em;
+    background-color: black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 300;
+    font-size: 10pt;
+
+}
+#amount{
+
+    background-color: black;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*# sourceMappingURL=progressbar.css.map */
