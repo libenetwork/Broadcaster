@@ -7,13 +7,16 @@ if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith(
         'wss://' + // http: => ws:, https: -> wss:
         "broadcaster-uozh.onrender.com" +
         '/youtube/auth'
-    );        
-    youtubesocket.send(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
-                youtubesocket.addEventListener("message", e => {
-                    if (e.data.toString().startsWith("{\"tokens\":")){
-                        alert(e.data);
-                    }
-                })
+    );     
+    youtubesocket.addEventListener("open", e => {
+        this.send(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
+        youtubesocket.addEventListener("message", e => {
+            if (e.data.toString().startsWith("{\"tokens\":")){
+                alert(e.data);
+            }
+        })
+    })   
+   
 }
 
 document.getElementById("youtube").addEventListener("click", (e) =>
