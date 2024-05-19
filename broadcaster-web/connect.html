@@ -18,7 +18,11 @@
 
 </head>
 <body>
-
+<script>
+    if (localStorage.refresh_token !== undefined){
+        location.href = "broadcaster.html";
+    }
+</script>
     <div class = "gtk-window main-window no-scrollbar" 
     style="border-radius: 0; border: 0 !important;box-shadow: 0 !important; 
     height: 100vh; overflow-y: scroll;  ">
