@@ -160,8 +160,6 @@
 #connect{
     position: absolute;
     top: 7%;
-opacity: -100%;
-    display: none;
     width: 100%;
     height: 100%;
     justify-content: center;
