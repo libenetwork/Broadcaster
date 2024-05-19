@@ -1,7 +1,6 @@
 let youtubesocket;
 
 if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith("?code")){
-    alert(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
     youtubesocket = new WebSocket(
 
         'wss://' + // http: => ws:, https: -> wss:
@@ -12,7 +11,7 @@ if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith(
         youtubesocket.send(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
         youtubesocket.addEventListener("message", e => {
             if (e.data.toString().startsWith("{\"tokens\":")){
-                alert(e.data);
+                console.log(e.data);
             }
         })
     })   
