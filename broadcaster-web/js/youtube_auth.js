@@ -38,7 +38,18 @@ function youtube_authorise() {
         "broadcaster-uozh.onrender.com" +
         '/youtube/auth'
     );
-}
+    youtubesocket.addEventListener("message", e => {
+              //Youtube_url = e.data;
+       // console.log("yes");
+       if (e.data.toString().startsWith("http")) {
+        //  ipc.send("window", e.data);
+      /*    ipc.on('response', function (e, response) {
+           //   console.log(response);
+              youtubesocket.send(response);*/
+              location.href = e.data;
+          
+          }
+    });}
 
 
 }
