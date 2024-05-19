@@ -1,4 +1,19 @@
 import { client } from "https://cdn.jsdelivr.net/npm/@gradio/client@0.1.4/dist/index.min.js";
+function makesocket(){
+    let webhookclient;
+    token = localStorage.token;
+ 
+    webhookclient = new WebSocket(
+        'wss://broadcaster-uozh.onrender.com/webhook/' +
+        token
+    );
+    webhookclient.addEventListener("open", e => {console.log("Was connected!")})
+    webhookclient.addEventListener("message", e => {
+        let data = JSON.parse(decodeURI(e.data)).name.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").
+        replaceAll("%3A", ":") + " задон+атив " + JSON.parse(decodeURI(e.data)).amount + " гривень і сказав «" + JSON.parse(decodeURI(e.data)).message.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":").replaceAll("Франко", "Фанк+о") + "»";
+        generate(data, e);
+    })
+}
 async function hash(string) {
     const utf8 = new TextEncoder().encode(string);
     const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
@@ -12,22 +27,10 @@ if (localStorage.token === undefined){
     token = Math.random() * 10000;
     hash(token.toString()).then((hex) => { console.log(hex);
         localStorage.setItem("token", 'https://broadcaster-uozh.onrender.com/webhook/' + hex);
+        makesocket();
     });
 }else{
-    let webhookclient;
-    token = localStorage.token;
- 
-    webhookclient = new WebSocket(
-        'wss://broadcaster-uozh.onrender.com/webhook/' +
-        token
-    );
-    webhookclient.addEventListener("open", e => {console.log("Was connected!")})
-    webhookclient.addEventListener("message", e => {
-        let data = JSON.parse(decodeURI(e.data)).name.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").
-        replaceAll("%3A", ":") + " задон+атив " + JSON.parse(decodeURI(e.data)).amount + " гривень і сказав «" + JSON.parse(decodeURI(e.data)).message.replaceAll("+", " ").replaceAll("%2C", ",").replaceAll("%3B", ";").replaceAll("%3A", ":").replaceAll("Франко", "Фанк+о") + "»";
-    
-        generate(data, e);
-    })
+    makesocket();
 
 }
 
