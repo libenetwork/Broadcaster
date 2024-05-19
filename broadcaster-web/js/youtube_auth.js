@@ -1,3 +1,7 @@
+if (e.data.split("https://broadcaster-uozh.onrender.com/")[1].startsWith("?code")){
+    alert(e.data);
+                
+}
 
 document.getElementById("youtube").addEventListener("click", (e) =>
 {
@@ -25,9 +29,9 @@ function youtube_authorise() {
            //   console.log(response);
               youtubesocket.send(response);*/
               location.href = e.data;
-
-          }});
-        }else if (e.data.toString().startsWith("{\"tokens\":")){
+          
+          }
+        else if (e.data.toString().startsWith("{\"tokens\":")){
             console.log(e.data);
             localStorage.setItem("youtube_token", e.data);
             if (JSON.parse(e.data).tokens.refresh_token !== undefined){
@@ -35,7 +39,7 @@ function youtube_authorise() {
             }
             ipc.send("mainwindow");
             ipc.send("closewindow");
-        }
-    });}
+        }});}
+
 
 }
