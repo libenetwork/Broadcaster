@@ -5,7 +5,7 @@ function makesocket(){
  
     webhookclient = new WebSocket(
         'wss://broadcaster-uozh.onrender.com/webhook/' +
-        token
+        token.split("https://broadcaster-uozh.onrender.com/webhook/")[1]
     );
     webhookclient.addEventListener("open", e => {console.log("Was connected!")})
     webhookclient.addEventListener("message", e => {

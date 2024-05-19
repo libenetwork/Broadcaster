@@ -18,7 +18,6 @@ wc.addEventListener("message", (e) =>
        
      
         case "connected":
-            alert("Поширте вікно створенної сцени");
            
           //  ipc.send("get-frame");
             

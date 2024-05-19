@@ -1,22 +1,31 @@
 @media only screen and (min-width: 500px){ #header_image{
     width: 90vw !important;
 }
+#header_image{
+    width: 90vw !important;
+}
 
 }
+
+
+
 @media only screen and (min-width: 900px){ #header_image{
-    width:60vw !important;
-}
-
-
-}
-@media only screen and (min-width: 1100px){ #header_image{
     width: 60vw !important;
 }
 #second_flour_text{
         font-size: 4.9vw !important;
+        text-align: left;
 
 }
+
 #first_flour{
+    width: 100% !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+
+}
+
+#third_flour{
     width: 100% !important;
     flex-direction: row !important;
     align-items: flex-start !important;
@@ -29,6 +38,10 @@
 #first_flour_block{
     gap: 0.7em !important;
 }
+#second_flour_block{
+    gap: 0.7em !important;
+    flex-direction: column-reverse !important;
+}
 #first_flour_subtext{
     text-align: left !important;
     font-size: 1.7vw !important;
@@ -39,6 +52,16 @@
 #start{
     display: flex !important;
 }
+#block_widget{
+    width: 60% !important;
+}
+}
+@media only screen and (min-width: 1100px){ .video-container{
+    width:  50vw !important;
+}
+#fourth_flour_block{
+    justify-content: flex-start !important;
+}
 }
 @media only screen and (min-width: 1300px){ .video-container{
     width:  50vw !important;
@@ -46,10 +69,31 @@
 @media only screen and (min-width: 1400px){ .video-container{
     width:  50vw !important;
 }}
+#block_widget{
+    width: 100%;
+    margin: auto;
+}
 #first_flour{
     display: flex;
     gap: 2.5vw;
     flex-direction: column;
+    align-items: center;
+}
+#fourth_flour_block{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.block{
+    display: flex;
+    justify-content: center;
+}
+#third_flour{
+    display: flex;
+    gap: 2.5vw;
+    flex-direction: column-reverse;
     align-items: center;
 }
 #first_flour_block{
@@ -57,6 +101,11 @@
   flex-direction: column;
   gap: 1em;
 }
+#second_flour_block{
+    display: flex;
+   flex-direction: column;
+   gap: 1em;
+ }
 #first_flour_text{
     font-size: 6.5vw;
     text-align: center;
@@ -64,6 +113,7 @@
 }
 #second_flour_text{
     font-size: 6.5vw;
+    text-align: center;
 }
 #first_flour_subtext{
     font-size: 3vw;
@@ -103,6 +153,9 @@
     font-weight: 800;
     padding: 1em;
 
+}
+#widget{
+    width: 100%;
 }
 #connect{
     position: absolute;

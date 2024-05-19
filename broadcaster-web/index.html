@@ -19,15 +19,19 @@
 </head>
 <body>
 
-    <div class = "gtk-window main-window no-scrollbar" style="border-radius: 0; border: 0 !important;box-shadow: 0 !important; height: 100vh; overflow-y: scroll;  ">
+    <div class = "gtk-window main-window no-scrollbar" 
+    style="border-radius: 0; border: 0 !important;box-shadow: 0 !important; 
+    height: 100vh; overflow-y: scroll;  ">
         <div style="padding-left: 3vw; padding-right: 3vw;">
         <div class = "gtkheader">
             <div id="logo"><img src="img/icon.png">Broadcaster</div>
-            <button class="button" id="start"  style="width: 7em;font-weight: 500;font-size: 1.1em;padding-top: 0.7em;padding-bottom: 0.7em;  justify-content: center; gap: 5px" >Почати</button>
+            <button onclick="location.href='connect.html'" class="button" id="start"  
+            style="width: 7em;font-weight: 500;font-size: 1.1em;padding-top: 0.7em;
+            padding-bottom: 0.7em;  justify-content: center; gap: 5px" >Почати</button>
 
         </div>
 <div class = "content " style="padding-bottom: 0; height: 100%; overflow-x: hidden;">
-<div class = "welcome">
+<div class = "welcome" style="gap: 5vw;">
     <div id = "first_flour">
     <img id = "header_image" src="img/wrap.png" >
     <div id = "first_flour_block">   <div class = "welcome_label" id = "first_flour_text"  style="
@@ -36,28 +40,189 @@
         Вroadcaster це інтернет додаток для відео-стрімінгу та прийому пожертв. Вільний та безкоштовний.
         
     </div>    
-    <button class="button" id="big_start"  style="width: 15em;font-weight: 500;font-size: 1.1em; margin-top: 2vw !important; padding-top: 0.7em;padding-bottom: 0.7em; display: flex; justify-content: center; gap: 5px" ><img src = "symbols/explore2-large-symbolic.svg" class="button_icon">Почати трансляцію</button>
+    <button onclick="location.href='connect.html'"  class="button" id="big_start" 
+     style="width: 15em;font-weight: 500;
+    font-size: 1.1em; margin-top: 2vw !important; padding-top: 0.7em;
+    padding-bottom: 0.7em; display: flex; justify-content: center; gap: 5px" >
+    <img src = "symbols/explore2-large-symbolic.svg" class="button_icon">
+    Почати трансляцію</button>
 
     </div>
 </div>
 <div id = "second_flour">
-    <div id = "first_flour_block">   <div class = "welcome_label" id = "second_flour_text"  style="
+    <div id = "second_flour_block">  
+        <iframe id = "block_widget" src = "widget/donat/progressbar/example.html" 
+        style="height: 130px;;"></iframe>
+        <div class = "welcome_label" id = "second_flour_text"  style="
         ">Легко додавайте потрібні віджети!</div>
+</div></div>
+<div id = "third_flour">
+  
+    <div id = "first_flour_block">   <div class = "welcome_label" id = "first_flour_text"  
+    style="
+        ">Управляти чатом просто як ніколи!</div>
+    <div id = "first_flour_subtext">
+        Додавайте та видаляйте повідомлення, блокуйте користувачів, та призначайте модераторів в усіх транлсляціях, скрізь куди ви транслюєте
+    </div>    
+
+    </div>
+    <video autoplay loop muted id = "header_image" src="img/chat.webm" >
 </div>
-
-
-    <div id="connect">
-        <div id ="register_text">Увійдіть за допомогою соціальних мереж</div>
-        <div id="register_button">
-        <div class = "block" id = "youtube">
+<div id = "second_flour">
+    <div id = "fourth_flour_block">  
+        <div class = "block" style="width: 150px;">
             <div class="youtube">
-                <img src = "symbols/Youtube.svg">
+                <img src = "symbols/Youtube.svg" style="
+                height: 70px;
+            ">
                 <p class="register_label">Youtube</p>
             </div>
         </div>
-
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img src = "symbols/polygon1.svg" style="
+                height: 70px;
+            ">
+                <p class="register_label">Twitch</p>
+            </div>
         </div>
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img src = "symbols/Telegram_logo.svg" style="
+                height: 70px;
+            ">
+                <p class="register_label">Telegram</p>
+            </div>
+        </div>
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img src = "symbols/Facebook_f_logo_(2021).svg" style="
+                height: 70px;
+            ">
+                <p class="register_label">Facebook</p>
+            </div>
+        </div>
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img class="button_icon" src = "symbols/RTMP_logo_1-big.png" style="
+                height: 70px;
+            ">
+                <p class="register_label">Та інші</p>
+            </div>
+        </div>
+    
+</div>
+
+</div>
+<div id = "first_flour">
+    <img id = "header_image" src="img/donates.png" >
+    <div id = "first_flour_block">   <div class = "welcome_label" id = "first_flour_text"  style="
+        ">Приймайте пожертви</div>
+    <div id = "first_flour_subtext">
+        За допомогою Broadcaster можна приймати пожертви.
+        
+    </div>    
+    <div id = "fourth_flour_block">  
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img src = "symbols/images.png" style="
+                height: 70px;
+            ">
+                <p class="register_label">Дяка</p>
+            </div>
+        </div>
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img src = "symbols/donnatello.png" style="
+                height: 70px;
+            ">
+                <p class="register_label">Donnatello</p>
+            </div>
+        </div>
+        <div class = "block" style="width: 150px;">
+            <div class="youtube" style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        ">
+                <img src = "symbols/monobank.png" style="
+                height: 70px;
+            ">
+                <p class="register_label">Monobank</p>
+            </div>
+        </div>
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img src = "symbols/Youtube.svg" style="
+                height: 70px;
+            ">
+                <p class="register_label">Youtube</p>
+            </div>
+        </div>
+        
+        <div class = "block" style="width: 150px;">
+            <div class="youtube" style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        ">
+                <img src = "symbols/Buy Me a Coffee.webp" style="
+                height: 70px;
+            ">
+                <p class="register_label">Buy me a Coffe</p>
+            </div>
+        </div>
+        <div class = "block" style="width: 150px;">
+            <div class="youtube">
+                <img class="button_icon" src = "symbols/Patreon_logomark_2023.svg" style="
+                height: 70px;
+            ">
+                <p class="register_label">Patreon</p>
+            </div>
+        </div>
+    
     </div>
+    </div>
+
+</div>
+<div id = "second_flour">
+    <div id = "second_flour_block">  
+        <div id = "fourth_flour_block" style="justify-content: center !important;">  
+            <div class = "block" style="width: 150px;">
+                <div class="youtube">
+                    <img class="button_icon" src = "symbols/logo-microsoft-svgrepo-com.svg" style="
+                    height: 70px;
+                ">
+                    <p class="register_label">Windows</p>
+                </div>
+            </div>
+            <div class = "block" style="width: 150px;">
+                <div class="youtube">
+                    <img class="button_icon" src = "symbols/Simpleicons-Team-Simple-Flathub.svg" style="
+                    height: 70px;
+                ">
+                    <p class="register_label">Linux</p>
+                </div>
+            </div>
+            <div onclick='location.href="https://github.com/libenetwork/Broadcaster";' class = "block" style="width: 150px;">
+                <div class="youtube" style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            ">
+                    <img class="button_icon" src = "symbols/Octicons-mark-github.svg" style="
+                    height: 70px;
+                ">
+                    <p class="register_label">Вихідний код</p>
+                </div>
+            </div>
+            
+        </div>
+        <div class = "welcome_label" id = "second_flour_text"  style="
+        ">Cкачайте наш клієнт</div>
+</div>
+</div>
+  
     <div class="footer">
         ©Naumenko. 2024
     </div>

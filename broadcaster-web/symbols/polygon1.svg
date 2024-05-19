@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="635mm"
+   height="740.83337mm"
+   viewBox="0 0 635 740.83337"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm" /><defs
+     id="defs1"><linearGradient
+       id="linearGradient22"
+       inkscape:collect="always"><stop
+         style="stop-color:#10a5ff;stop-opacity:1;"
+         offset="0"
+         id="stop21" /><stop
+         style="stop-color:#00e6d1;stop-opacity:1;"
+         offset="0.3528713"
+         id="stop22" /><stop
+         style="stop-color:#a892dc;stop-opacity:1;"
+         offset="0.73796582"
+         id="stop24" /><stop
+         style="stop-color:#06b3ff;stop-opacity:1;"
+         offset="1"
+         id="stop23" /></linearGradient><linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient22"
+       id="linearGradient19"
+       x1="-1038.2625"
+       y1="-453.65231"
+       x2="3543.3047"
+       y2="1842.5692"
+       gradientUnits="userSpaceOnUse" /><linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient22"
+       id="linearGradient20"
+       x1="-1038.2625"
+       y1="-453.65231"
+       x2="3543.3047"
+       y2="1842.5692"
+       gradientUnits="userSpaceOnUse" /><linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient22"
+       id="linearGradient21"
+       x1="-482.79361"
+       y1="792.68756"
+       x2="2993.8435"
+       y2="1416.062"
+       gradientUnits="userSpaceOnUse" /></defs><g
+     inkscape:label="Шар 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(212.26983,221.91665)"><g
+       id="g3"
+       transform="matrix(0.26458333,0,0,0.26458333,-212.26982,-221.91666)">
+	<polygon
+   class="st0"
+   points="1050,1700 600,1700 600,200 2200,200 2200,1300 1800,1700 1400,1700 1050,2050 "
+   id="polygon1" />
+	<g
+   id="g2">
+		<g
+   id="Layer_1-2">
+			<path
+   class="st1"
+   d="M 500,0 0,500 v 1800 h 600 v 500 l 500,-500 h 400 l 900,-900 V 0 Z m 1700,1300 -400,400 h -400 l -350,350 V 1700 H 600 V 200 h 1600 z"
+   id="path1"
+   style="fill:url(#linearGradient21);fill-opacity:1" />
+			<rect
+   x="1700"
+   y="550"
+   class="st1"
+   width="200"
+   height="600"
+   id="rect1"
+   style="fill:url(#linearGradient20);fill-opacity:1" />
+			<rect
+   x="1150"
+   y="550"
+   class="st1"
+   width="200"
+   height="600"
+   id="rect2"
+   style="fill:url(#linearGradient19);fill-opacity:1" />
+		</g>
+	</g>
+</g></g><style
+     type="text/css"
+     id="style1">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#9146FF;}
+</style></svg>
