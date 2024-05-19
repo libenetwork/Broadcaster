@@ -15,7 +15,8 @@ if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith(
         youtubesocket.addEventListener("message", e => {
             if (e.data.toString().startsWith("{\"tokens\":")){
                // console.log(JSON.parse(e.data));
-               localStorage.setItem("refresh_token", JSON.parse(e.data).tokens.refresh_token);
+               if ((localStorage.refresh_token === undefined) || (localStorage.refresh_token === 'undefined')){
+               localStorage.setItem("refresh_token", JSON.parse(e.data).tokens.refresh_token);}
                location.href = "connect.html";
              //   alert(e.data);
             }
