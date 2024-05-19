@@ -1,3 +1,5 @@
+let youtubesocket;
+
 if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith("?code")){
     alert(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
                 youtubesocket.send(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
@@ -13,7 +15,6 @@ document.getElementById("youtube").addEventListener("click", (e) =>
    console.log("youtube");
    youtube_authorise();
 });
-let youtubesocket;
 let authostarted = false;
 function youtube_authorise() {
     if (authostarted === false){
