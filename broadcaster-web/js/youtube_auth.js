@@ -1,4 +1,4 @@
-if (e.data.split("https://broadcaster-uozh.onrender.com/")[1].startsWith("?code")){
+if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith("?code")){
     alert(e.data);
                 
 }
