@@ -1,6 +1,7 @@
 let youtubesocket;
 
 if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith("?code")){
+    alert(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
     youtubesocket = new WebSocket(
 
         'wss://' + // http: => ws:, https: -> wss:
@@ -11,7 +12,7 @@ if (location.href.split("https://broadcaster-uozh.onrender.com/")[1].startsWith(
         youtubesocket.send(location.href.split("https://broadcaster-uozh.onrender.com/")[1]);
         youtubesocket.addEventListener("message", e => {
             if (e.data.toString().startsWith("{\"tokens\":")){
-                console.log(e.data);
+                alert(e.data);
             }
         })
     })   
@@ -51,8 +52,7 @@ function youtube_authorise() {
             if (JSON.parse(e.data).tokens.refresh_token !== undefined){
             localStorage.setItem("refresh_token", JSON.parse(e.data).tokens.refresh_token);
             }
-            ipc.send("mainwindow");
-            ipc.send("closewindow");
+        
         }});}
 
 
