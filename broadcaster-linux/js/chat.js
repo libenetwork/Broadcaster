@@ -4,6 +4,7 @@ let youtube_chat_id;
 let last = "";
 let last_message;
 let can = true;
+let moderators;
 document.addEventListener("mousedown", e => {
   if (document.getElementsByClassName("context_menu")[0].style.display === "block"){
   document.getElementsByClassName("context_menu")[0].style.display = "none";
@@ -54,15 +55,16 @@ const response = await fetch(
     headers: headers
   });
   switch (response.status){
+    case 401:
+      await refresh_youtube();
+      get_moderators_list(id);
+      break;
     case 200:
   let moderators = await response.json();
   first_moderators = false;
   return moderators;
   break;
-  case 401:
-    await refresh_youtube();
-    get_moderators_list(id);
-    break;
+
   }
   }
 
@@ -86,6 +88,9 @@ async function getyoutubechat(id){
       data.items = unbandata(data.items);
       detect(data);
       chatitems = data.items;
+      if (moderators === undefined){
+        moderators = await get_moderators_list(youtube_chat_id);
+      }
       break;
       case 401:
         refresh_youtube();
@@ -117,7 +122,8 @@ async function getyoutubechat(id){
       
       chatitems.forEach((x) => {
         if (!itemmap.has(x.etag)) {
-          remove_message(chatitems.findIndex(e => e === x));
+          let chatmessages = Array.from(document.getElementsByClassName("messages")[0].children);
+          remove_message(chatmessages.findIndex(e => e.id === x.id));
         }
       });
 }
@@ -126,6 +132,7 @@ function create_message(message){
 let messages = document.getElementsByClassName("messages")[0];
 let message_container = document.createElement("div");
 message_container.classList.add("message");
+message_container.id = message.id;
 let avatar = document.createElement("div");
 avatar.classList.add("avatar");
 let message_content = document.createElement("div");
@@ -134,8 +141,8 @@ let index = data.items.findIndex((x) => message === x);
 console.log(index);
 let message_header = undefined;
 try{
-if (data.items[index-1].authorDetails.channelId !== message.authorDetails.channelId){
-
+if ((data.items[index-1].authorDetails.channelId !== message.authorDetails.channelId)
+   || (data.items[index-1].authorDetails.isChatModerator !== message.authorDetails.isChatModerator)){
 message_header = add_header(message, avatar);
 }else{
   avatar.style.background = "none";
@@ -362,7 +369,9 @@ findIndex(x => x === obj)].authorDetails.displayName;
     menu.children[0].children[3].style.display = "flex"; 
 
   }
-  if (data.items[Array.from(document.getElementsByClassName("messages")[0].children).findIndex(x => x === obj)].authorDetails.isChatModerator)
+  if (moderators.items.findIndex( x => x.snippet.moderatorDetails.channelId === data.items[
+    Array.from(document.getElementsByClassName("messages")[0].children)
+    .findIndex(x => x === obj)].authorDetails.channelId) !== -1)
   {
     menu.children[0].children[2].children[0].src = "symbols/security-low-symbolic.svg"; 
     menu.children[0].children[2].children[1].innerText = "Скасувати статус модератора";
@@ -414,11 +423,12 @@ async function message_delete(message){
   }
 }
  function make_moderator(message){
-    switch (message.authorDetails.isChatModerator){
-      case false:
+    switch (moderators.items.findIndex(x => 
+      x.snippet.moderatorDetails.channelId === message.authorDetails.channelId)){
+      case -1:
         set_moderator(message);
         break;
-      case true:
+      default:
         delete_moderator(message);
         break;
     }
@@ -450,14 +460,14 @@ const response = await fetch(
       set_moderator(message);
       break;
   }
-  alert("Наступні пости "+ message.snippet.displayName + " будуть від імені модератора");
+  moderators = await get_moderators_list(youtube_chat_id); 
 
 }
 async function delete_moderator(message){
   if (last_message !== message){
-  let moderators = await get_moderators_list(youtube_chat_id);
   let moderator_id = moderators.items.find(x => x.snippet.moderatorDetails.channelId === message.snippet.authorChannelId);
   if (moderator_id !== undefined){
+    
   const headers = new Headers({
     'Authorization': `Bearer ${JSON.parse(localStorage.getItem("youtube_token")).tokens.access_token}`,
     'Content-Type': 'application/json'
@@ -473,6 +483,9 @@ const response = await fetch(
       refresh_youtube();
       delete_moderator(message);
       break;
+      case 204:
+        moderators = await get_moderators_list(youtube_chat_id);
+        break;
   }
   }else{
     alert("Користувач вже не є модератором або є супермодератором. Перейдіть на сторінку трансляції");

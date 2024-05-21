@@ -401,7 +401,8 @@ const createWindow = (path) => {
 
 app.whenReady().then(() => {
     const token = new Promise(resolve => resolve(localStorage.getItem('refresh_token'))).then( value=> {
-    if (value === undefined){
+    console.log(value);
+        if ((value === undefined) || (value === 'undefined') || (value === '')){
     createWindow("index.html");
     }else{
         createmainwindow();

@@ -10,9 +10,9 @@ wc.addEventListener("message", (e) => {
 
     }
 })
-function refresh_youtube(){
-    let revoke_token = new WebSocket("wss://broadcaster-uozh.onrender.com/refresh/"  + localStorage.refresh_token);
-    revoke_token.addEventListener("message", e => {
+await function refresh_youtube(){
+    let refresh_token = new WebSocket("wss://broadcaster-uozh.onrender.com/refresh/"  + localStorage.refresh_token);
+    refresh_token.addEventListener("message", e => {
         console.log(JSON.parse(e.data));
         try{
         let new_token = JSON.parse(localStorage.youtube_token);
