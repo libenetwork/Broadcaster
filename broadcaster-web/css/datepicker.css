@@ -23,7 +23,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   --dark-arrows-bg: #B0B8CC;
   --dark-arrows-fill: #333641;
 }
-
+input[type="date"]::-moz-inner-spin-button,
+input[type="date"]::-moz-calendar-picker-indicator {
+    display: none;
+    -moz-appearance:none
+}:root {
+  --dark-body-bg: #232429;
+  --light-body-bg: #F5F7FB;
+  
+  --dark-input: #323741;
+  --light-input: #ffffff;
+  
+  --dark-border: #484D5A;
+  --light-border: #B8BCCB;
+  
+  --dark-date-foreground: #FFFFFF;
+  --dark-inactive-fg: #636A78;
+  --dark-active-fg: #9CA0B1;
+  --dark-current-year: #3B414A;
+  --dark-current-year-fg: #ffffff;
+  --dark-selected: #3584e4ff;
+  --dark-hover: #2C437B;
+  --dark-arrows-bg: #B0B8CC;
+  --dark-arrows-fill: #333641;
+}
 
 
 #date_picker {
@@ -182,6 +205,11 @@ text-transform: lowercase;
 input::-webkit-datetime-edit-day-field:focus,
 input::-webkit-datetime-edit-month-field:focus,
 input::-webkit-datetime-edit-year-field:focus {
+    background-color: #48607cff;
+}
+input::-moz-datetime-edit-day-field:focus,
+input::-moz-datetime-edit-month-field:focus,
+input::-moz-datetime-edit-year-field:focus {
     background-color: #48607cff;
 }
 .cal-btn:hover{

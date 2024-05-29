@@ -48,6 +48,8 @@ hr{
     background: linear-gradient(-130deg, #6228d7, #ee2a7b, #de9000);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
     text-align: center;
    /*padding-bottom: 0.25em;*/
 }

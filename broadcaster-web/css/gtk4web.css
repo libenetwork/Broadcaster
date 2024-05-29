@@ -198,6 +198,10 @@ Not supports in Firefox and IE */
     background-color:rgba(0,0,0,0);
     width:4px
 }
+.scrollbar::-moz-scrollbar {
+    background-color:rgba(0,0,0,0);
+    width:4px
+}
 
 
 /* background of the scrollbar except button or resizer */
@@ -224,6 +228,7 @@ Not supports in Firefox and IE */
 .no-scrollbar::-webkit-scrollbar {
     width: 4px;
 }
+
 .range_input {
     -webkit-appearance: none;
     appearance: none;
@@ -235,9 +240,45 @@ Not supports in Firefox and IE */
     height: 6px;
     background:  #6d6d6dff;
 }
+.scrollbar::-moz-scrollbar-track {
+    background-color:rgba(0,0,0,0);
+}
+.scrollbar::-moz-scrollbar-track:hover {
+    background-color:rgba(0,0,0,0);
+}
 
-.range_input::-webkit-slider-thumb {
-    -webkit-appearance: none;
+/* scrollbar itself */
+.scrollbar::-moz-scrollbar-thumb {
+    background-color:rgba(186, 186, 192, 0.4);
+    border-radius:8px;
+    border:0px solid #fff
+}
+.scrollbar::-moz-scrollbar-thumb:hover {
+    background-color:rgba(186, 186, 192, 0.6);
+    border:0px solid #f4f4f4
+}
+
+/* set button(top and bottom of the scrollbar) */
+.scrollbar::-moz-scrollbar-button {opacity: 0;}
+.no-scrollbar::-moz-scrollbar {
+    width: 4px;
+}
+
+.range_input::-moz-slider-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: none;
+    transition: .2s ease-in-out;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0.15)), linear-gradient(rgba(255, 255, 255, 1),rgba(255, 255, 255, 1));
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+
+}
+
+.range_input::-moz-slider-thumb {
+    -moz-appearance: none;
     appearance: none;
     height: 20px;
     width: 20px;

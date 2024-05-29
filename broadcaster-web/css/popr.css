@@ -127,6 +127,7 @@ text-overflow: ellipsis;
 .popr-text{
 	margin: 0;
 	width: -webkit-fill-available;
+	width: -moz-available;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }

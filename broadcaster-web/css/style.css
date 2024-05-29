@@ -57,17 +57,17 @@
 }
 }
 @media only screen and (min-width: 1100px){ .video-container{
-    width:  50vw !important;
+    height:  50vw !important;
 }
 #fourth_flour_block{
     justify-content: flex-start !important;
 }
 }
 @media only screen and (min-width: 1300px){ .video-container{
-    width:  50vw !important;
+    height:  50vw !important;
 }}
 @media only screen and (min-width: 1400px){ .video-container{
-    width:  50vw !important;
+    height:  50vw !important;
 }}
 #block_widget{
     width: 100%;
@@ -332,6 +332,7 @@
 .message-body{
     font-weight: 300;
     -webkit-user-select: text;
+    -moz-user-select: text;
     text-align: justify;
 }
 .message_form{

@@ -1,4 +1,4 @@
-@media only screen and (min-width: 601px){ .video-container{
+@media only screen and (min-width: 301px){ .video-container{
     height: 40vw !important;
 }
 
@@ -7,7 +7,7 @@
     height: 35vw !important;
 }}
 @media only screen and (min-width: 1100px){ .video-container{
-    height: 30vw !important;
+    height: 60vw !important;
 }
 #comments{
     display: none;
