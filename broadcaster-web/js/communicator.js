@@ -10,7 +10,7 @@ wc.addEventListener("message", (e) => {
 
     }
 })
-await function refresh_youtube(){
+async function refresh_youtube(){
     let refresh_token = new WebSocket("wss://broadcaster-uozh.onrender.com/refresh/"  + localStorage.refresh_token);
     refresh_token.addEventListener("message", e => {
         console.log(JSON.parse(e.data));
