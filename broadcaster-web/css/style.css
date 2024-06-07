@@ -42,6 +42,11 @@
     gap: 0.7em !important;
     flex-direction: column-reverse !important;
 }
+#forth_flour_block{
+    gap: 0.7em !important;
+    flex-direction: column-reverse !important;
+}
+
 #first_flour_subtext{
     text-align: left !important;
     font-size: 1.7vw !important;
@@ -104,6 +109,11 @@
 #second_flour_block{
     display: flex;
    flex-direction: column;
+   gap: 1em;
+ }
+ #forth_flour_block{
+    display: flex;
+   flex-direction: column-reverse;
    gap: 1em;
  }
 #first_flour_text{
